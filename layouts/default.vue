@@ -1,41 +1,24 @@
 <template>
-  <div>
-    <nav
-      class="navbar header has-shadow is-primary"
-      role="navigation"
-      aria-label="main navigation"
-    >
-      <div class="navbar-brand">
-        <a class="navbar-item" href="/">
-          <img src="~assets/buefy.png" alt="Buefy" height="28" />
-        </a>
-
-        <div class="navbar-burger">
-          <span />
-          <span />
-          <span />
-        </div>
+  <div id="app" class="container full-height">
+    <header class="level">
+      <span
+        class="level-left tag is-dark is-medium is-family-monospace has-text-light"
+        ><span class="is-size-5">m</span
+        ><span class="has-text-weight-bold is-size-5">.io</span></span
+      >
+      <div class="level-right">
+        <nuxt-link
+          class="pl-2"
+          v-for="(item, i) in menu"
+          v-bind:key="i"
+          :to="item.to"
+        >
+          <span class="has-text-dark is-family-monospace">
+            {{ item.title }}</span
+          >
+        </nuxt-link>
       </div>
-    </nav>
-
-    <section class="main-content columns">
-      <aside class="column is-2 section">
-        <p class="menu-label is-hidden-touch">
-          General
-        </p>
-        <ul class="menu-list">
-          <li v-for="(item, key) of items" :key="key">
-            <nuxt-link :to="item.to" exact-active-class="is-active">
-              <b-icon :icon="item.icon" /> {{ item.title }}
-            </nuxt-link>
-          </li>
-        </ul>
-      </aside>
-
-      <div class="container column is-10">
-        <nuxt />
-      </div>
-    </section>
+    </header>
   </div>
 </template>
 
@@ -43,19 +26,26 @@
 export default {
   data() {
     return {
-      items: [
+      menu: [
         {
-          title: 'Home',
-          icon: 'home',
-          to: { name: 'index' },
+          title: "home",
+          route: "index",
+          to: "/",
         },
         {
-          title: 'Inspire',
-          icon: 'lightbulb',
-          to: { name: 'inspire' },
+          title: "projects",
+          route: "projects",
+          to: "/projects",
+        },
+        {
+          title: "contact",
+          route: "contact",
+          to: "/contact",
         },
       ],
-    }
+    };
   },
-}
+};
 </script>
+
+<style lang="scss"></style>

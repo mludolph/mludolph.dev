@@ -1,0 +1,15 @@
+header {
+  margin: 2rem 0;
+  padding: 0 2rem;
+}
+a.navbar-item:hover,
+a.navbar-item.is-active,
+.navbar-link:focus {
+  background-color: transparent;
+}
+
+.container > .navbar .navbar-menu .navbar .container > .navbar .navbar-brand,
+.container > .navbar .navbar-menu {
+  margin-right: 0;
+  margin-left: 0;
+}
