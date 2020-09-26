@@ -1,7 +1,24 @@
-header {
-  margin: 2rem 0;
-  padding: 0 2rem;
+body {
+  height: 100vh;
+  margin: 0;
 }
+#__nuxt {
+  height: 100%;
+}
+#__layout {
+  height: 100%;
+}
+.header-bar {
+  padding: 2rem 0;
+  margin-bottom: 2rem !important;
+}
+.main-container {
+  padding: 0 2rem;
+  display: flex;
+  flex-flow: column;
+  height: 100%;
+}
+
 a.navbar-item:hover,
 a.navbar-item.is-active,
 .navbar-link:focus {
@@ -12,4 +29,20 @@ a.navbar-item.is-active,
 .container > .navbar .navbar-menu {
   margin-right: 0;
   margin-left: 0;
+}
+
+@media screen and (min-width: 575px) and (max-width: 768px), print {
+  .columns {
+    display: flex;
+  }
+  .column.is-narrow {
+    -webkit-box-flex: 0;
+    -ms-flex: none;
+    flex: none;
+  }
+}
+@media screen and (max-width: 500px) {
+  .column.is-narrow {
+    text-align: center;
+  }
 }

@@ -1,24 +1,31 @@
 <template>
-  <div id="app" class="container full-height">
-    <header class="level">
-      <span
-        class="level-left tag is-dark is-medium is-family-monospace has-text-light"
+  <div id="app" class="container main-container">
+    <header class="is-pulled-left is-mobile header-bar">
+      <span class="tag is-dark is-medium is-family-monospace has-text-light"
         ><span class="is-size-5">m</span
         ><span class="has-text-weight-bold is-size-5">.io</span></span
       >
-      <div class="level-right">
+      <div class="is-pulled-right">
         <nuxt-link
-          class="pl-2"
+          class="d-block t-align-right"
           v-for="(item, i) in menu"
           v-bind:key="i"
+          tag="a"
           :to="item.to"
         >
-          <span class="has-text-dark is-family-monospace">
-            {{ item.title }}</span
+          <span
+            v-if="item.route === $route.name"
+            class="title has-text-dark is-family-sans-serif"
           >
+            {{ item.title }}
+          </span>
+          <span v-else class="is-size-5 has-text-dark is-family-sans-serif">
+            {{ item.title }}
+          </span>
         </nuxt-link>
       </div>
     </header>
+    <nuxt />
   </div>
 </template>
 
@@ -28,9 +35,14 @@ export default {
     return {
       menu: [
         {
-          title: "home",
+          title: "about me",
           route: "index",
           to: "/",
+        },
+        {
+          title: "blog",
+          route: "blog",
+          to: "/blog",
         },
         {
           title: "projects",
@@ -38,9 +50,14 @@ export default {
           to: "/projects",
         },
         {
-          title: "contact",
-          route: "contact",
-          to: "/contact",
+          title: "music",
+          route: "music",
+          to: "/music",
+        },
+        {
+          title: "photography",
+          route: "photography",
+          to: "/photography",
         },
       ],
     };
@@ -48,4 +65,8 @@ export default {
 };
 </script>
 
-<style lang="scss"></style>
+<style lang="scss">
+.nav-item + .nav-item::before {
+  //content: "·";
+}
+</style>
