@@ -1,11 +1,15 @@
 .d-inline-block {
-  display: inline-block;
+  display: inline-block !important;
 }
 
 .d-block {
-  display: block;
+  display: block !important;
 }
 
 .t-align-right {
-  text-align: right;
+  text-align: right !important;
+}
+
+.overflow-visible {
+  overflow: visible !important;
 }

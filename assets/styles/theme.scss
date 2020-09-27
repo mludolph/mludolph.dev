@@ -1,9 +1,11 @@
 // Import Bulma's core
 @import "~bulma/sass/utilities/_all";
 
-@import "helpers";
 @import "variables";
-@import "layout";
-@import "me";
 @import "~bulma";
 @import "~buefy/src/scss/buefy";
+
+@import "me";
+@import "helpers";
+@import "layout";
+@import "card";

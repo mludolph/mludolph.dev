@@ -45,9 +45,9 @@ export default {
           to: "/blog",
         },
         {
-          title: "projects",
-          route: "projects",
-          to: "/projects",
+          title: "ai",
+          route: "ai",
+          to: "/ai",
         },
         {
           title: "music",

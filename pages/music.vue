@@ -2,7 +2,7 @@
   <section class="main-section">
     <div class="main-body">
       <h3 class="title">
-        Projects
+        music
       </h3>
       <div class="columns"></div>
     </div>
@@ -11,6 +11,6 @@
 
 <script>
 export default {
-  name: "Projects",
+  name: "music",
 };
 </script>
