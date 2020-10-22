@@ -12,13 +12,16 @@
         >
           <div class="card">
             <div class="card-image">
-              <figure class="image is-4by3">
+              <figure class="image is-2by1">
                 <img v-if="entry.img" :src="entry.img" :alt="entry.title" />
               </figure>
             </div>
             <div class="card-content">
               <p class="title is-4">{{ entry.title }}</p>
-              <p class="subtitle is-6 has-text-grey has-text-weight-light">
+              <p
+                v-if="entry.subtitle"
+                class="subtitle is-6 has-text-grey has-text-weight-light"
+              >
                 {{ entry.subtitle }}
               </p>
 
@@ -47,31 +50,52 @@ export default {
     return {
       entries: [
         {
-          title: "Title",
-          subtitle: "Subtitle",
-          tags: ["Machine Learning", "Statistics"],
-          img:
-            "https://sebastianraschka.com/images/blog/2014/kernel_pca/2014-09-14-kernel_pca_72_0.png",
+          title: "Statistics Primer",
+          subtitle: "Probabilities, Estimation Theory & more",
+          tags: ["Statistics"],
         },
         {
-          title: "Title",
-          subtitle: "Subtitle",
-          tags: ["Machine Learning", "Statistics"],
+          title: "Principal Component Analysis",
+          subtitle: "PCA, Online-PCA & Kernel PCA",
+          tags: ["Machine Learning", "PCA", "Unsupervised Learning"],
         },
         {
-          title: "Title",
-          subtitle: "Subtitle",
-          tags: ["Machine Learning", "Statistics"],
+          title: "Independent Component Analysis",
+          subtitle: "ICA, InfoMax, FastICA",
+          tags: [
+            "Machine Learning",
+            "Blind Source Seperation",
+            "Unsupervised Learning",
+          ],
         },
         {
-          title: "Title",
-          subtitle: "Subtitle",
-          tags: ["Machine Learning", "Statistics"],
+          title: "Stochastic Optimization",
+          subtitle: "Simulated Annealing & Mean-Field Annealing",
+          tags: ["Machine Learning", "Optimization", "Unsupervised Learning"],
         },
         {
-          title: "Title",
-          subtitle: "Subtitle",
-          tags: ["Machine Learning", "Statistics"],
+          title: "Clustering",
+          subtitle: "K-Means & Pairwise Clustering",
+          tags: ["Machine Learning", "Clustering", "Unsupervised Learning"],
+        },
+        {
+          title: "Embeddings",
+          subtitle: "Self Organizing Maps, LLE, t-SNE",
+          tags: [
+            "Machine Learning",
+            "Embeddings",
+            "Visualization",
+            "Unsupervised Learning",
+          ],
+        },
+        {
+          title: "Density Estimation",
+          subtitle: "KDE, GMMs & EM-Algorithms",
+          tags: ["Machine Learning"],
+        },
+        {
+          title: "Hidden Markov Models",
+          tags: ["Machine Learning"],
         },
       ],
     };

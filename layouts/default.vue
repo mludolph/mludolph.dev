@@ -2,8 +2,8 @@
   <div id="app" class="container main-container">
     <header class="is-pulled-left is-mobile header-bar">
       <span class="tag is-dark is-medium is-family-monospace has-text-light"
-        ><span class="is-size-5">m</span
-        ><span class="has-text-weight-bold is-size-5">.io</span></span
+        ><span class="has-text-weight-bold  is-size-5">m</span
+        ><span class="is-size-5">il</span></span
       >
       <div class="is-pulled-right">
         <nuxt-link
