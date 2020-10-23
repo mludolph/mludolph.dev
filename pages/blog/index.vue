@@ -8,12 +8,16 @@
         <div class="column is-full">
           <div
             class="blog-entry-wrapper mb-2"
-            v-for="(entry, i) in blog_entries"
+            v-for="(entry, i) in blogEntries"
             v-bind:key="i"
           >
             <div class="blog-entry">
               <div class="blog-entry-content">
-                <p class="title is-4">{{ entry.title }}</p>
+                <nuxt-link
+                  class="d-block title is-4"
+                  :to="'/blog/' + entry.slug + '/'"
+                  >{{ entry.title }}</nuxt-link
+                >
                 <p class="subtitle is-6 has-text-grey has-text-weight-light">
                   {{ entry.subtitle }}
                 </p>
@@ -51,26 +55,12 @@
 export default {
   name: "Blog",
   data() {
-    return {
-      blog_entries: [
-        {
-          title: "3 things you should do on your portfolio website",
-          subtitle: "What you should really focus on",
-          timestamp: "2020-09-23T15:53:53+0000",
-          wordcount: 1042,
-          tags: ["portfolio", "website"],
-        },
-        {
-          title: "5 things to do as a data scientist",
-          subtitle: "Things you would have missed out on!",
-          timestamp: "2020-09-23T15:54:53+0000",
-          wordcount: 1042,
-          image:
-            "https://images.unsplash.com/photo-1542744173-05336fcc7ad4?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=991&q=80",
-          tags: ["portfolio", "website"],
-        },
-      ],
-    };
+    return {};
+  },
+  computed: {
+    blogEntries() {
+      return this.$store.state.blogEntries;
+    },
   },
 };
 </script>

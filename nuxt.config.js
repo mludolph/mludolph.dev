@@ -3,12 +3,12 @@ export default {
    ** Nuxt rendering mode
    ** See https://nuxtjs.org/api/configuration-mode
    */
-  mode: "spa",
+  ssr: false,
   /*
    ** Nuxt target
    ** See https://nuxtjs.org/api/configuration-target
    */
-  target: "server",
+  target: "static",
   /*
    ** Headers of the page
    ** See https://nuxtjs.org/api/configuration-head
@@ -29,7 +29,7 @@ export default {
   /*
    ** Global CSS
    */
-  css: ["@/assets/styles/theme.scss"],
+  css: ["~assets/styles/theme.scss"],
   /*
    ** Plugins to load before mounting the App
    ** https://nuxtjs.org/guide/plugins
@@ -53,15 +53,22 @@ export default {
     // Doc: https://axios.nuxtjs.org/usage
     "@nuxtjs/axios",
     "@nuxtjs/pwa",
+    "@nuxt/content",
   ],
   /*
    ** Axios module configuration
    ** See https://axios.nuxtjs.org/options
    */
-  axios: {},
+  axios: { baseURL: "http://localhost:3000" },
   /*
    ** Build configuration
    ** See https://nuxtjs.org/api/configuration-build/
    */
   build: {},
+  content: {
+    markdown: {
+      remarkPlugins: ["remark-math"],
+      rehypePlugins: ["rehype-katex"],
+    },
+  },
 };
