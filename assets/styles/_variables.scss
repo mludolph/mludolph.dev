@@ -1,2 +1,42 @@
+@import url("https://fonts.googleapis.com/css?family=Raleway:300,400,500,600,700,800,900");
+@import url("https://fonts.googleapis.com/css?family=Poppins:300,500,600,700,800,900");
+@import url("https://fonts.googleapis.com/css?family=Merriweather:300,400,700,900");
+
 $widescreen-enabled: false;
 $fullhd-enabled: false;
+
+$family-secondary: "Raleway", sans-serif;
+$family-primary: "Poppins", sans-serif;
+$family-sans-serif: "Raleway", sans-serif;
+$family-serif: "Merriweather", serif;
+
+$weight-light: 200;
+$weight-normal: 300;
+
+$cornflower-blue: #8490ff;
+$baby-blue-eyes: #abd5ff;
+$azure: #007fff;
+$sea-green-crayola: #1affd5;
+$capri: #48beff;
+$maya-blue: #62bdfc;
+$cornflower-blue-dark: #04091e;
+
+$primary: $cornflower-blue;
+$secondary: $capri;
+
+$hero-gradient: -webkit-linear-gradient(0deg, $primary 0%, $secondary 100%);
+$footer-background-color: $cornflower-blue-dark;
+
+$button-border-width: 0rem;
+$button-focus-box-shadow-size: 0rem;
+
+$control-radius: 0rem;
+$control-radius-small: 0rem;
+
+$control-border-width: 0px;
+
+$control-height: auto;
+$control-line-height: 1.5rem;
+
+$button-padding-vertical: 0.5rem;
+$button-padding-horizontal: 2rem;

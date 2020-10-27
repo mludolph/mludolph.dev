@@ -1,12 +1,16 @@
 // Import Bulma's core
-@import "~bulma/sass/utilities/_all";
+//@import "~bulma/sass/utilities/_all";
 
 @import "variables";
-@import "~bulma";
-@import "~buefy/src/scss/buefy";
+@import "bulma/bulma";
+//@import "~buefy/src/scss/buefy";
+@import "bulma-timeline/timeline";
 
-@import "me";
 @import "helpers";
+
+@import "button";
 @import "layout";
+@import "home";
+
 @import "card";
 @import "blog";

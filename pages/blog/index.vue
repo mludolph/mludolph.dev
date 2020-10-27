@@ -1,49 +1,73 @@
 <template>
-  <section class="main-section">
+  <section class="container main-container">
     <div class="main-body">
-      <h3 class="title">
+      <h1 class="title is-size-3">
         blog
-      </h3>
+      </h1>
       <div class="columns">
         <div class="column is-full">
           <div
-            class="blog-entry-wrapper mb-2"
-            v-for="(entry, i) in blogEntries"
+            class="post-preview mb-2"
+            v-for="(post, i) in posts"
             v-bind:key="i"
           >
-            <div class="blog-entry">
-              <div class="blog-entry-content">
+            <div
+              class="is-flex is-align-items-center is-justify-content-space-between"
+            >
+              <div class="mr-2 is-flex-grow-1">
                 <nuxt-link
-                  class="d-block title is-4"
-                  :to="'/blog/' + entry.slug + '/'"
-                  >{{ entry.title }}</nuxt-link
+                  class="title is-clickable is-size-4 is-size-5-phone is-family-serif"
+                  :to="'/blog/' + post.slug + '/'"
+                  tag="h1"
+                  >{{ post.title }}</nuxt-link
                 >
-                <p class="subtitle is-6 has-text-grey has-text-weight-light">
-                  {{ entry.subtitle }}
-                </p>
-                <div class="blog-entry-footer">
+                <h2
+                  class="subtitle is-size-6 is-size-7-phone has-text-grey-dark is-family-serif mb-3"
+                >
+                  {{ post.subtitle }}
+                </h2>
+                <div
+                  class="is-flex is-align-items-baseline is-justify-content-space-between"
+                >
                   <div
                     class="is-size-7 has-text-grey has-text-weight-normal mb-2"
                   >
-                    <time :datetime="entry.timestamp">{{
-                      entry.timestamp | formatDate
+                    <time :datetime="post.createdAt">{{
+                      post.createdAt | formatDate
                     }}</time>
-                    &middot; {{ entry.wordcount | readTime }} min read
+                    &middot; {{ post.wordcount | readTime }} min read
                   </div>
-                  <div class="tags are-normal">
+                  <!-- <div class="tags are-normal mb-0">
                     <span
-                      v-for="(tag, i2) in entry.tags"
+                      v-for="(tag, i2) in post.tags"
                       v-bind:key="i2"
-                      class="tag"
+                      class="tag mb-0"
                       >{{ tag }}</span
                     >
+                  </div> -->
+                  <div class="">
+                    <button
+                      class="button px-3 mr-2 has-border-none has-shadow-none"
+                    >
+                      <b-icon pack="fab" icon="medium"></b-icon>
+                    </button>
+                    <button
+                      class="button px-3 mr-2 has-border-none has-shadow-none"
+                    >
+                      <b-icon pack="fas" icon="ellipsis-h"></b-icon>
+                    </button>
                   </div>
                 </div>
               </div>
-              <a class="blog-entry-image">
-                <img v-if="entry.image" :src="entry.image" :alt="entry.title" />
-              </a>
+
+              <img
+                class="post-preview-image"
+                v-if="post.image"
+                :src="post.image"
+                :alt="post.title"
+              />
             </div>
+            <hr />
           </div>
         </div>
       </div>
@@ -59,8 +83,12 @@ export default {
   },
   computed: {
     blogEntries() {
-      return this.$store.state.blogEntries;
+      return []; //this.$content;
     },
+  },
+  async asyncData({ params, $content }) {
+    const posts = await $content("posts").fetch();
+    return { posts };
   },
 };
 </script>

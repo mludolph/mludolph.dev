@@ -1,3 +1,7 @@
+html {
+  overflow-y: auto;
+}
+
 body {
   height: 100vh;
   margin: 0;
@@ -8,41 +12,70 @@ body {
 #__layout {
   height: 100%;
 }
-.header-bar {
-  padding: 2rem 0;
-  margin-bottom: 2rem !important;
+
+.main-container,
+.footer-container,
+.header-container {
+  @include until($mobile) {
+    margin-left: 1rem;
+    margin-right: 1rem;
+  }
+  @include from($mobile) {
+    @include until($desktop) {
+      margin-left: 2rem;
+      margin-right: 2rem;
+    }
+  }
 }
 .main-container {
-  padding: 0 2rem;
-  display: flex;
-  flex-flow: column;
-  height: 100%;
+  margin-bottom: 6rem;
 }
 
-a.navbar-item:hover,
-a.navbar-item.is-active,
-.navbar-link:focus {
-  background-color: transparent;
+.header-container {
+  margin-bottom: 8rem;
+  margin-top: 2rem;
+}
+.header-gradient {
+  height: 4px;
+  width: 100%;
+  background: $hero-gradient;
 }
 
-.container > .navbar .navbar-menu .navbar .container > .navbar .navbar-brand,
-.container > .navbar .navbar-menu {
-  margin-right: 0;
-  margin-left: 0;
+.active-route {
+  background: $hero-gradient;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
-@media screen and (min-width: 575px) and (max-width: 768px), print {
-  .columns {
-    display: flex;
+.resume-button {
+  border-radius: 20px;
+  font-size: 0.6rem;
+  text-transform: uppercase;
+  font-weight: bold;
+  border-width: 1px;
+  padding: 0 8px 0 8px !important;
+  line-height: 1rem;
+}
+
+$desktop-wide: $desktop + (2 * $gap);
+@include from($desktop-wide) {
+  .main-body::before {
+    background: radial-gradient(circle at center, $primary 25%, transparent 25%),
+      transparent;
+    background-size: 8px 8px;
+    content: "";
+    display: block;
+    height: 8rem;
+    width: 8rem;
+    position: absolute;
+    transform: translate(-4rem, -4rem);
+    z-index: -1;
   }
-  .column.is-narrow {
-    -webkit-box-flex: 0;
-    -ms-flex: none;
-    flex: none;
-  }
-}
-@media screen and (max-width: 500px) {
-  .column.is-narrow {
-    text-align: center;
+  .main-body {
+    background-color: $white;
+    margin-left: -2rem;
+    padding-left: 2rem;
+    margin-top: -2rem;
+    padding-top: 2rem;
   }
 }

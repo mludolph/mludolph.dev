@@ -1,13 +1,23 @@
 <template>
-  <section class="main-section">
+  <section class="container main-container">
     <div class="main-body">
-      <p class="title">
-        {{ entry.title }}
-      </p>
-      <p class="subtitle"></p>
       <div class="columns">
-        <div class="column is-full">
-          <nuxt-content :document="document" />
+        <div class="column is-full blog-post">
+          <h1
+            class="title is-family-serif has-text-weight-bold is-size-3 is-size-4-mobile"
+          >
+            {{ post.title }}
+          </h1>
+          <h2
+            class="subtitle is-family-serif has-text-grey-dark is-size-4 is-size-5-mobile"
+          >
+            {{ post.subtitle }}
+          </h2>
+          <div class="columns">
+            <div class="column is-full">
+              <nuxt-content :document="post" />
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -21,13 +31,9 @@ export default {
     return {};
   },
   computed: {},
-  async asyncData({ store, params, $content }) {
-    const entry = store.state.blogEntries.filter(
-      (entry) => entry.slug === params.slug
-    )[0];
-
-    const document = await $content(entry.source).fetch();
-    return { entry: entry, document: document };
+  async asyncData({ params, $content }) {
+    const post = await $content("posts", params.slug).fetch();
+    return { post };
   },
 };
 </script>

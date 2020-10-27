@@ -34,7 +34,7 @@ export default {
    ** Plugins to load before mounting the App
    ** https://nuxtjs.org/guide/plugins
    */
-  plugins: ["~plugins/filters.js"],
+  plugins: ["~plugins/filters.js", "~plugins/directives.js"],
   /*
    ** Auto import components
    ** See https://nuxtjs.org/api/configuration-components
@@ -43,16 +43,17 @@ export default {
   /*
    ** Nuxt.js dev-modules
    */
-  buildModules: ["@nuxt/typescript-build"],
+  buildModules: ["@nuxt/typescript-build", "@nuxtjs/moment"],
   /*
    ** Nuxt.js modules
    */
   modules: [
     // Doc: https://buefy.github.io/#/documentation
     "nuxt-buefy",
+    "nuxt-fontawesome",
+
     // Doc: https://axios.nuxtjs.org/usage
     "@nuxtjs/axios",
-    "@nuxtjs/pwa",
     "@nuxt/content",
   ],
   /*
@@ -70,5 +71,23 @@ export default {
       remarkPlugins: ["remark-math"],
       rehypePlugins: ["rehype-katex"],
     },
+  },
+  buefy: {
+    css: false,
+    materialDesignIcons: false,
+    defaultIconPack: "fas",
+    defaultIconComponent: "font-awesome-icon",
+  },
+  fontawesome: {
+    component: "font-awesome-icon",
+
+    imports: [
+      {
+        set: "@fortawesome/free-solid-svg-icons",
+        icons: ["fas"],
+      },
+      { set: "@fortawesome/free-brands-svg-icons", icons: ["fab"] },
+      { set: "@fortawesome/free-regular-svg-icons", icons: ["far"] },
+    ],
   },
 };

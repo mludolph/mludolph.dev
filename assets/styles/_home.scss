@@ -1,0 +1,29 @@
+.contact-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+.contact-icon:hover {
+  color: $text-light !important;
+}
+
+.profile {
+  .profile-image {
+    margin-right: 1rem;
+    margin-bottom: 0rem;
+  }
+  @include phone {
+    flex-direction: column;
+    text-align: center;
+
+    .profile-image {
+      margin-right: 0rem;
+      margin-bottom: 1rem;
+    }
+  }
+}
+
+.hero-banner {
+  height: 450px;
+  min-height: 450px;
+}
