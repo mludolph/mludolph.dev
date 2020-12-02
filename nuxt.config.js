@@ -69,7 +69,7 @@ export default {
   content: {
     markdown: {
       remarkPlugins: ["remark-math"],
-      rehypePlugins: ["rehype-katex"],
+      rehypePlugins: ["rehype-mathjax"],
     },
   },
   buefy: {

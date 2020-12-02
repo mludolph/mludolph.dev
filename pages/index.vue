@@ -2,7 +2,7 @@
   <div v-fragment>
     <section class="container main-container">
       <div class="main-body">
-        <div class="columns hero-banner">
+        <div class="columns">
           <div class="column">
             <div class="profile is-flex">
               <div class="image profile-image is-96x96 is-align-self-center">
@@ -23,69 +23,18 @@
               </div>
             </div>
           </div>
-
-          <div class="column">
-            <p class="mb-4">
-              Pragmatic problem solver and aspiring machine learning engineer.
-            </p>
-            <button class="button is-hero is-medium">
-              <span
-                class="has-text-light has-weight-bold is-size-6 is-uppercase"
-                >projects</span
-              >
-            </button>
-          </div>
         </div>
       </div>
-      <hr />
     </section>
-    <section class="container main-container mb-6">
-      <h1 class="title is-size-3 has-text-centered">My Interests</h1>
-      <div class="columns is-multiline">
-        <div
-          v-for="(interest, i) in interests"
-          v-bind:key="i"
-          class="column is-one-third-desktop"
-        >
+    <section class="container main-container">
+      <div class="columns">
+        <div class="column is-full">
           <div
-            class="is-flex is-flex-direction-column is-align-items-center is-text-centered is-width-100 px-2 py-2 mt-6"
+            class="post-preview mb-2"
+            v-for="(post, i) in posts"
+            v-bind:key="i"
           >
-            <font-awesome-icon :icon="interest.icon" size="2x" />
-            <h2 class="title is-size-6 mt-5 mb-4">{{ interest.title }}</h2>
-            <p class="is-size-7" style="max-width: 300px;">
-              {{ interest.description }}
-            </p>
-          </div>
-        </div>
-      </div>
-      <hr />
-    </section>
-    <section class="container main-container mb-6">
-      <h1 class="title is-size-3 has-text-centered">My Experience</h1>
-      <div class="timeline is-centered">
-        <header class="timeline-header">
-          <span class="tag is-primary">Today</span>
-        </header>
-        <div
-          v-for="(entry, i) in timelineEntries"
-          v-bind:key="i"
-          class="timeline-item"
-        >
-          <div class="timeline-marker"></div>
-          <div class="timeline-content">
-            <p class="heading">
-              {{ entry.startDate | formatDate2 }} -
-              {{ entry.endDate | formatDate2 }}
-            </p>
-            <h2 class="title is-size-6">{{ entry.title }}</h2>
-            <h3 class="subtitle is-size-7">{{ entry.institution }}</h3>
-            <p
-              class="is-size-7"
-              v-for="(line, i2) in entry.descriptionLines"
-              v-bind:key="i2"
-            >
-              {{ line }}
-            </p>
+            <blog-entry :post="post"></blog-entry>
           </div>
         </div>
       </div>
@@ -95,47 +44,14 @@
 
 <script>
 export default {
-  name: "AboutMe",
+  name: "blog",
   data() {
-    return {
-      interests: [
-        {
-          icon: ["fas", "graduation-cap"],
-          title: "Machine Learning",
-          description: "Machine Learning",
-        },
-        {
-          icon: ["far", "comment"],
-          title: "NLP",
-          description: "Sentinment Analysis",
-        },
-        {
-          icon: ["fas", "box-open"],
-          title: "Cloud Computing",
-          description: "Cloud Computing Architecture",
-        },
-        {
-          icon: ["fas", "code"],
-          title: "APIs",
-          description: "APIs",
-        },
-        {
-          icon: ["fas", "code"],
-          title: "Internet of Things",
-          description: "Inter of Things",
-        },
-      ],
-    };
+    return {};
   },
-  computed: {
-    timelineEntries() {
-      return this.$store.state.timelineEntries;
-    },
+  async asyncData({ params, $content }) {
+    const posts = await $content("posts").fetch();
+    return { posts };
   },
 };
 </script>
-<style lang="scss">
-.timeline-content {
-  max-width: 400px;
-}
-</style>
+<style lang="scss"></style>

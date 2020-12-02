@@ -4,7 +4,7 @@
       v-for="(social, i) in socialLinks"
       v-bind:key="i"
       :href="social.link"
-      class="button is-transparent contact-icon px-3 py-0 my-0 mr-2 is-medium has-border-none has-shadow-none"
+      class="button is-transparent is-hover-light px-3 py-0 my-0 mr-2 is-medium has-border-none has-shadow-none"
     >
       <b-icon
         pack="fab"
@@ -17,7 +17,7 @@
 
 <script>
 export default {
-  name: "SocialLinks",
+  name: "social-links",
   props: {
     theme: {
       type: String,

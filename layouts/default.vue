@@ -1,18 +1,12 @@
 <template>
   <div id="app">
-    <div class="header-gradient"></div>
+    <!--<div class="header-gradient"></div>-->
     <header class="container header-container">
       <div class="is-flex is-justify-content-space-between">
         <div class="is-flex has-text-dark is-height-fit-content">
           <nuxt-link to="/" tag="span" class="is-clickable">
             <span class="is-size-5">mludol.</span
             ><span class="has-text-weight-semibold is-size-5">ph</span>
-          </nuxt-link>
-          <nuxt-link
-            to="/resume.pdf"
-            class="button is-primary is-outlined resume-button is-height-fit-content is-align-self-center ml-3"
-          >
-            resume
           </nuxt-link>
         </div>
         <div class="is-flex is-flex-direction-column has-text-right">
@@ -23,7 +17,7 @@
             :to="item.to"
           >
             <span
-              v-if="$route.name.startsWith(item.route)"
+              v-if="item.names.indexOf($route.name) != -1"
               class="title is-3 has-text-weight-bold has-text-dark active-route"
             >
               {{ item.title }}
@@ -38,6 +32,7 @@
     <main>
       <nuxt />
     </main>
+    <!--
     <footer class="footer">
       <div class="container footer-container">
         <div class="columns">
@@ -47,10 +42,8 @@
             </h1>
             <p class="has-text-grey-light is-size-7 mb-4">
               Made with <font-awesome-icon icon="heart" /> using
-              <a href="https://https://nuxtjs.org/">Nuxt.js</a>,
-              <a href="https://buefy.org">Buefy</a> and lots of custom
-              components. The source code can be found on
-              <a href="https://github.com/mludolph/mludolph.github.io">github</a
+              <a href="https://https://nuxtjs.org/">Nuxt.js</a> and hosted on
+              <a href="https://github.com/mludolph/mludolph.github.io">GitHub</a
               >.
             </p>
             <p class="has-text-grey-light is-size-7">
@@ -71,6 +64,7 @@
         </div>
       </div>
     </footer>
+    -->
   </div>
 </template>
 
@@ -80,19 +74,14 @@ export default {
     return {
       menu: [
         {
-          title: "about me",
-          route: "index",
+          title: "blog",
+          names: ["index", "blog-slug"],
           to: "/",
         },
         {
-          title: "projects",
-          route: "projects",
-          to: "/projects",
-        },
-        {
-          title: "blog",
-          route: "blog",
-          to: "/blog",
+          title: "resume",
+          names: ["resume"],
+          to: "/resume",
         },
       ],
     };

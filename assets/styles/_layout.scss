@@ -1,5 +1,5 @@
 html {
-  overflow-y: auto;
+  overflow-y: overlay;
 }
 
 body {
@@ -28,12 +28,12 @@ body {
   }
 }
 .main-container {
-  margin-bottom: 6rem;
+  margin-bottom: 4rem;
 }
 
 .header-container {
+  padding-top: 2rem;
   margin-bottom: 8rem;
-  margin-top: 2rem;
 }
 .header-gradient {
   height: 4px;
@@ -42,12 +42,12 @@ body {
 }
 
 .active-route {
-  background: $hero-gradient;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  //background: $hero-gradient;
+  //-webkit-background-clip: text;
+  //-webkit-text-fill-color: transparent;
 }
 
-.resume-button {
+.small-rounded-button {
   border-radius: 20px;
   font-size: 0.6rem;
   text-transform: uppercase;
@@ -60,7 +60,7 @@ body {
 $desktop-wide: $desktop + (2 * $gap);
 @include from($desktop-wide) {
   .main-body::before {
-    background: radial-gradient(circle at center, $primary 25%, transparent 25%),
+    background: radial-gradient(circle at center, $black 20%, transparent 20%),
       transparent;
     background-size: 8px 8px;
     content: "";

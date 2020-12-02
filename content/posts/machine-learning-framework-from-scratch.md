@@ -1,12 +1,28 @@
 ---
-title: Containerize your Data Science workflow
-subtitle: How to speed up your Data Science workflow using Docker
+title: Building a Machine Learning framework from scratch
+subtitle: Not the best, but my own!
 tags:
-  - Data Science
-  - Docker
-image: https://images.unsplash.com/photo-1553268169-8232852a2377?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1324&q=80
+  - Machine Learning
+  - Neural Networks
+  - Backpropagation
+fabIconPack: fas
+fabIcon: code
 wordcount: 1000
 ---
+
+$$
+\begin{aligned}
+Error(\hat P) &= \mathbb{E}[D_{KL}(P || \hat P)]\\
+&= \mathbb{E}\Big[ \sum_{i=1}^N P_i \log \Big(\frac{P_i}{\hat P_i}\Big) \Big]\\
+&= \mathbb{E}\Big[ \sum_{i=1}^N P_i \big(\log(P_i) - \log(\hat P_i)\big) \Big]\\
+&= \mathbb{E}\Big[ \sum_{i=1}^N P_i \big(\log(P_i) - \log(R_i) + \log(R_i) - \log(\hat P_i)\big) \Big]\\
+&= \mathbb{E}\Big[ \Big(\sum_{i=1}^N P_i \big(\log(P_i) - \log(R_i)\big)\Big) + \sum_{i=1}^N P_i \big( \log(R_i) - \log(\hat P_i)\big) \Big]\\
+&= \Big(\sum_{i=1}^N P_i \big(\log(P_i) - \log(R_i)\big)\Big) + \mathbb{E}\Big[  \sum_{i=1}^N P_i \big( \log(R_i) - \log(\hat P_i)\big) \Big]\\
+&= \Big(\sum_{i=1}^N P_i \log\Big(\frac{P_i}{R_i}\Big)\Big) + \mathbb{E}\Big[  \sum_{i=1}^N P_i \log\Big(\frac{R_i}{\hat P_i}\Big) \Big]\\
+&= D_{KL}(P || R) + \mathbb{E}[D_{KL}(R || \hat P)]\\
+&= Bias(\hat P) + Var(\hat P)
+\end{aligned}
+$$
 
 **Lorem** ipsum dolor sit amet, consectetur adipiscing elit. Duis ultrices diam elit, eget bibendum sem rhoncus at. Sed mattis arcu eu lobortis consectetur. Fusce sagittis pretium mauris, vel venenatis tellus vehicula rhoncus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam et facilisis augue, feugiat ullamcorper nisi. Vestibulum dignissim vitae tortor at vulputate. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nam dignissim, ligula a accumsan elementum, sem neque consectetur erat, nec laoreet elit arcu nec augue. Proin scelerisque nulla ut magna mollis, nec tempus sapien interdum. Vivamus sed auctor elit. Aliquam rhoncus scelerisque vulputate. Fusce quis purus in nisi viverra efficitur id efficitur velit. Praesent dictum libero eros, eget condimentum velit vestibulum rhoncus. Aenean sollicitudin mauris eu viverra pulvinar. Integer efficitur blandit mattis. Pellentesque luctus quis felis vel tempus.
 

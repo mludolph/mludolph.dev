@@ -7,7 +7,9 @@ $fullhd-enabled: false;
 
 $family-secondary: "Raleway", sans-serif;
 $family-primary: "Poppins", sans-serif;
-$family-sans-serif: "Raleway", sans-serif;
+$family-sans-serif: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+  "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji",
+  "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 $family-serif: "Merriweather", serif;
 
 $weight-light: 200;
@@ -23,6 +25,7 @@ $cornflower-blue-dark: #04091e;
 
 $primary: $cornflower-blue;
 $secondary: $capri;
+$dark: $cornflower-blue-dark;
 
 $hero-gradient: -webkit-linear-gradient(0deg, $primary 0%, $secondary 100%);
 $footer-background-color: $cornflower-blue-dark;

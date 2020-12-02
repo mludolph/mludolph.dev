@@ -20,6 +20,8 @@
 }
 
 .nuxt-content {
+  max-width: 800px;
+  margin: auto;
   @extend .is-family-secondary;
   h1,
   h2,
@@ -30,7 +32,7 @@
     @extend .is-family-serif;
   }
   p {
-    @extend .is-size-5;
+    @extend .is-size-6;
     @extend .is-size-6-mobile;
     display: block;
     margin-block-start: 1em;
@@ -39,3 +41,11 @@
     margin-inline-end: 0px;
   }
 }
+
+.math-display {
+  @extend .is-size-6;
+  @extend .is-size-7-mobile;
+
+  overflow-x: auto;
+}
+
