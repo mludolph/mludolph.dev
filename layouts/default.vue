@@ -1,28 +1,30 @@
 <template>
-  <div id="app">
+  <div id="app" class="mx-4 xl:mx-0">
     <!--<div class="header-gradient"></div>-->
-    <header class="container header-container">
-      <div class="is-flex is-justify-content-space-between">
-        <div class="is-flex has-text-dark is-height-fit-content">
-          <nuxt-link to="/" tag="span" class="is-clickable">
-            <span class="is-size-5">mludol.</span
-            ><span class="has-text-weight-semibold is-size-5">ph</span>
+    <header class="container max-w-content mx-auto pt-4 mb-32 sm:mb-48">
+      <div class="flex justify-between">
+        <div class="flex h-fit-content">
+          <nuxt-link to="/" tag="span" class="cursor-pointer">
+            <span class="text-2xl text-gray-800 font-blog">mludol.</span
+            ><span class="text-2xl text-gray-800 font-blog font-semibold"
+              >ph</span
+            >
           </nuxt-link>
         </div>
-        <div class="is-flex is-flex-direction-column has-text-right">
+        <div class="flex flex-col text-right">
           <nuxt-link
-            class="is-block"
+            class="block"
             v-for="(item, i) in menu"
             v-bind:key="i"
             :to="item.to"
           >
             <span
               v-if="item.names.indexOf($route.name) != -1"
-              class="title is-3 has-text-weight-bold has-text-dark active-route"
+              class="text-3xl text-gray-800 font-bold font-secondary"
             >
               {{ item.title }}
             </span>
-            <span v-else class="is-size-5 has-text-dark">
+            <span v-else class="text-lg text-gray-800 font-secondary">
               {{ item.title }}
             </span>
           </nuxt-link>

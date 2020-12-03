@@ -24,7 +24,27 @@ export default {
         content: process.env.npm_package_description || "",
       },
     ],
-    link: [{ rel: "icon", type: "image/x-icon", href: "/favicon.ico" }],
+    script: [
+      {
+        src:
+          "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS_HTML",
+      },
+    ],
+
+    link: [
+      {
+        rel: "stylesheet",
+        href:
+          "https://fonts.googleapis.com/css?family=Poppins:300,500,600,700,800,900",
+      },
+
+      {
+        rel: "stylehset",
+        href:
+          "https://fonts.googleapis.com/css?family=Raleway:300,400,500,600,700,800,900",
+      },
+      { rel: "icon", type: "image/x-icon", href: "/favicon.ico" },
+    ],
   },
   /*
    ** Global CSS
@@ -43,13 +63,17 @@ export default {
   /*
    ** Nuxt.js dev-modules
    */
-  buildModules: ["@nuxt/typescript-build", "@nuxtjs/moment"],
+  buildModules: [
+    "@nuxt/typescript-build",
+    "@nuxtjs/moment",
+    "@nuxtjs/tailwindcss",
+  ],
   /*
    ** Nuxt.js modules
    */
   modules: [
     // Doc: https://buefy.github.io/#/documentation
-    "nuxt-buefy",
+    //"nuxt-buefy",
     "nuxt-fontawesome",
 
     // Doc: https://axios.nuxtjs.org/usage
@@ -70,6 +94,9 @@ export default {
     markdown: {
       remarkPlugins: ["remark-math"],
       rehypePlugins: ["rehype-mathjax"],
+      prism: {
+        theme: "prism-themes/themes/prism-material-oceanic.css",
+      },
     },
   },
   buefy: {
@@ -89,5 +116,19 @@ export default {
       { set: "@fortawesome/free-brands-svg-icons", icons: ["fab"] },
       { set: "@fortawesome/free-regular-svg-icons", icons: ["far"] },
     ],
+  },
+  hooks: {
+    "content:file:beforeInsert": (document) => {
+      if (document.extension === ".md") {
+        var count = require("word-count");
+        document.readingTime = Math.max(
+          Math.round(count(document.text) / 200),
+          1
+        );
+      }
+    },
+  },
+  tailwindcss: {
+    configPath: "~/tailwind.config.js",
   },
 };

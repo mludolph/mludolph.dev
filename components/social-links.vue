@@ -1,16 +1,15 @@
 <template>
-  <div class="is-inline-block">
+  <div class="inline-block">
     <button
       v-for="(social, i) in socialLinks"
       v-bind:key="i"
       :href="social.link"
-      class="button is-transparent is-hover-light px-3 py-0 my-0 mr-2 is-medium has-border-none has-shadow-none"
+      class="text-lg text-gray-800 hover:text-gray-500 mr-3"
     >
-      <b-icon
-        pack="fab"
-        :icon="social.icon"
+      <font-awesome-icon
+        :icon="['fab', social.icon]"
         :type="{ 'is-light': theme == 'light' }"
-      ></b-icon>
+      ></font-awesome-icon>
     </button>
   </div>
 </template>

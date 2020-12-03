@@ -1,9 +1,9 @@
 $timeline-marker-size: 12px !default
-$timeline-marker-color: $grey-lighter !default
+$timeline-marker-color: #b9c0fc !default
 $timeline-marker-icon-size: 24px !default
 $timeline-marker-border-size: 1px !default
 $timeline-marker-border: $timeline-marker-border-size solid $timeline-marker-color !default
-$timeline-line-color: $grey-lighter !default
+$timeline-line-color: #daddfa !default
 $timeline-line-width: 1px !default
 $timeline-line-style: solid !default
 $timeline-line: $timeline-line-width $timeline-line-style $timeline-line-color !default
@@ -35,6 +35,7 @@ $dimensions: 16 24 32 48 64 96 128 !default
     padding-bottom: $timeline-item-padding-bottom
     &::before
       content: ""
+      letter-spacing: normal
       background-color: $timeline-line-color
       display: block
       width: $timeline-line-width
@@ -54,16 +55,16 @@ $dimensions: 16 24 32 48 64 96 128 !default
       transform: translateX(-50%)
       top: 1.2rem
       width: $timeline-marker-size
-      &.is-image
-        @each $dimension in $dimensions
-          &.is-#{$dimension}x#{$dimension}
-            height: $dimension * 1px
-            width: $dimension * 1px
-        background: $timeline-marker-color
-        border: $timeline-marker-border
-        border-radius: 100%
-        display: block
-        overflow: hidden
+      // &.is-image
+      //   @each $dimension in $dimensions
+      //     &.is-#{$dimension}x#{$dimension}
+      //       height: $dimension * 1px
+      //       width: $dimension * 1px
+      //       background: $timeline-marker-color
+      //       border: $timeline-marker-border
+      //       border-radius: 100%
+      //       display: block
+      //       overflow: hidden
       &.is-icon
         display: flex
         align-items: center
@@ -78,45 +79,47 @@ $dimensions: 16 24 32 48 64 96 128 !default
           font-size: $timeline-icon-size !important
       &.is-outlined
         .image
-          background: $white
+          background: var(--color-white)
         &.is-icon
-          background: $white
+          background: var(--color-white)
           > *
             color: $timeline-marker-color
-      @each $name, $pair in $colors
-        $color: nth($pair, 1)
-        $color-invert: nth($pair, 2)
-        &.is-#{$name}
-          background-color: $color !important
-          border-color: $color !important
-          .image
-            border-color: $color !important
 
-          &.is-icon
-            background-color: $color !important
-            border-color: $color !important
-            > *
-              color: $color-invert !important
-          &.is-outlined
-            background-color: $white !important
-            border-color: $color !important
-            .image
-              background-color: $white !important
-            &.is-icon
-              background-color: $white !important
-              > *
-                color: $color !important
+      // @each $name, $pair in $colors
+      //   $color: nth($pair, 1)
+      //   $color-invert: nth($pair, 2)
+      //   &.is-#{$name}
+      //     background-color: $color !important
+      //     border-color: $color !important
+      //     .image
+      //       border-color: $color !important
+
+      //     &.is-icon
+      //       background-color: $color !important
+      //       border-color: $color !important
+      //       > *
+      //         color: $color-invert !important
+      //     &.is-outlined
+      //       background-color: $white !important
+      //       border-color: $color !important
+      //       .image
+      //         background-color: $white !important
+      //       &.is-icon
+      //         background-color: $white !important
+      //         > *
+      //           color: $color !important
+
     .timeline-content
       padding: $timeline-content-padding
       .heading
-        font-weight: $weight-semibold
+        @apply font-semibold
 
-    @each $name, $pair in $colors
-      $color: nth($pair, 1)
-      $color-invert: nth($pair, 2)
-      &.is-#{$name}
-        &::before
-          background-color: $color
+    // @each $name, $pair in $colors
+    //   $color: nth($pair, 1)
+    //   $color-invert: nth($pair, 2)
+    //   &.is-#{$name}
+    //     &::before
+    //       background-color: $color
 
   &.is-centered
     .timeline-header
@@ -153,12 +156,12 @@ $dimensions: 16 24 32 48 64 96 128 !default
           height: 100%
           position: absolute
           top: 0
-      @each $name, $pair in $colors
-        $color: nth($pair, 1)
-        $color-invert: nth($pair, 2)
-        &.is-#{$name}
-          &::before
-            background-color: $color
+      // @each $name, $pair in $colors
+      //   $color: nth($pair, 1)
+      //   $color-invert: nth($pair, 2)
+      //   &.is-#{$name}
+      //     &::before
+      //       background-color: $color
 
   &.is-rtl
     justify-content: flex-end
@@ -170,14 +173,14 @@ $dimensions: 16 24 32 48 64 96 128 !default
       &::before
         right: 0
         left: auto
-      margin-left: 0
-      margin-right: $timeline-header-width / 2
+        margin-left: 0
+        margin-right: $timeline-header-width / 2
       .timeline-marker
         transform: translateX(50%)
-        &.is-image
-          @each $dimension in $dimensions
-            &.is-#{$dimension}x#{$dimension}
-              transform: translateX(50%)
+        // &.is-image
+        //   @each $dimension in $dimensions
+        //     &.is-#{$dimension}x#{$dimension}
+        //       transform: translateX(50%)
       .timeline-content
         padding: $timeline-rtl-content-padding
         text-align: right

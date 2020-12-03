@@ -1,51 +1,54 @@
-.post-preview-image {
-  object-fit: cover;
-  width: 200px;
-  min-width: 200px;
-  height: 133px;
-  @include mobile {
-    min-width: 172px;
-    width: 172px;
-    height: 129px;
-  }
-  @include phone {
-    min-width: 100px;
-    width: 100px;
-    height: 100px;
-  }
-}
-
-.post-preview {
-  max-width: 680px;
-}
-
 .nuxt-content {
-  max-width: 800px;
-  margin: auto;
-  @extend .is-family-secondary;
+  @apply max-w-content;
+  @apply ml-auto;
+  @apply font-blog;
+  @apply text-gray-800;
   h1,
   h2,
   h3,
   h4,
   h5,
   h6 {
-    @extend .is-family-serif;
+    @apply font-sans;
   }
   p {
-    @extend .is-size-6;
-    @extend .is-size-6-mobile;
+    @apply text-base;
     display: block;
     margin-block-start: 1em;
     margin-block-end: 1em;
     margin-inline-start: 0px;
     margin-inline-end: 0px;
   }
+
+  & .nuxt-content-highlight {
+    @apply relative;
+    /* Style filename span added by @nuxt/content */
+    & > .filename {
+      @apply absolute;
+      @apply right-0;
+      @apply top-0;
+      @apply text-gray-100;
+      @apply z-10;
+      @apply font-mono;
+      @apply text-sm;
+      @apply tracking-tight;
+      @apply leading-none;
+      @apply mr-4;
+      @apply mt-3;
+    }
+  }
 }
 
 .math-display {
-  @extend .is-size-6;
-  @extend .is-size-7-mobile;
+  @apply text-base;
+  @apply text-sm;
 
   overflow-x: auto;
 }
+svg {
+  display: inline;
+}
 
+pre {
+  border-radius: 4px;
+}

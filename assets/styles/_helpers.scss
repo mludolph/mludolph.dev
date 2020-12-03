@@ -1,37 +1,11 @@
-.is-overflow-visible {
-  overflow: visible !important;
-}
-
-.has-border-none {
-  border: none !important;
-}
-.has-shadow-none {
-  box-shadow: none !important;
-}
-
-.is-family-serif {
-  font-family: $family-serif;
-}
-.is-transparent {
-  background: transparent;
-}
-
-.is-white-space-nowrap {
-  white-space: nowrap;
-}
-
-.is-height-fit-content {
+.h-fit {
   height: fit-content;
 }
 
-.is-width-100 {
-  width: 100%;
-}
-.is-height-100 {
-  height: 100%;
+.w-fit {
+  width: fit-content;
 }
 
-.is-hover-light:hover {
-  color: $text-light !important;
+.max-w-content {
+  max-width: 800px;
 }
-

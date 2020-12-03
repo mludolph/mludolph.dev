@@ -1,24 +1,19 @@
 <template>
-  <section class="container main-container">
+  <section class="container max-w-5xl mx-auto">
     <div class="main-body">
-      <div
-        class="is-flex is-align-items-center is-justify-content-space-between mb-6"
-      >
-        <h1 class="title is-size-3 mb-0">resume</h1>
-        <a href="/resume_moritzludolph.pdf" download="" class=""
-          ><b-icon
-            pack="fas"
-            icon="download"
-            class="has-text-dark is-hover-light"
-          ></b-icon
-        ></a>
-
-        <!-- class="button is-primary is-outlined resume-button is-height-fit-content is-align-self-center ml-3"--->
+      <div class="flex items-center justify-between mb-6 w-full">
+        <h1 class="text-2xl text-gray-800 font-semibold mb-0">resume</h1>
+        <a href="/resume_moritzludolph.pdf" download="">
+          <font-awesome-icon
+            class="text-gray-800 hover:text-gray-500"
+            :icon="['fas', 'download']"
+          ></font-awesome-icon>
+        </a>
       </div>
 
       <div class="timeline is-centered">
         <header class="timeline-header">
-          <span class="tag is-primary">today</span>
+          <span class="text-xs uppercase font-semibold bg-primary py-1 px-2 rounded text-white ">today</span>
         </header>
         <div
           v-for="(entry, i) in timelineEntries"
@@ -27,14 +22,14 @@
         >
           <div class="timeline-marker"></div>
           <div class="timeline-content">
-            <p class="heading">
+            <p class="text-gray-700 text-xs font-semibold uppercase">
               {{ entry.startDate | formatDate2 }} -
               {{ entry.endDate | formatDate2 }}
             </p>
-            <h2 class="title is-size-6">{{ entry.title }}</h2>
-            <h3 class="subtitle is-size-7">{{ entry.institution }}</h3>
+            <h2 class="text-gray-800 text-lg font-bold leading-1">{{ entry.title }}</h2>
+            <h3 class="text-gray-800 text-base leading-none mb-2">{{ entry.institution }}</h3>
             <p
-              class="is-size-7"
+              class="text-gray-700 text-sm"
               v-for="(line, i2) in entry.descriptionLines"
               v-bind:key="i2"
             >

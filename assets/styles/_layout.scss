@@ -13,54 +13,9 @@ body {
   height: 100%;
 }
 
-.main-container,
-.footer-container,
-.header-container {
-  @include until($mobile) {
-    margin-left: 1rem;
-    margin-right: 1rem;
-  }
-  @include from($mobile) {
-    @include until($desktop) {
-      margin-left: 2rem;
-      margin-right: 2rem;
-    }
-  }
-}
-.main-container {
-  margin-bottom: 4rem;
-}
-
-.header-container {
-  padding-top: 2rem;
-  margin-bottom: 8rem;
-}
-.header-gradient {
-  height: 4px;
-  width: 100%;
-  background: $hero-gradient;
-}
-
-.active-route {
-  //background: $hero-gradient;
-  //-webkit-background-clip: text;
-  //-webkit-text-fill-color: transparent;
-}
-
-.small-rounded-button {
-  border-radius: 20px;
-  font-size: 0.6rem;
-  text-transform: uppercase;
-  font-weight: bold;
-  border-width: 1px;
-  padding: 0 8px 0 8px !important;
-  line-height: 1rem;
-}
-
-$desktop-wide: $desktop + (2 * $gap);
-@include from($desktop-wide) {
+@media (min-width: 1280px) {
   .main-body::before {
-    background: radial-gradient(circle at center, $black 20%, transparent 20%),
+    background: radial-gradient(circle at center, black 20%, transparent 20%),
       transparent;
     background-size: 8px 8px;
     content: "";
@@ -72,7 +27,7 @@ $desktop-wide: $desktop + (2 * $gap);
     z-index: -1;
   }
   .main-body {
-    background-color: $white;
+    background-color: white;
     margin-left: -2rem;
     padding-left: 2rem;
     margin-top: -2rem;

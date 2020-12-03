@@ -1,55 +1,41 @@
 <template>
-  <section class="container main-container">
+  <section class="container max-w-content mx-auto">
     <div class="main-body">
       <nuxt-link to="/">
-        <b-icon
-          pack="fas"
-          icon="arrow-left"
-          class="has-text-dark is-hover-light"
-        ></b-icon>
+        <span class="icon has-text-dark is-hover-light">
+          <font-awesome-icon :icon="['fas', 'arrow-left']"></font-awesome-icon>
+        </span>
       </nuxt-link>
 
-      <div class="columns">
-        <div class="column is-full blog-post">
-          <div class="is-flex is-align-items-center">
-            <div class="is-flex is-flex-direction-column">
-              <div
-                class="is-size-7 has-text-grey has-text-weight-normal"
-                style="margin-left: 2rem"
-              >
-                <time :datetime="post.createdAt">{{
-                  post.createdAt | formatDate
-                }}</time>
-                &middot; {{ post.wordcount | readTime }} min read
-              </div>
-
-              <div class="is-flex">
-                <b-icon
-                  v-if="post.fabIcon"
-                  :pack="post.fabIconPack"
-                  :icon="post.fabIcon"
-                  class="has-text-primary mr-2"
-                  style="margin-top: 2px"
-                ></b-icon>
-
-                <div>
-                  <div
-                    class="title is-size-4 is-size-5-phone is-family-sans-serif"
-                  >
-                    {{ post.title }}
-                  </div>
-                  <div
-                    class="subtitle is-size-6 is-size-6-phone has-text-grey-dark is-family-sans-serif mb-3"
-                  >
-                    {{ post.subtitle }}
-                  </div>
-                </div>
-              </div>
-            </div>
+      <div class="flex flex-col w-full mt-2">
+        <div class="flex flex-col mb-8">
+          <div class="text-xs text-gray-600 ml-8">
+            <time :datetime="post.createdAt">{{
+              post.createdAt | formatDate
+            }}</time>
+            &middot; {{ post.readingTime }} min read
           </div>
 
-          <nuxt-content :document="post" />
+          <div class="flex flex-col">
+            <div class="flex items-center mb-2">
+              <font-awesome-icon
+                class="text-primary text-base w-6 mr-2"
+                :icon="[post.faIconPack, post.faIcon]"
+              ></font-awesome-icon>
+              <span
+                class="text-xl sm:text-2xl text-gray-800 font-sans font-semibold leading-none"
+              >
+                {{ post.title }}
+              </span>
+            </div>
+            <div
+              class="text-sm sm:text-base text-gray-700 font-blog leading-none ml-8 mb-3"
+            >
+              {{ post.subtitle }}
+            </div>
+          </div>
         </div>
+        <nuxt-content :document="post" />
       </div>
     </div>
   </section>
@@ -65,6 +51,19 @@ export default {
   async asyncData({ params, $content }) {
     const post = await $content("posts", params.slug).fetch();
     return { post };
+  },
+  head() {
+    return {
+      title: this.post.title + "| Moritz Ludolph",
+      meta: [
+        // hid is used as unique identifier. Do not use `vmid` for it as it will not work
+        {
+          hid: "mludolph_blog_" + this.post.slug,
+          name: this.post.title + " | Moritz Ludolph",
+          content: "",
+        },
+      ],
+    };
   },
 };
 </script>
