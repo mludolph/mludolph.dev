@@ -67,7 +67,7 @@ export default {
   name: "blog",
   data: () => ({
     loading: true,
-    repoNames: ["mludolph/mulearn", "mludolph/mludolph.github.io"],
+    repoNames: ["mludolph/mludolph.github.io"],
   }),
   computed: {
     repos() {
