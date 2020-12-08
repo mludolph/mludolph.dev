@@ -1,6 +1,6 @@
 <template>
   <div class="inline-block">
-    <button
+    <a
       v-for="(social, i) in socialLinks"
       v-bind:key="i"
       :href="social.link"
@@ -10,7 +10,7 @@
         :icon="['fab', social.icon]"
         :type="{ 'is-light': theme == 'light' }"
       ></font-awesome-icon>
-    </button>
+    </a>
   </div>
 </template>
 

@@ -1,7 +1,7 @@
 <template>
   <div id="app" class="mx-4 xl:mx-0">
     <!--<div class="header-gradient"></div>-->
-    <header class="container max-w-content mx-auto pt-4 mb-32 sm:mb-48">
+    <header class="container max-w-content mx-auto pt-4 mb-24 sm:mb-32">
       <div class="flex justify-between">
         <div class="flex h-fit-content">
           <nuxt-link to="/" tag="span" class="cursor-pointer">
@@ -34,6 +34,7 @@
     <main>
       <nuxt />
     </main>
+
     <!--
     <footer class="footer">
       <div class="container footer-container">
