@@ -1,61 +1,113 @@
 <template>
-  <div>
-    <nav
-      class="navbar header has-shadow is-primary"
-      role="navigation"
-      aria-label="main navigation"
-    >
-      <div class="navbar-brand">
-        <a class="navbar-item" href="/">
-          <img src="~assets/buefy.png" alt="Buefy" height="28" />
-        </a>
-
-        <div class="navbar-burger">
-          <span />
-          <span />
-          <span />
-        </div>
-      </div>
-    </nav>
-
-    <section class="main-content columns">
-      <aside class="column is-2 section">
-        <p class="menu-label is-hidden-touch">
-          General
-        </p>
-        <ul class="menu-list">
-          <li v-for="(item, key) of items" :key="key">
-            <nuxt-link :to="item.to" exact-active-class="is-active">
-              <b-icon :icon="item.icon" /> {{ item.title }}
+  <div
+    id="app"
+    class="px-4 xl:mx-0 bg-white"
+    :class="{ dark: darkMode, 'bg-gray-800': darkMode }"
+  >
+    <div class="transition duration-300 ease-in-out min-h-screen z-minus-5">
+      <header class="container max-w-content mx-auto pt-4 mb-24 sm:mb-24">
+        <div class="flex justify-between">
+          <div class="flex flex-col h-content">
+            <nuxt-link to="/" tag="span" class="cursor-pointer">
+              <span class="text-2xl text-gray-800 dark:text-gray-300 font-blog"
+                >mludol.</span
+              ><span
+                class="text-2xl text-gray-800 dark:text-gray-300 font-blog font-semibold"
+                >ph</span
+              >
             </nuxt-link>
-          </li>
-        </ul>
-      </aside>
+            <div
+              class="text-xs text-gray-600 dark:text-gray-400 font-secondary mb-1"
+            >
+              portfolio
+            </div>
+          </div>
 
-      <div class="container column is-10">
+          <div class="flex flex-col items-end">
+            <nuxt-link
+              class="block"
+              v-for="(item, i) in menu"
+              v-bind:key="i"
+              :to="item.to"
+            >
+              <span
+                v-if="item.names.indexOf($route.name) != -1"
+                class="text-3xl text-gray-800 dark:text-gray-300 hover:text-gray-700 dark:hover:text-gray-400 font-bold font-secondary"
+              >
+                {{ item.title }}
+              </span>
+              <span
+                v-else
+                class="text-lg text-gray-800 dark:text-gray-300 hover:text-gray-700 dark:hover:text-gray-400 font-secondary"
+              >
+                {{ item.title }}
+              </span>
+            </nuxt-link>
+
+            <a
+              class="text-lg text-gray-800 dark:text-gray-300 hover:text-gray-700 dark:hover:text-gray-400 font-secondary"
+              :href="mail"
+              >contact</a
+            >
+            <span
+              class="flex mt-1 cursor-pointer text-gray-800 dark:text-gray-300 hover:text-gray-700 dark:hover:text-gray-400"
+            >
+              <font-awesome-icon
+                class="w-4"
+                @click="setDarkMode(false)"
+                v-if="darkMode"
+                :icon="['fas', 'sun']"
+              ></font-awesome-icon>
+              <font-awesome-icon
+                class="w-4"
+                @click="setDarkMode(true)"
+                v-if="!darkMode"
+                :icon="['fas', 'moon']"
+              ></font-awesome-icon>
+            </span>
+          </div>
+        </div>
+      </header>
+      <main>
         <nuxt />
-      </div>
-    </section>
+      </main>
+    </div>
   </div>
 </template>
 
 <script>
+import { mapGetters } from "vuex";
+
 export default {
   data() {
     return {
-      items: [
+      mail: "mailto:mail@moritzludolph.de",
+      menu: [
         {
-          title: 'Home',
-          icon: 'home',
-          to: { name: 'index' },
+          title: "home",
+          names: ["index", "blog-slug"],
+          to: "/",
         },
         {
-          title: 'Inspire',
-          icon: 'lightbulb',
-          to: { name: 'inspire' },
+          title: "about me",
+          names: ["aboutme"],
+          to: "/aboutme",
         },
       ],
-    }
+    };
   },
-}
+  computed: {
+    year() {},
+    ...mapGetters({
+      darkMode: "getDarkMode",
+    }),
+  },
+  methods: {
+    setDarkMode(value) {
+      this.$store.commit("setDarkMode", value);
+    },
+  },
+};
 </script>
+
+<style lang="scss"></style>

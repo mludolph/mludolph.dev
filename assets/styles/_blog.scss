@@ -1,0 +1,54 @@
+.nuxt-content {
+  @apply max-w-content;
+  @apply ml-auto;
+  @apply font-blog;
+  @apply text-gray-800;
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-sans;
+  }
+  p {
+    @apply text-base;
+    display: block;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+  }
+
+  & .nuxt-content-highlight {
+    @apply relative;
+    /* Style filename span added by @nuxt/content */
+    & > .filename {
+      @apply absolute;
+      @apply right-0;
+      @apply top-0;
+      @apply text-gray-100;
+      @apply z-10;
+      @apply font-mono;
+      @apply text-sm;
+      @apply tracking-tight;
+      @apply leading-none;
+      @apply mr-4;
+      @apply mt-3;
+    }
+  }
+}
+
+.math-display {
+  @apply text-base;
+  @apply text-sm;
+
+  overflow-x: auto;
+}
+svg {
+  display: inline;
+}
+
+pre {
+  border-radius: 4px;
+}

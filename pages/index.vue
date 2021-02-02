@@ -1,46 +1,121 @@
 <template>
-  <section class="section">
-    <div class="columns is-mobile">
-      <card title="Free" icon="github">
-        Open source on
-        <a href="https://github.com/buefy/buefy">
-          GitHub
-        </a>
-      </card>
+  <div>
+    <section class="container max-w-content m-auto mb-4">
+      <div class="dots"></div>
+      <div class="dots-vertical"></div>
+      <div class="transition duration-300 ease-in-out">
+        <div class="flex flex-col sm:flex-row">
+          <div class="w-24 h-24 self-center mb-4 mr-0 sm:mr-4 sm:mb-0">
+            <img class="rounded-full" src="images/profile_square.jpg" />
+          </div>
 
-      <card title="Responsive" icon="cellphone-link">
-        <b class="has-text-grey">
-          Every
-        </b>
-        component is responsive
-      </card>
+          <div class="flex flex-col text-center sm:text-left self-center">
+            <div
+              class="text-lg font-secondary text-gray-800 dark:text-gray-300"
+            >
+              Hi! I'm
+            </div>
+            <h1
+              class="text-3xl text-gray-800 dark:text-gray-300 font-secondary whitespace-no-wrap leading-none"
+            >
+              Moritz Ludolph
+            </h1>
+            <h2 class="text-base text-gray-800 dark:text-gray-300 font-sans">
+              M.Sc. student @ TU Berlin
+            </h2>
+            <div
+              class="text-xs text-gray-600 dark:text-gray-400 font-secondary mb-1"
+            >
+              Machine Learning - Software Engineering
+            </div>
+            <social-links></social-links>
+          </div>
+        </div>
+      </div>
+      <hr class="mt-6 mx-4 dark:bg-gray-600" />
+    </section>
 
-      <card title="Modern" icon="alert-decagram">
-        Built with
-        <a href="https://vuejs.org/">
-          Vue.js
-        </a>
-        and
-        <a href="http://bulma.io/">
-          Bulma
-        </a>
-      </card>
-
-      <card title="Lightweight" icon="arrange-bring-to-front">
-        No other internal dependency
-      </card>
-    </div>
-  </section>
+    <section class="container max-w-content m-auto mb-4">
+      <div class="">
+        <h1
+          class="text-2xl text-gray-800 dark:text-gray-300 font-light w-full text-center sm:text-left mb-4"
+        >
+          projects
+        </h1>
+        <div
+          class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2 place-content-stretch"
+          v-if="loading"
+        >
+          <repo-card
+            v-for="(repo, i) in repoNames"
+            v-bind:key="i"
+            :repo="null"
+            :loading="true"
+          ></repo-card>
+        </div>
+        <div
+          class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2 place-content-stretch"
+          v-if="!loading"
+        >
+          <repo-card
+            v-for="(repo, i) in repos"
+            v-bind:key="i"
+            :repo="repo"
+            :loading="false"
+          ></repo-card>
+        </div>
+        <hr class="mt-6 mx-4 dark:bg-gray-600" />
+      </div>
+    </section>
+    <section class="container max-w-content m-auto pb-8">
+      <h1
+        class="text-2xl text-gray-800 dark:text-gray-300 font-light w-full text-center sm:text-left mb-4"
+      >
+        blog posts
+      </h1>
+      <blog-entry
+        class="mb-2"
+        v-for="(post, i) in posts"
+        v-bind:key="i"
+        :post="post"
+      ></blog-entry>
+    </section>
+  </div>
 </template>
 
 <script>
-import Card from '~/components/Card'
-
+import { mapGetters } from "vuex";
 export default {
-  name: 'HomePage',
-
-  components: {
-    Card,
+  name: "blog",
+  data: () => ({
+    repoNames: ["mludolph/mludolph.github.io"],
+  }),
+  computed: {
+    ...mapGetters({ repos: "getRepositories", loading: "isLoading" }),
   },
-}
+  async asyncData({ params, $content, store }) {
+    store.dispatch("loadRepositories", ["mludolph/mludolph.github.io"]);
+    const posts = await $content("posts").fetch();
+    return { posts };
+  },
+  mounted() {
+    let matched = window.matchMedia("(prefers-color-scheme: dark)").matches;
+    this.$store.commit("setDarkMode", matched);
+  },
+  head() {
+    return {
+      title: "Moritz Ludolph",
+      meta: [
+        // hid is used as unique identifier. Do not use `vmid` for it as it will not work
+        {
+          hid: "mludolph_index",
+          name: "Moritz Ludolph Portfolio",
+          content:
+            "All things about machine learning, cloud computing and IoT.",
+        },
+      ],
+    };
+  },
+};
 </script>
+<style lang="scss"></style>

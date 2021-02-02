@@ -1,0 +1,71 @@
+html {
+  overflow-y: overlay;
+}
+hr {
+  height: 1px;
+  background-color: #ccc;
+  border: none;
+}
+
+@media (min-width: 1280px) {
+  .dots {
+    background: radial-gradient(
+        circle at center,
+        bg-gray-800 10%,
+        transparent 30%
+      ),
+      transparent;
+    background-size: 8px 8px;
+    content: "";
+    display: flex;
+    height: 2rem;
+    width: 8rem;
+    position: absolute;
+    transform: translate(-4rem, -4rem);
+    .dark & {
+      background: radial-gradient(
+          circle at center,
+          $bg-gray-300 10%,
+          transparent 30%
+        ),
+        transparent;
+      background-size: 8px 8px;
+      content: "";
+      display: flex;
+      height: 2rem;
+      width: 8rem;
+      position: absolute;
+      transform: translate(-4rem, -4rem);
+    }
+  }
+  .dots-vertical {
+    background: radial-gradient(
+        circle at center,
+        bg-gray-800 10%,
+        transparent 30%
+      ),
+      transparent;
+    background-size: 8px 8px;
+    content: "";
+    display: flex;
+    height: 6rem;
+    width: 2rem;
+    position: absolute;
+    transform: translate(-4rem, -2rem);
+    .dark & {
+      background: radial-gradient(
+          circle at center,
+          $bg-gray-300 10%,
+          transparent 30%
+        ),
+        transparent;
+      background-size: 8px 8px;
+      content: "";
+      display: flex;
+      height: 6rem;
+      width: 2rem;
+      position: absolute;
+      transform: translate(-4rem, -2rem);
+    }
+  }
+}
