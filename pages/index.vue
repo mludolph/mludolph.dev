@@ -82,12 +82,17 @@ export default {
   },
   head() {
     return {
+      htmlAttrs: {
+        lang: "en",
+      },
       title: "Moritz Ludolph",
       meta: [
+        { charset: "utf-8" },
+        { name: "viewport", content: "width=device-width, initial-scale=1" },
         // hid is used as unique identifier. Do not use `vmid` for it as it will not work
         {
-          hid: "mludolph_index",
-          name: "Moritz Ludolph Portfolio",
+          hid: "description",
+          name: "description",
           content:
             "All things about machine learning, cloud computing and IoT.",
         },
