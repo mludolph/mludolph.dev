@@ -36,7 +36,7 @@ export default {
         {
           name: "Twitter",
           icon: ["fab", "twitter"],
-          link: "https://twitter.com/mludolph",
+          link: "https://twitter.com/moritzludolph",
         },
         {
           name: "LinkedIn",
