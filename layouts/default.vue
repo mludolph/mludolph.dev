@@ -1,10 +1,10 @@
 <template>
   <div
     id="app"
-    class="px-4 xl:mx-0 bg-white"
+    class="px-4 xl:mx-0 bg-white transition duration-300 ease-in-out"
     :class="{ dark: darkMode, 'bg-gray-800': darkMode }"
   >
-    <div class="transition duration-300 ease-in-out min-h-screen z-minus-5">
+    <div class="min-h-screen z-minus-5">
       <header class="container max-w-content mx-auto pt-4 mb-24 sm:mb-24">
         <div class="flex justify-between">
           <div class="flex flex-col h-content">

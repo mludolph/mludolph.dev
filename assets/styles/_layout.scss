@@ -11,7 +11,7 @@ hr {
   .dots {
     background: radial-gradient(
         circle at center,
-        bg-gray-800 10%,
+        $bg-gray-800 10%,
         transparent 30%
       ),
       transparent;
@@ -41,7 +41,7 @@ hr {
   .dots-vertical {
     background: radial-gradient(
         circle at center,
-        bg-gray-800 10%,
+        $bg-gray-800 10%,
         transparent 30%
       ),
       transparent;
