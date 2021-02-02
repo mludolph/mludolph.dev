@@ -1,36 +1,71 @@
 html {
   overflow-y: overlay;
 }
-
-body {
-  height: 100vh;
-  margin: 0;
-}
-#__nuxt {
-  height: 100%;
-}
-#__layout {
-  height: 100%;
+hr {
+  height: 1px;
+  background-color: #ccc;
+  border: none;
 }
 
 @media (min-width: 1280px) {
-  .main-body::before {
-    background: radial-gradient(circle at center, black 20%, transparent 20%),
+  .dots {
+    background: radial-gradient(
+        circle at center,
+        bg-gray-800 10%,
+        transparent 30%
+      ),
       transparent;
     background-size: 8px 8px;
     content: "";
-    display: block;
-    height: 8rem;
+    display: flex;
+    height: 2rem;
     width: 8rem;
     position: absolute;
     transform: translate(-4rem, -4rem);
-    z-index: -1;
+    .dark & {
+      background: radial-gradient(
+          circle at center,
+          $bg-gray-300 10%,
+          transparent 30%
+        ),
+        transparent;
+      background-size: 8px 8px;
+      content: "";
+      display: flex;
+      height: 2rem;
+      width: 8rem;
+      position: absolute;
+      transform: translate(-4rem, -4rem);
+    }
   }
-  .main-body {
-    background-color: white;
-    margin-left: -2rem;
-    padding-left: 2rem;
-    margin-top: -2rem;
-    padding-top: 2rem;
+  .dots-vertical {
+    background: radial-gradient(
+        circle at center,
+        bg-gray-800 10%,
+        transparent 30%
+      ),
+      transparent;
+    background-size: 8px 8px;
+    content: "";
+    display: flex;
+    height: 6rem;
+    width: 2rem;
+    position: absolute;
+    transform: translate(-4rem, -2rem);
+    .dark & {
+      background: radial-gradient(
+          circle at center,
+          $bg-gray-300 10%,
+          transparent 30%
+        ),
+        transparent;
+      background-size: 8px 8px;
+      content: "";
+      display: flex;
+      height: 6rem;
+      width: 2rem;
+      position: absolute;
+      transform: translate(-4rem, -2rem);
+    }
   }
 }

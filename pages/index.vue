@@ -1,57 +1,78 @@
 <template>
   <div>
     <section class="container max-w-content m-auto mb-4">
-      <div class="main-body">
+      <div class="dots"></div>
+      <div class="dots-vertical"></div>
+      <div class="transition duration-300 ease-in-out">
         <div class="flex flex-col sm:flex-row">
           <div class="w-24 h-24 self-center mb-4 mr-0 sm:mr-4 sm:mb-0">
             <img class="rounded-full" src="images/profile_square.jpg" />
           </div>
 
-          <div class="flex flex-col self-center">
-            <div class="text-xl text-gray-800 font-secondary">I am</div>
+          <div class="flex flex-col text-center sm:text-left self-center">
+            <div
+              class="text-lg font-secondary text-gray-800 dark:text-gray-300"
+            >
+              Hi! I'm
+            </div>
             <h1
-              class="text-3xl text-gray-800 font-secondary whitespace-no-wrap leading-none"
+              class="text-3xl text-gray-800 dark:text-gray-300 font-secondary whitespace-no-wrap leading-none"
             >
               Moritz Ludolph
             </h1>
-            <h2 class="text-base text-gray-800 font-sans mb-1">
+            <h2 class="text-base text-gray-800 dark:text-gray-300 font-sans">
               M.Sc. student @ TU Berlin
             </h2>
+            <div
+              class="text-xs text-gray-600 dark:text-gray-400 font-secondary mb-1"
+            >
+              Machine Learning - Software Engineering
+            </div>
             <social-links></social-links>
           </div>
         </div>
       </div>
-      <hr class="mt-6 mx-4" />
+      <hr class="mt-6 mx-4 dark:bg-gray-600" />
     </section>
 
     <section class="container max-w-content m-auto mb-4">
-      <h1 class="text-2xl text-gray-800 font-light mb-4">projects</h1>
-      <div
-        class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2 place-content-stretch"
-        v-if="loading"
-      >
-        <repo-card
-          v-for="(repo, i) in repoNames"
-          v-bind:key="i"
-          :repo="null"
-          :loading="loading"
-        ></repo-card>
+      <div class="">
+        <h1
+          class="text-2xl text-gray-800 dark:text-gray-300 font-light w-full text-center sm:text-left mb-4"
+        >
+          projects
+        </h1>
+        <div
+          class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2 place-content-stretch"
+          v-if="loading"
+        >
+          <repo-card
+            v-for="(repo, i) in repoNames"
+            v-bind:key="i"
+            :repo="null"
+            :loading="true"
+          ></repo-card>
+        </div>
+        <div
+          class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2 place-content-stretch"
+          v-if="!loading"
+        >
+          <repo-card
+            v-for="(repo, i) in repos"
+            v-bind:key="i"
+            :repo="repo"
+            :loading="false"
+          ></repo-card>
+        </div>
+        <hr class="mt-6 mx-4 dark:bg-gray-600" />
       </div>
-      <div
-        class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2 place-content-stretch"
-        v-if="!loading"
-      >
-        <repo-card
-          v-for="(repo, i) in repos"
-          v-bind:key="i"
-          :repo="repo"
-          :loading="loading"
-        ></repo-card>
-      </div>
-      <hr class="mt-6 mx-4" />
     </section>
     <section class="container max-w-content m-auto pb-8">
-      <h1 class="text-2xl text-gray-800 font-light mb-4">blog posts</h1>
+      <h1
+        class="text-2xl text-gray-800 dark:text-gray-300 font-light w-full text-center sm:text-left mb-4"
+      >
+        blog posts
+      </h1>
       <blog-entry
         class="mb-2"
         v-for="(post, i) in posts"
@@ -63,36 +84,34 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
 export default {
   name: "blog",
   data: () => ({
-    loading: true,
     repoNames: ["mludolph/mludolph.github.io"],
   }),
   computed: {
-    repos() {
-      return this.$store.state.repos;
-    },
+    ...mapGetters({ repos: "getRepositories", loading: "isLoading" }),
   },
-  async asyncData({ params, $content }) {
+  async asyncData({ params, $content, store }) {
+    store.dispatch("loadRepositories", ["mludolph/mludolph.github.io"]);
     const posts = await $content("posts").fetch();
     return { posts };
   },
   mounted() {
-    this.loading = true;
-    this.$store
-      .dispatch("load_repos", this.repoNames)
-      .finally(() => (this.loading = false));
+    let matched = window.matchMedia("(prefers-color-scheme: dark)").matches;
+    this.$store.commit("setDarkMode", matched);
   },
   head() {
     return {
-      title: "Moritz Ludolph's Blog",
+      title: "Moritz Ludolph",
       meta: [
         // hid is used as unique identifier. Do not use `vmid` for it as it will not work
         {
           hid: "mludolph_index",
-          name: "Moritz Ludolph's Blog",
-          content: "All things about machine learning, data analysis and IoT.",
+          name: "Moritz Ludolph Portfolio",
+          content:
+            "All things about machine learning, cloud computing and IoT.",
         },
       ],
     };

@@ -1,12 +1,14 @@
 <template>
-  <div class="border border-gray-300 rounded p-4">
+  <div class="border border-gray-300 dark:border-gray-700 rounded p-4">
     <div class="flex flex-col justify-between h-full" v-if="loading">
       <div class="flex flex-col">
-        <div class="h-4 w-24 bg-gray-300 rounded mt-1 mb-4"></div>
-        <div class="h-4 bg-gray-300 rounded mt-1"></div>
-        <div class="h-4 bg-gray-300 rounded mt-1"></div>
+        <div
+          class="h-4 w-24 bg-gray-300 dark:bg-gray-700 rounded mt-1 mb-4"
+        ></div>
+        <div class="h-4 bg-gray-300 dark:bg-gray-700 rounded mt-1"></div>
+        <div class="h-4 bg-gray-300 dark:bg-gray-700 rounded mt-1"></div>
       </div>
-      <div class="h-4 bg-gray-300 rounded"></div>
+      <div class="h-4 bg-gray-300 dark:bg-gray-700 rounded mt-1"></div>
     </div>
     <div class="flex flex-col justify-between h-full" v-if="!loading">
       <div class="flex flex-col">
@@ -15,13 +17,13 @@
           :href="repo.html_url"
           >{{ repo.name }}</a
         >
-        <p class="block text-gray-800 text-sm mb-2">
+        <p class="block text-gray-800 dark:text-gray-400 text-sm mb-2">
           {{ repo.description | truncate(100) }}
         </p>
       </div>
       <div class="flex flex-row relative justify-between">
         <div
-          class="text-gray-600 text-sm"
+          class="text-gray-600 dark:text-gray-500 text-sm"
           @mouseover="dropdown(true)"
           @mouseleave="dropdown(false)"
         >
@@ -31,11 +33,11 @@
             (+{{ this.languagesCount - 1 }} more)</span
           >
         </div>
-        <div class="text-gray-600 text-sm">
+        <div class="text-gray-600 dark:text-gray-500 text-sm">
           <font-awesome-icon :icon="['far', 'star']"></font-awesome-icon>
           <span>{{ repo.stargazers_count }}</span>
         </div>
-        <div class="text-gray-600 text-sm">
+        <div class="text-gray-600 dark:text-gray-500 text-sm">
           <font-awesome-icon
             class="mr-1"
             :icon="['fas', 'code-branch']"
@@ -52,11 +54,12 @@
         >
           <div
             v-show="isVisible"
-            class="absolute left-0 mt-6 w-40 rounded-md shadow-md bg-white border-gray-300 border"
+            class="absolute left-0 mt-6 w-40 rounded-md shadow-md bg-white dark:bg-gray-800 border-gray-300 dark:border-gray-600 border"
           >
+            <!--
             <div
               class="absolute top-0 w-2 h-2 origin-center flyout-arrow bg-white border-t border-l border-gray-300 rounded-xs pointer-events-none"
-            ></div>
+            ></div>-->
             <div
               class="px-2 pt-2 pb-1"
               role="menu"
@@ -64,7 +67,7 @@
               aria-labelledby="options-menu"
             >
               <div
-                class="text-gray-600 text-sm mb-1"
+                class="text-gray-600 dark:text-gray-500 text-sm mb-1"
                 v-for="(i, language) in repo.languages"
                 v-bind:key="i"
               >

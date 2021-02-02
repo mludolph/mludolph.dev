@@ -4,11 +4,12 @@
       v-for="(social, i) in socialLinks"
       v-bind:key="i"
       :href="social.link"
-      class="text-lg text-gray-800 hover:text-gray-500 mr-3"
+      class="text-lg mr-3 text-gray-800 dark:text-gray-300 hover:text-gray-600 dark:hover:text-gray-400"
     >
       <font-awesome-icon
-        :icon="['fab', social.icon]"
-        :type="{ 'is-light': theme == 'light' }"
+        :icon="social.icon"
+        :type="{ 'is-light': theme == 'dark' }"
+        :class="social.classes"
       ></font-awesome-icon>
     </a>
   </div>
@@ -27,20 +28,24 @@ export default {
     return {
       socialLinks: [
         {
-          icon: "github",
+          icon: ["fab", "github"],
           link: "https://github.com/mludolph",
         },
         {
-          icon: "twitter",
+          icon: ["fab", "twitter"],
           link: "https://twitter.com/mludolph",
         },
         {
-          icon: "linkedin",
-          link: "",
-        },
+          icon: ["fab", "linkedin"],
+          link: "https://de.linkedin.com/in/moritzludolph",
+        } /*
         {
-          icon: "medium",
+          icon: ["fab", "medium"],
           link: "",
+        },*/,
+        {
+          icon: ["fas", "envelope"],
+          link: "mailto:contact@moritzludolph.de",
         },
       ],
     };

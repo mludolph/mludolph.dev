@@ -1,7 +1,7 @@
 <template>
   <div class="flex items-center">
     <div class="flex flex-col">
-      <div class="text-xs text-gray-600 ml-8">
+      <div class="text-xs text-gray-600 dark:text-gray-500 ml-8">
         <time :datetime="post.createdAt">{{
           post.createdAt | formatDate
         }}</time>
@@ -16,13 +16,13 @@
               :icon="[post.faIconPack, post.faIcon]"
             ></font-awesome-icon>
             <span
-              class="text-lg sm:text-xl text-gray-800 font-semibold font-sans leading-none"
+              class="text-lg sm:text-xl text-gray-800 dark:text-gray-300 font-semibold font-sans leading-none"
             >
               {{ post.title }}
             </span>
           </div>
           <div
-            class="text-sm sm:text-sm text-gray-700 font-blog leading-none ml-8 mb-3"
+            class="text-sm sm:text-sm text-gray-700 dark:text-gray-400 font-blog leading-none ml-8 mb-3"
           >
             {{ post.subtitle }}
           </div></nuxt-link

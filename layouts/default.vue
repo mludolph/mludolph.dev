@@ -1,96 +1,111 @@
 <template>
-  <div id="app" class="mx-4 xl:mx-0">
-    <!--<div class="header-gradient"></div>-->
-    <header class="container max-w-content mx-auto pt-4 mb-24 sm:mb-32">
-      <div class="flex justify-between">
-        <div class="flex h-fit-content">
-          <nuxt-link to="/" tag="span" class="cursor-pointer">
-            <span class="text-2xl text-gray-800 font-blog">mludol.</span
-            ><span class="text-2xl text-gray-800 font-blog font-semibold"
-              >ph</span
+  <div
+    id="app"
+    class="px-4 xl:mx-0 bg-white"
+    :class="{ dark: darkMode, 'bg-gray-800': darkMode }"
+  >
+    <div class="transition duration-300 ease-in-out min-h-screen z-minus-5">
+      <header class="container max-w-content mx-auto pt-4 mb-24 sm:mb-24">
+        <div class="flex justify-between">
+          <div class="flex flex-col h-content">
+            <nuxt-link to="/" tag="span" class="cursor-pointer">
+              <span class="text-2xl text-gray-800 dark:text-gray-300 font-blog"
+                >mludol.</span
+              ><span
+                class="text-2xl text-gray-800 dark:text-gray-300 font-blog font-semibold"
+                >ph</span
+              >
+            </nuxt-link>
+            <div
+              class="text-xs text-gray-600 dark:text-gray-400 font-secondary mb-1"
             >
-          </nuxt-link>
-        </div>
-        <div class="flex flex-col text-right">
-          <nuxt-link
-            class="block"
-            v-for="(item, i) in menu"
-            v-bind:key="i"
-            :to="item.to"
-          >
-            <span
-              v-if="item.names.indexOf($route.name) != -1"
-              class="text-3xl text-gray-800 font-bold font-secondary"
-            >
-              {{ item.title }}
-            </span>
-            <span v-else class="text-lg text-gray-800 font-secondary">
-              {{ item.title }}
-            </span>
-          </nuxt-link>
-        </div>
-      </div>
-    </header>
-    <main>
-      <nuxt />
-    </main>
+              portfolio
+            </div>
+          </div>
 
-    <!--
-    <footer class="footer">
-      <div class="container footer-container">
-        <div class="columns">
-          <div class="column is-two-fifths">
-            <h1 class="title is-size-5 has-text-light">
-              About this page
-            </h1>
-            <p class="has-text-grey-light is-size-7 mb-4">
-              Made with <font-awesome-icon icon="heart" /> using
-              <a href="https://https://nuxtjs.org/">Nuxt.js</a> and hosted on
-              <a href="https://github.com/mludolph/mludolph.github.io">GitHub</a
-              >.
-            </p>
-            <p class="has-text-grey-light is-size-7">
-              Copyright &copy; 2020 All rights reserved
-            </p>
-            <p></p>
-          </div>
-          <div class="column is-two-fifths"></div>
-          <div class="column is-one-fifths">
-            <h1 class="title is-size-5 has-text-light">
-              Follow me!
-            </h1>
-            <p class="has-text-grey-light is-size-7 mb-4">
-              Connect with all my social media links
-            </p>
-            <social-links theme="light"></social-links>
+          <div class="flex flex-col items-end">
+            <nuxt-link
+              class="block"
+              v-for="(item, i) in menu"
+              v-bind:key="i"
+              :to="item.to"
+            >
+              <span
+                v-if="item.names.indexOf($route.name) != -1"
+                class="text-3xl text-gray-800 dark:text-gray-300 hover:text-gray-700 dark:hover:text-gray-400 font-bold font-secondary"
+              >
+                {{ item.title }}
+              </span>
+              <span
+                v-else
+                class="text-lg text-gray-800 dark:text-gray-300 hover:text-gray-700 dark:hover:text-gray-400 font-secondary"
+              >
+                {{ item.title }}
+              </span>
+            </nuxt-link>
+
+            <a
+              class="text-lg text-gray-800 dark:text-gray-300 hover:text-gray-700 dark:hover:text-gray-400 font-secondary"
+              :href="mail"
+              >contact</a
+            >
+            <span
+              class="flex mt-1 cursor-pointer text-gray-800 dark:text-gray-300 hover:text-gray-700 dark:hover:text-gray-400"
+            >
+              <font-awesome-icon
+                class="w-4"
+                @click="setDarkMode(false)"
+                v-if="darkMode"
+                :icon="['fas', 'sun']"
+              ></font-awesome-icon>
+              <font-awesome-icon
+                class="w-4"
+                @click="setDarkMode(true)"
+                v-if="!darkMode"
+                :icon="['fas', 'moon']"
+              ></font-awesome-icon>
+            </span>
           </div>
         </div>
-      </div>
-    </footer>
-    -->
+      </header>
+      <main>
+        <nuxt />
+      </main>
+    </div>
   </div>
 </template>
 
 <script>
+import { mapGetters } from "vuex";
+
 export default {
   data() {
     return {
+      mail: "mailto:mail@moritzludolph.de",
       menu: [
         {
-          title: "blog",
+          title: "home",
           names: ["index", "blog-slug"],
           to: "/",
         },
         {
-          title: "resume",
-          names: ["resume"],
-          to: "/resume",
+          title: "about me",
+          names: ["aboutme"],
+          to: "/aboutme",
         },
       ],
     };
   },
   computed: {
     year() {},
+    ...mapGetters({
+      darkMode: "getDarkMode",
+    }),
+  },
+  methods: {
+    setDarkMode(value) {
+      this.$store.commit("setDarkMode", value);
+    },
   },
 };
 </script>
