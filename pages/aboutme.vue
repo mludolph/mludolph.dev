@@ -97,6 +97,22 @@ export default {
       return this.$moment().diff("1996-11-15", "years");
     },
   },
+  head() {
+    return {
+      htmlAttrs: {
+        lang: "en",
+      },
+      title: "Moritz Ludolph - About Me",
+      meta: [
+        {
+          hid: "description",
+          name: "description",
+          content:
+            "All things about machine learning, cloud computing and IoT.",
+        },
+      ],
+    };
+  },
 };
 </script>
 
