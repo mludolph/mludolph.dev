@@ -131,7 +131,5 @@ export default {
   tailwindcss: {
     configPath: "~/tailwind.config.js",
   },
-  router: {
-    base: "/mludolph.github.io/",
-  },
+  router: {},
 };
