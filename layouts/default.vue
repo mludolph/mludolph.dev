@@ -32,6 +32,7 @@
               class="block tap-transparent"
               v-for="(item, i) in menu"
               v-bind:key="i"
+              :aria-label="item.title"
               :to="item.to"
             >
               <span
