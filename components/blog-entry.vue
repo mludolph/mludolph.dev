@@ -9,7 +9,11 @@
       </div>
 
       <div class="flex">
-        <nuxt-link class="cursor-pointer" :to="'/blog/' + post.slug">
+        <nuxt-link
+          class="cursor-pointer"
+          :aria-label="post.title"
+          :to="'/blog/' + post.slug"
+        >
           <div class="flex items-center mb-2">
             <font-awesome-icon
               class="text-primary text-base w-6 mr-2"
