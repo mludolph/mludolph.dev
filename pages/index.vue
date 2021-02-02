@@ -4,32 +4,10 @@
       <div class="dots"></div>
       <div class="dots-vertical"></div>
       <div class="transition duration-300 ease-in-out">
-        <div class="flex flex-col sm:flex-row">
-          <div class="w-24 h-24 self-center mb-4 mr-0 sm:mr-4 sm:mb-0">
-            <img class="rounded-full" src="images/profile_square.jpg" />
-          </div>
-
-          <div class="flex flex-col text-center sm:text-left self-center">
-            <div
-              class="text-lg font-secondary text-gray-800 dark:text-gray-300"
-            >
-              Hi! I'm
-            </div>
-            <h1
-              class="text-3xl text-gray-800 dark:text-gray-300 font-secondary whitespace-no-wrap leading-none"
-            >
-              Moritz Ludolph
-            </h1>
-            <h2 class="text-base text-gray-800 dark:text-gray-300 font-sans">
-              M.Sc. student @ TU Berlin
-            </h2>
-            <div
-              class="text-xs text-gray-600 dark:text-gray-400 font-secondary mb-1"
-            >
-              Machine Learning - Software Engineering
-            </div>
-            <social-links></social-links>
-          </div>
+        <div
+          class="flex flex-col items-center sm:items-start text-center sm:text-left sm:flex-row sm:justify-between"
+        >
+          <vcard></vcard>
         </div>
       </div>
       <hr class="mt-6 mx-4 dark:bg-gray-600" />

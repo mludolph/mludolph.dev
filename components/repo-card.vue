@@ -21,16 +21,17 @@
           {{ repo.description | truncate(100) }}
         </p>
       </div>
-      <div class="flex flex-row relative justify-between">
+      <div class="flex flex-row relative justify-between select-none">
         <div
           class="text-gray-600 dark:text-gray-500 text-sm"
-          @mouseover="dropdown(true)"
+          @mouseenter="dropdown(true)"
           @mouseleave="dropdown(false)"
         >
           <font-awesome-icon :icon="icon(repo.language)"></font-awesome-icon>
           {{ repo.language }}
           <span v-if="this.languagesCount > 1">
-            (+{{ this.languagesCount - 1 }} more)</span
+            (+{{ this.languagesCount - 1 }}
+            <span class="text-primary">more</span>)</span
           >
         </div>
         <div class="text-gray-600 dark:text-gray-500 text-sm">
@@ -73,7 +74,7 @@
               >
                 <div class="flex justify-between">
                   <div>
-                    <font-awesome-icon class="mr-1" :icon="icon(language)">
+                    <font-awesome-icon class="mr-1 w-4" :icon="icon(language)">
                     </font-awesome-icon
                     ><span>{{ language }}</span>
                   </div>
@@ -110,6 +111,7 @@ export default {
         Vue: ["fab", "vuejs"],
         Angular: ["fab", "angular"],
         React: ["fab", "react"],
+        Sass: ["fab", "sass"],
       },
       isVisible: false,
       isLoaded: false,

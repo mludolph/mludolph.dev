@@ -8,7 +8,7 @@
       <header class="container max-w-content mx-auto pt-4 mb-24 sm:mb-24">
         <div class="flex justify-between">
           <div class="flex flex-col h-content">
-            <nuxt-link to="/" tag="span" class="cursor-pointer">
+            <nuxt-link to="/" tag="span" class="cursor-pointer select-none">
               <span class="text-2xl text-gray-800 dark:text-gray-300 font-blog"
                 >mludol.</span
               ><span
@@ -17,13 +17,13 @@
               >
             </nuxt-link>
             <div
-              class="text-xs text-gray-600 dark:text-gray-400 font-secondary mb-1"
+              class="text-xs text-gray-600 dark:text-gray-400 font-secondary mb-1 select-none"
             >
               portfolio
             </div>
           </div>
 
-          <div class="flex flex-col items-end">
+          <div class="flex flex-col items-end select-none">
             <nuxt-link
               class="block"
               v-for="(item, i) in menu"
