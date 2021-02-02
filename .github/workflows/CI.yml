@@ -43,6 +43,6 @@ jobs:
           destination-repository-name: mludolph.github.io
           user-email: mail@moritzludolph.de
           destination-repository-username: mludolph
-          target-branch: gh_pages
+          target-branch: gh-pages
         
           
