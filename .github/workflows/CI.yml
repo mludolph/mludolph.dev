@@ -27,13 +27,11 @@ jobs:
           node-version: '12'
 
       # Runs a single command using the runners shell
-      - uses: borales/actions-yarn@v2.0.0
-        with:
-          cmd: install
+      - name: run yarn install
+        run: yarn install
       
-      - uses: borales/actions-yarn@v2.0.0
-        with:
-          cmd: generate
+      - name: run yarn generate
+        run: yarn generate
       
       - name: Push dist folder to other directory
         uses: cpina/github-action-push-to-another-repository@v1.2
