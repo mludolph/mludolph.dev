@@ -1,4 +1,6 @@
-# mludolph.gitub.io
+# mludolph.gitub.io - portfolio for Moritz Ludolph
+
+![CI](https://github.com/mludolph/mludolph.github.io/workflows/CI/badge.svg)
 
 ## Build Setup
 
@@ -9,12 +11,9 @@ $ yarn install
 # serve with hot reload at localhost:3000
 $ yarn dev
 
-# build for production and launch server
-$ yarn build
-$ yarn start
-
 # generate static project
 $ yarn generate
-```
 
-For detailed explanation on how things work, check out [Nuxt.js docs](https://nuxtjs.org).
+# deploy to github pages (done automatically by pushing master branch) or using
+$ yarn deploy
+```
