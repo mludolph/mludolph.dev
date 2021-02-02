@@ -14,10 +14,10 @@
               class="cursor-pointer select-none tap-transparent"
             >
               <span class="text-2xl text-gray-800 dark:text-gray-300 font-blog"
-                >mludol.</span
+                >mludolph.</span
               ><span
                 class="text-2xl text-gray-800 dark:text-gray-300 font-blog font-semibold"
-                >ph</span
+                >dev</span
               >
             </nuxt-link>
             <div
