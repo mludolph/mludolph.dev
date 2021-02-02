@@ -8,7 +8,11 @@
       <header class="container max-w-content mx-auto pt-4 mb-24 sm:mb-24">
         <div class="flex justify-between">
           <div class="flex flex-col h-content">
-            <nuxt-link to="/" tag="span" class="cursor-pointer select-none">
+            <nuxt-link
+              to="/"
+              tag="span"
+              class="cursor-pointer select-none tap-transparent"
+            >
               <span class="text-2xl text-gray-800 dark:text-gray-300 font-blog"
                 >mludol.</span
               ><span
@@ -25,7 +29,7 @@
 
           <div class="flex flex-col items-end select-none">
             <nuxt-link
-              class="block"
+              class="block tap-transparent"
               v-for="(item, i) in menu"
               v-bind:key="i"
               :to="item.to"
