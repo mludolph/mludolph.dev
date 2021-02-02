@@ -12,10 +12,9 @@
             <p class="text-gray-800 dark:text-gray-300 text-sm font-sans">
               I'm a {{ age }}-year old
               <b class="font-semibold">Computer Science</b> student from
-              Germany, currently living in Berlin. Learning new things and
-              solving problems are things that I enjoy thoroughly. Currently I'm
-              mainly interested in machine learning, cloud computing and product
-              development.
+              Germany, currently living in Berlin. I enjoy building things and
+              solving problems in a fast and impactful way. Currently I'm mainly
+              interested in machine learning, cloud computing and IoT.
             </p>
             <p class="text-gray-800 dark:text-gray-300 text-sm mt-2">
               In my free time I love hiking, playing the piano and producing
