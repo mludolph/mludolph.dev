@@ -72,7 +72,10 @@ export default {
     ...mapGetters({ repos: "getRepositories", loading: "isLoading" }),
   },
   async asyncData({ params, $content, store }) {
-    store.dispatch("loadRepositories", ["mludolph/mludolph.github.io"]);
+    store.dispatch("loadRepositories", [
+      "mludolph/mludolph.github.io",
+      "mludolph/pytorch_isin",
+    ]);
     const posts = await $content("posts").fetch();
     return { posts };
   },
