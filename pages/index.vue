@@ -79,10 +79,6 @@ export default {
     const posts = await $content("posts").fetch();
     return { posts };
   },
-  mounted() {
-    let matched = window.matchMedia("(prefers-color-scheme: dark)").matches;
-    this.$store.commit("setDarkMode", matched);
-  },
   head() {
     return {
       htmlAttrs: {

@@ -2,6 +2,7 @@ import { faTruckLoading } from "@fortawesome/free-solid-svg-icons";
 
 export const state = () => ({
   darkMode: true,
+  initialized: false,
   timelineEntries: [
     {
       periods: [["2019-10", "today"]],
@@ -79,6 +80,9 @@ export const mutations = {
       state.loading = value;
     }
   },
+  setInitialized(state, value){
+    state.intialized = value;
+  }
 };
 
 const GITHUB_API = "https://api.github.com/";
@@ -112,5 +116,8 @@ export const getters = {
   },
   isLoading: (state) => {
     return state.loading;
+  },
+  isInitialized: (state) => {
+    return state.initialized;
   },
 };

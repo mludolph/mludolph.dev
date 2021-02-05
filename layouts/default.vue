@@ -105,7 +105,15 @@ export default {
     year() {},
     ...mapGetters({
       darkMode: "getDarkMode",
+      initialized: "isInitialized",
     }),
+  },
+  mounted() {
+    if (this.initialized) {
+      let matched = window.matchMedia("(prefers-color-scheme: dark)").matches;
+      this.$store.commit("setDarkMode", matched);
+      this.$store.commit("setInitialized", true);
+    }
   },
   methods: {
     setDarkMode(value) {
