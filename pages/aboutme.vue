@@ -100,7 +100,7 @@ export default {
     },
     meta() {
       const metaData = {
-        title: "About me | Moritz Ludolph",
+        title: "Moritz Ludolph | About me",
         url: "https://www.mludolph.dev",
       };
       return getSiteMeta(metaData);
@@ -108,7 +108,7 @@ export default {
   },
   head() {
     return {
-      title: "About me | Moritz Ludolph",
+      title: "Moritz Ludolph | About me",
       meta: [...this.meta],
       link: [
         {
