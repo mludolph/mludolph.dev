@@ -87,6 +87,8 @@
 </template>
 
 <script>
+import getSiteMeta from "@/utils/getSiteMeta";
+
 export default {
   name: "resume",
   computed: {
@@ -96,19 +98,23 @@ export default {
     age() {
       return this.$moment().diff("1996-11-15", "years");
     },
+    meta() {
+      const metaData = {
+        title: "About me | Moritz Ludolph",
+        url: "https://mludolph.dev",
+      };
+      return getSiteMeta(metaData);
+    },
   },
   head() {
     return {
-      htmlAttrs: {
-        lang: "en",
-      },
-      title: "Moritz Ludolph - About Me",
-      meta: [
+      title: "About me | Moritz Ludolph",
+      meta: [...this.meta],
+      link: [
         {
-          hid: "description",
-          name: "description",
-          content:
-            "All things about machine learning, cloud computing and IoT.",
+          hid: "canonical",
+          rel: "canonical",
+          href: "https://mludolph.dev/aboutme",
         },
       ],
     };

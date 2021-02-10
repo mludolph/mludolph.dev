@@ -1,8 +1,10 @@
 ---
 title: Principal Component Analysis
 subtitle: Motivation, Derivation and Implementation
+description: "Principal Component Analysis (PCA) is a dimensionality reduction method that tries to reduce the dimensions by finding the most relevant directions in the high dimensional space..."
 tags:
   - Machine Learning
+image: ""
 faIconPack: fas
 faIcon: square-root-alt
 ---

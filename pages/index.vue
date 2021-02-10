@@ -63,6 +63,8 @@
 
 <script>
 import { mapGetters } from "vuex";
+import getSiteMeta from "@/utils/getSiteMeta";
+
 export default {
   name: "blog",
   data: () => ({
@@ -70,6 +72,13 @@ export default {
   }),
   computed: {
     ...mapGetters({ repos: "getRepositories", loading: "isLoading" }),
+    meta() {
+      const metaData = {
+        title: "About me | Moritz Ludolph",
+        url: "https://mludolph.dev",
+      };
+      return getSiteMeta(metaData);
+    },
   },
   async asyncData({ params, $content, store }) {
     store.dispatch("loadRepositories", [
@@ -81,16 +90,13 @@ export default {
   },
   head() {
     return {
-      htmlAttrs: {
-        lang: "en",
-      },
-      title: "Moritz Ludolph",
-      meta: [
+      title: "Moritz Ludolph | MSc CS student",
+      meta: [...this.meta],
+      link: [
         {
-          hid: "description",
-          name: "description",
-          content:
-            "All things about machine learning, cloud computing and IoT.",
+          hid: "canonical",
+          rel: "canonical",
+          href: "https://mludolph.dev",
         },
       ],
     };

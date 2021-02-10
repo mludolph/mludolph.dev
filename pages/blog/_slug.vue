@@ -47,10 +47,27 @@
 </template>
 
 <script>
+import getSiteMeta from "@/utils/getSiteMeta";
+
 export default {
   name: "blog-post",
   data() {
     return {};
+  },
+  computed: {
+    meta() {
+      const metaData = {
+        type: "article",
+        title: this.post.title,
+        description: this.post.description,
+        url: `https://mludolph.dev/blog/${this.$route.params.slug}`,
+        mainImage: this.post.image,
+      };
+      let m = getSiteMeta(metaData);
+      console.log(m);
+      console.log(this.post)
+      return m;
+    },
   },
 
   async asyncData({ params, $content }) {
@@ -59,13 +76,28 @@ export default {
   },
   head() {
     return {
-      title: this.post.title + "| Moritz Ludolph",
+      title: this.post.title + " | Moritz Ludolph",
       meta: [
-        // hid is used as unique identifier. Do not use `vmid` for it as it will not work
+        ...this.meta,
+        { property: "article:published", content: this.post.createdAt },
+        { property: "article:modified_time", content: this.post.updatedAt },
         {
-          hid: "mludolph_blog_" + this.post.slug,
-          name: this.post.title + " | Moritz Ludolph",
-          content: "",
+          property: "article:tag",
+          content: this.post.tags ? this.post.tags.toString() : "",
+        },
+        { name: "twitter:label1", content: "Written by" },
+        { name: "twitter:data1", content: "Moritz Ludolph" },
+        { name: "twitter:label2", content: "Filed under" },
+        {
+          name: "twitter:data2",
+          content: this.post.tags ? this.post.tags.toString() : "",
+        },
+      ],
+      link: [
+        {
+          hid: "canonical",
+          rel: "canonical",
+          href: `https://mludolph.dev/blog/${this.$route.params.slug}`,
         },
       ],
     };

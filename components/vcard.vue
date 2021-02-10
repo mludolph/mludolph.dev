@@ -1,12 +1,10 @@
 <template>
   <div class="flex flex-col sm:flex-row sm:w-content items-center">
-    <div class="w-24 h-24 mb-4 mr-0 sm:mr-4 sm:mb-0 select-none">
-      <img
-        class="rounded-full"
-        src="images/profile_square.jpg"
-        alt="Profile Image"
-      />
-    </div>
+    <img
+      class="w-24 h-24 mb-4 mr-0 sm:mr-4 sm:mb-0 select-none rounded-full"
+      src="images/profile_square.jpg"
+      alt="Profile Image"
+    />
 
     <div class="flex flex-col">
       <div class="text-lg font-secondary text-gray-800 dark:text-gray-300">
