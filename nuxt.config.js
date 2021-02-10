@@ -1,4 +1,6 @@
 import getSiteMeta from "./utils/getSiteMeta";
+import getRoutes from "./utils/getRoutes";
+
 const meta = getSiteMeta();
 
 export default {
@@ -112,6 +114,8 @@ export default {
     // Doc: https://axios.nuxtjs.org/usage
     "@nuxtjs/axios",
     "@nuxt/content",
+
+    "@nuxtjs/sitemap",
   ],
   /*
    ** Axios module configuration
@@ -123,6 +127,13 @@ export default {
    ** See https://nuxtjs.org/api/configuration-build/
    */
   build: {},
+  sitemap: {
+    hostname: "https://www.mludolph.dev",
+    routes() {
+      return getRoutes();
+    },
+  },
+
   content: {
     markdown: {
       remarkPlugins: ["remark-math"],
@@ -131,12 +142,6 @@ export default {
         theme: "prism-themes/themes/prism-material-oceanic.css",
       },
     },
-  },
-  buefy: {
-    css: false,
-    materialDesignIcons: false,
-    defaultIconPack: "fas",
-    defaultIconComponent: "font-awesome-icon",
   },
   fontawesome: {
     component: "font-awesome-icon",

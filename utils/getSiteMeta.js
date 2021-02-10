@@ -1,5 +1,5 @@
 const type = "website";
-const url = "https://mludolph.dev";
+const url = "https://www.mludolph.dev";
 const title = "Moritz Ludolph | MSc CS student";
 const description =
   "A Berlin-based CS student's portfolio and blog. I write about all things regarding machine learning, cloud computing and the Internet of Things.";

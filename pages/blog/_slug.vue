@@ -60,12 +60,12 @@ export default {
         type: "article",
         title: this.post.title,
         description: this.post.description,
-        url: `https://mludolph.dev/blog/${this.$route.params.slug}`,
+        url: `https://www.mludolph.dev/blog/${this.$route.params.slug}`,
         mainImage: this.post.image,
       };
       let m = getSiteMeta(metaData);
       console.log(m);
-      console.log(this.post)
+      console.log(this.post);
       return m;
     },
   },
@@ -97,7 +97,7 @@ export default {
         {
           hid: "canonical",
           rel: "canonical",
-          href: `https://mludolph.dev/blog/${this.$route.params.slug}`,
+          href: `https://www.mludolph.dev/blog/${this.$route.params.slug}`,
         },
       ],
     };

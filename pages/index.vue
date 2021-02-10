@@ -72,13 +72,7 @@ export default {
   }),
   computed: {
     ...mapGetters({ repos: "getRepositories", loading: "isLoading" }),
-    meta() {
-      const metaData = {
-        title: "About me | Moritz Ludolph",
-        url: "https://mludolph.dev",
-      };
-      return getSiteMeta(metaData);
-    },
+    meta() {},
   },
   async asyncData({ params, $content, store }) {
     store.dispatch("loadRepositories", [
@@ -96,7 +90,7 @@ export default {
         {
           hid: "canonical",
           rel: "canonical",
-          href: "https://mludolph.dev",
+          href: "https://www.mludolph.dev",
         },
       ],
     };
