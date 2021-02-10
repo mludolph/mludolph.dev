@@ -85,7 +85,7 @@ export default {
   head() {
     return {
       title: "Moritz Ludolph | MSc CS student",
-      meta: [...this.meta],
+      meta: [],
       link: [
         {
           hid: "canonical",

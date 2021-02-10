@@ -63,10 +63,7 @@ export default {
         url: `https://www.mludolph.dev/blog/${this.$route.params.slug}`,
         mainImage: this.post.image,
       };
-      let m = getSiteMeta(metaData);
-      console.log(m);
-      console.log(this.post);
-      return m;
+      return getSiteMeta(metaData);
     },
   },
 
