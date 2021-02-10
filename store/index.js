@@ -69,7 +69,6 @@ export const state = () => ({
 
 export const mutations = {
   saveRepositories(state, payload) {
-    console.log(payload);
     state.repos = payload;
   },
   setDarkMode(state, value) {
@@ -80,9 +79,9 @@ export const mutations = {
       state.loading = value;
     }
   },
-  setInitialized(state, value){
+  setInitialized(state, value) {
     state.intialized = value;
-  }
+  },
 };
 
 const GITHUB_API = "https://api.github.com/";

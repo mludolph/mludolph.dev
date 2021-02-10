@@ -18,7 +18,6 @@ Vue.filter("formatDate2", (value) => {
 });
 
 Vue.filter("formatPeriod", (values) => {
-  console.log(values);
   return formatDate(values[0]) + "‒" + formatDate(values[1]);
 });
 
