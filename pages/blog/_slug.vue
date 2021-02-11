@@ -47,7 +47,7 @@
 </template>
 
 <script>
-import getSiteMeta from "~/utils/getSiteMeta";
+import getSiteMeta from "@/utils/getSiteMeta";
 
 export default {
   name: "blog-post",

@@ -24,10 +24,10 @@ export default {
     },
     title: "Moritz Ludolph | M.Sc. CS student",
     meta: [
-      ...meta,
       { charset: "utf-8" },
       { name: "HandheldFriendly", content: "True" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
+      ...meta,
     ],
 
     link: [
