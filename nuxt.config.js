@@ -131,10 +131,32 @@ export default {
     imports: [
       {
         set: "@fortawesome/free-solid-svg-icons",
-        icons: ["fas"],
+        icons: [
+          "faEnvelope",
+          "faMoon",
+          "faSun",
+          "faArrowLeft",
+          "faCodeBranch",
+          "faSquareRootAlt",
+        ],
       },
-      { set: "@fortawesome/free-brands-svg-icons", icons: ["fab"] },
-      { set: "@fortawesome/free-regular-svg-icons", icons: ["far"] },
+      {
+        set: "@fortawesome/free-brands-svg-icons",
+        icons: [
+          "faGithub",
+          "faTwitter",
+          "faLinkedin",
+          "faMedium",
+          "faPython",
+          "faJsSquare",
+          "faJava",
+          "faVuejs",
+          "faAngular",
+          "faReact",
+          "faSass",
+        ],
+      },
+      { set: "@fortawesome/free-regular-svg-icons", icons: ["faStar"] },
     ],
   },
   hooks: {
