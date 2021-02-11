@@ -20,9 +20,10 @@
         >
           projects
         </h1>
+
         <div
           class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2 place-content-stretch"
-          v-if="loading"
+          v-if="reposLoading"
         >
           <repo-card
             v-for="(repo, i) in repoNames"
@@ -33,7 +34,7 @@
         </div>
         <div
           class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2 place-content-stretch"
-          v-if="!loading"
+          v-if="!reposLoading"
         >
           <repo-card
             v-for="(repo, i) in repos"
@@ -51,36 +52,48 @@
       >
         blog posts
       </h1>
-      <blog-entry
-        class="mb-2"
-        v-for="(post, i) in posts"
-        v-bind:key="i"
-        :post="post"
-      ></blog-entry>
+      <div v-if="postsLoading">
+        <blog-entry
+          class="mb-2"
+          v-for="i in postsCount"
+          v-bind:key="i"
+          :post="null"
+          :loading="true"
+        ></blog-entry>
+      </div>
+      <div v-else>
+        <blog-entry
+          class="mb-2"
+          v-for="(post, i) in posts"
+          v-bind:key="i"
+          :post="post"
+          :loading="false"
+        ></blog-entry>
+      </div>
     </section>
   </div>
 </template>
 
 <script>
 import { mapGetters } from "vuex";
-import getSiteMeta from "@/utils/getSiteMeta";
 
 export default {
   name: "blog",
-  data: () => ({
-    repoNames: ["mludolph/mludolph.github.io"],
-  }),
+  data: () => ({}),
   computed: {
-    ...mapGetters({ repos: "getRepositories", loading: "isLoading" }),
+    ...mapGetters({
+      repos: "repos/getRepositories",
+      repoNames: "repos/getRepositoryNames",
+      reposLoading: "repos/isLoading",
+      posts: "posts/getPosts",
+      postsCount: "posts/getPostsCount",
+      postsLoading: "posts/isLoading",
+    }),
     meta() {},
   },
-  async asyncData({ params, $content, store }) {
-    store.dispatch("loadRepositories", [
-      "mludolph/mludolph.github.io",
-      "mludolph/pytorch_isin",
-    ]);
-    const posts = await $content("posts").fetch();
-    return { posts };
+  async asyncData({ $content, store }) {
+    await store.dispatch("repos/LOAD");
+    await store.dispatch("posts/LOAD", $content);
   },
   head() {
     return {

@@ -74,7 +74,11 @@
               >
                 <div class="flex justify-between">
                   <div>
-                    <font-awesome-icon class="mr-1 w-4" :icon="icon(language)">
+                    <font-awesome-icon
+                      v-if="icon(language)"
+                      class="mr-1 w-4"
+                      :icon="icon(language)"
+                    >
                     </font-awesome-icon
                     ><span>{{ language }}</span>
                   </div>

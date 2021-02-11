@@ -47,7 +47,7 @@
 </template>
 
 <script>
-import getSiteMeta from "@/utils/getSiteMeta";
+import getSiteMeta from "~/utils/getSiteMeta";
 
 export default {
   name: "blog-post",
@@ -95,6 +95,12 @@ export default {
           hid: "canonical",
           rel: "canonical",
           href: `https://www.mludolph.dev/blog/${this.$route.params.slug}`,
+        },
+      ],
+      script: [
+        {
+          src:
+            "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS_HTML",
         },
       ],
     };

@@ -84,6 +84,7 @@
 import { mapGetters } from "vuex";
 
 export default {
+  loading: true,
   data() {
     return {
       mail: "mailto:mail@moritzludolph.de",

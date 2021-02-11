@@ -88,13 +88,12 @@
 
 <script>
 import getSiteMeta from "@/utils/getSiteMeta";
+import { mapGetters } from "vuex";
 
 export default {
   name: "resume",
   computed: {
-    timelineEntries() {
-      return this.$store.state.timelineEntries;
-    },
+    ...mapGetters({ timelineEntries: "timeline/getTimelineEntries" }),
     age() {
       return this.$moment().diff("1996-11-15", "years");
     },
