@@ -1,9 +1,5 @@
 <template>
-  <div
-    id="app"
-    class="px-4 xl:mx-0 bg-white transition duration-300 ease-in-out"
-    :class="{ dark: darkMode, 'bg-gray-800': darkMode }"
-  >
+  <div id="app" class="px-4 xl:mx-0">
     <div class="min-h-screen z-minus-5">
       <header class="container max-w-content mx-auto pt-4 mb-24 sm:mb-24">
         <div class="flex justify-between">
@@ -59,13 +55,13 @@
             >
               <font-awesome-icon
                 class="w-4"
-                @click="setDarkMode(false)"
+                @click="setColorMode('light')"
                 v-if="darkMode"
                 :icon="['fas', 'sun']"
               ></font-awesome-icon>
               <font-awesome-icon
                 class="w-4"
-                @click="setDarkMode(true)"
+                @click="setColorMode('dark')"
                 v-if="!darkMode"
                 :icon="['fas', 'moon']"
               ></font-awesome-icon>
@@ -103,22 +99,21 @@ export default {
     };
   },
   computed: {
-    year() {},
-    ...mapGetters({
-      darkMode: "getDarkMode",
-      initialized: "isInitialized",
-    }),
+    darkMode() {
+      return this.$colorMode.value === "dark";
+    },
   },
   mounted() {
+    /*
     if (this.initialized) {
       let matched = window.matchMedia("(prefers-color-scheme: dark)").matches;
       this.$store.commit("setDarkMode", matched);
       this.$store.commit("setInitialized", true);
-    }
+    }*/
   },
   methods: {
-    setDarkMode(value) {
-      this.$store.commit("setDarkMode", value);
+    setColorMode(value) {
+      this.$colorMode.preference = value;
     },
   },
 };

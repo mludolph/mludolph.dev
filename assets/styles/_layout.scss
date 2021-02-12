@@ -7,6 +7,19 @@ hr {
   border: none;
 }
 
+body {
+  background-color: white;
+  color: $bg-gray-800;
+  @apply transition;
+  @apply duration-300;
+  @apply ease-in-out;
+}
+
+.dark body {
+  background-color: $bg-gray-800;
+  color: $bg-gray-300;
+}
+
 @media (min-width: 1280px) {
   .dots {
     background: radial-gradient(

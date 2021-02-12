@@ -27,6 +27,7 @@
       "@types/node",
       "@nuxt/types",
       "@nuxt/content",
+      "@nuxtjs/color-mode",
       "@nuxtjs/moment"
     ]
   },

@@ -1,24 +1,7 @@
-export const state = () => ({
-  darkMode: true,
-  initialized: false,
-});
+export const state = () => ({});
 
-export const mutations = {
-  setDarkMode(state, value) {
-    state.darkMode = value;
-  },
-  setInitialized(state, value) {
-    state.intialized = value;
-  },
-};
+export const mutations = {};
 
 export const actions = {};
 
-export const getters = {
-  getDarkMode: (state) => {
-    return state.darkMode;
-  },
-  isInitialized: (state) => {
-    return state.initialized;
-  },
-};
+export const getters = {};

@@ -82,6 +82,7 @@ export default {
    */
   buildModules: [
     "@nuxt/typescript-build",
+    "@nuxtjs/color-mode",
     "@nuxtjs/moment",
     "@nuxtjs/tailwindcss",
   ],
@@ -109,6 +110,12 @@ export default {
    ** See https://nuxtjs.org/api/configuration-build/
    */
   build: {},
+  colorMode: {
+    classSuffix: "",
+  },
+  loadingIndicator: {
+    name: "~/loading-indicator.html",
+  },
   sitemap: {
     hostname: "https://www.mludolph.dev",
     routes() {
@@ -174,4 +181,7 @@ export default {
     configPath: "~/tailwind.config.js",
   },
   router: {},
+  purgeCSS: {
+    whitelist: ["dark"],
+  },
 };
