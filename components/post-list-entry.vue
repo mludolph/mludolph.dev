@@ -33,7 +33,7 @@
       <nuxt-link
         class="flex flex-col cursor-pointer"
         :aria-label="post.title"
-        :to="'/blog/' + post.slug"
+        :to="'/posts/' + post.slug"
       >
         <div class="flex items-center mb-2">
           <font-awesome-icon
@@ -58,7 +58,7 @@
 
 <script>
 export default {
-  name: "blog-entry",
+  name: "post-list-entry",
   props: {
     post: {
       type: Object,

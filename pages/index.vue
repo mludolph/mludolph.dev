@@ -53,22 +53,22 @@
         blog posts
       </h1>
       <div v-if="postsLoading">
-        <blog-entry
+        <post-list-entry
           class="mb-2"
           v-for="i in postsCount"
           v-bind:key="i"
           :post="null"
           :loading="true"
-        ></blog-entry>
+        ></post-list-entry>
       </div>
       <div v-else>
-        <blog-entry
+        <post-list-entry
           class="mb-2"
           v-for="(post, i) in posts"
           v-bind:key="i"
           :post="post"
           :loading="false"
-        ></blog-entry>
+        ></post-list-entry>
       </div>
     </section>
   </div>

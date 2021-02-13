@@ -87,7 +87,7 @@ export default {
       menu: [
         {
           title: "home",
-          names: ["index", "blog-slug"],
+          names: ["index", "posts-slug"],
           to: "/",
         },
         {

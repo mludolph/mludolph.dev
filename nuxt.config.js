@@ -132,6 +132,11 @@ export default {
       },
     },
   },
+  generate: {
+    routes() {
+      return getRoutes();
+    },
+  },
   fontawesome: {
     component: "font-awesome-icon",
 

@@ -50,7 +50,7 @@
 import getSiteMeta from "@/utils/getSiteMeta";
 
 export default {
-  name: "blog-post",
+  name: "post",
   data() {
     return {};
   },
@@ -60,7 +60,7 @@ export default {
         type: "article",
         title: this.post.title,
         description: this.post.description,
-        url: `https://www.mludolph.dev/blog/${this.$route.params.slug}`,
+        url: `https://www.mludolph.dev/posts/${this.$route.params.slug}`,
         mainImage: this.post.image,
       };
       return getSiteMeta(metaData);
@@ -94,7 +94,7 @@ export default {
         {
           hid: "canonical",
           rel: "canonical",
-          href: `https://www.mludolph.dev/blog/${this.$route.params.slug}`,
+          href: `https://www.mludolph.dev/posts/${this.$route.params.slug}`,
         },
       ],
       script: [
