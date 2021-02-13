@@ -62,3 +62,5 @@ $$
 $$
 
 The resulting problem is thus a the solution to the **eigenvalue problem** $Sw = \lambda w$. From (2) we can see that we are looking for the eigenvector $w$ of $S$ with the **largest** eigenvalue $\lambda$ since we are maximizing the objective $w^\top S w = \lambda$. From (2) we can also see that the variance along an eigenvector $w_i$ is given by $\frac{1}{N} \lambda_i$, thus projecting all data points onto the largest $k \lt d$ eigenvectors preserves the most variance.
+
+To be continued...
