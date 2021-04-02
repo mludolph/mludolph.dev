@@ -22,9 +22,9 @@
     "@nuxtjs/pwa": "^3.0.0-beta.20",
     "@nuxtjs/sitemap": "^2.4.0",
     "autoprefixer": "^10.2.4",
-    "nuxt": "^2.14.9",
+    "d3": "^6.6.0",
+    "nuxt": "^2.15.3",
     "nuxt-fontawesome": "^0.4.0",
-    "postcss": "^8.2.4",
     "prism-themes": "^1.5.0",
     "rehype-mathjax": "^3.0.0",
     "remark-math": "^4.0.0",
@@ -39,7 +39,7 @@
     "@nuxtjs/eslint-config-typescript": "^3.0.0",
     "@nuxtjs/eslint-module": "^2.0.0",
     "@nuxtjs/moment": "^1.6.1",
-    "@nuxtjs/tailwindcss": "^3.4.2",
+    "@nuxtjs/tailwindcss": "^4.0.1",
     "@vue/test-utils": "^1.0.3",
     "babel-core": "7.0.0-bridge.0",
     "babel-eslint": "^10.1.0",
@@ -48,9 +48,13 @@
     "eslint-plugin-nuxt": "^1.0.0",
     "eslint-plugin-prettier": "^3.1.4",
     "jshint": "^2.12.0",
-    "node-sass": "^4.14.1",
+    "postcss": "^8.2.8",
+    "postcss-hexrgba": "^2.0.1",
+    "postcss-preset-env": "^6.7.0",
+    "postcss-responsive-type": "^1.0.0",
+    "postcss-url": "^10.1.1",
+    "precss": "^4.0.0",
     "prettier": "^2.0.5",
-    "push-dir": "^0.4.1",
-    "sass-loader": "^10.0.2"
+    "push-dir": "^0.4.1"
   }
 }

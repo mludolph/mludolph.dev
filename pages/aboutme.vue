@@ -121,7 +121,7 @@ export default {
 };
 </script>
 
-<style lang="scss">
+<style lang="css">
 .timeline-content {
   max-width: 400px;
 }

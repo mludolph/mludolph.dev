@@ -66,7 +66,7 @@ export default {
   /*
    ** Global CSS
    */
-  css: ["~assets/styles/theme.scss"],
+  css: ["~assets/styles/theme.css"],
   /*
    ** Plugins to load before mounting the App
    ** https://nuxtjs.org/guide/plugins
@@ -109,7 +109,31 @@ export default {
    ** Build configuration
    ** See https://nuxtjs.org/api/configuration-build/
    */
-  build: {},
+  build: {
+    postcss: {
+      // Add plugin names as key and arguments as value
+      // Install them before as dependencies with npm or yarn
+      plugins: {
+        // Disable a plugin by passing false as value
+        "postcss-url": {},
+        "postcss-nested": {},
+        "postcss-responsive-type": {},
+        "postcss-hexrgba": {},
+        precss: {},
+      },
+
+      preset: {
+        // Change the postcss-preset-env settings
+        autoprefixer: {
+          grid: true,
+        },
+        stage: 3,
+        features: {
+          "nesting-rules": true,
+        },
+      },
+    },
+  },
   colorMode: {
     classSuffix: "",
   },
