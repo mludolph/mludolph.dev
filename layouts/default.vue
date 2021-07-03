@@ -11,12 +11,22 @@
             <span class="text-2xl text-gray-800 dark:text-gray-300 font-blog"
               >mludolph.</span
             ><span
-              class="text-2xl text-gray-800 dark:text-gray-300 font-blog font-semibold"
+              class="
+                text-2xl text-gray-800
+                dark:text-gray-300
+                font-blog font-semibold
+              "
               >dev</span
             >
           </nuxt-link>
           <div
-            class="text-xs text-gray-600 dark:text-gray-400 font-secondary mb-1 select-none"
+            class="
+              text-xs text-gray-600
+              dark:text-gray-400
+              font-secondary
+              mb-1
+              select-none
+            "
           >
             portfolio
           </div>
@@ -32,25 +42,51 @@
           >
             <span
               v-if="item.names.indexOf($route.name) != -1"
-              class="text-3xl text-gray-800 dark:text-gray-300 hover:text-gray-700 dark:hover:text-gray-400 font-bold font-secondary"
+              class="
+                text-3xl text-gray-800
+                dark:text-gray-300
+                hover:text-gray-700
+                dark:hover:text-gray-400
+                font-bold font-secondary
+              "
             >
               {{ item.title }}
             </span>
             <span
               v-else
-              class="text-lg text-gray-800 dark:text-gray-300 hover:text-gray-700 dark:hover:text-gray-400 font-secondary"
+              class="
+                text-lg text-gray-800
+                dark:text-gray-300
+                hover:text-gray-700
+                dark:hover:text-gray-400
+                font-secondary
+              "
             >
               {{ item.title }}
             </span>
           </nuxt-link>
 
           <a
-            class="text-lg text-gray-800 dark:text-gray-300 hover:text-gray-700 dark:hover:text-gray-400 font-secondary"
+            class="
+              text-lg text-gray-800
+              dark:text-gray-300
+              hover:text-gray-700
+              dark:hover:text-gray-400
+              font-secondary
+            "
             :href="mail"
             >contact</a
           >
           <span
-            class="flex mt-1 cursor-pointer text-gray-800 dark:text-gray-300 hover:text-gray-700 dark:hover:text-gray-400"
+            class="
+              flex
+              mt-1
+              cursor-pointer
+              text-gray-800
+              dark:text-gray-300
+              hover:text-gray-700
+              dark:hover:text-gray-400
+            "
           >
             <font-awesome-icon
               class="w-4"
@@ -70,12 +106,25 @@
     </header>
 
     <Nuxt />
+
+    <footer class="flex flex-row justify-center mb-1 mt-2">
+      <cookie-law theme="custom" v-on:accept="enableTracking()"></cookie-law>
+      <span
+        class="
+          text-center text-xs
+          sm:text-sm
+          text-gray-700
+          dark:text-gray-400
+          font-blog
+          leading-none
+        "
+        >Made with ❤️ in Berlin.
+      </span>
+    </footer>
   </div>
 </template>
 
 <script>
-import { mapGetters } from "vuex";
-
 export default {
   loading: true,
   data() {
@@ -100,18 +149,29 @@ export default {
       return this.$colorMode.value === "dark";
     },
   },
-  mounted() {
-    /*
-    if (this.initialized) {
-      let matched = window.matchMedia("(prefers-color-scheme: dark)").matches;
-      this.$store.commit("setDarkMode", matched);
-      this.$store.commit("setInitialized", true);
-    }*/
-  },
+  mounted() {},
   methods: {
     setColorMode(value) {
       this.$colorMode.preference = value;
     },
+    enableTracking() {
+      this.$gtag.optIn();
+    },
   },
 };
 </script>
+
+<style lang="postcss">
+.Cookie--custom {
+  @apply py-2 px-4;
+  @apply dark:bg-gray-700 bg-gray-50;
+
+  .Cookie__content {
+    @apply text-sm;
+  }
+  .Cookie__button {
+    @apply text-sm rounded;
+    @apply bg-green-500 dark:bg-green-600 hover:bg-green-600 dark:hover:bg-green-500 text-gray-50 focus:outline-none px-2 py-1;
+  }
+}
+</style>

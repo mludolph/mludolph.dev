@@ -71,7 +71,13 @@ export default {
    ** Plugins to load before mounting the App
    ** https://nuxtjs.org/guide/plugins
    */
-  plugins: ["~plugins/filters.js", "~plugins/directives.js"],
+  plugins: [
+    "~plugins/filters.js",
+    "~plugins/directives.js",
+    "~plugins/banner.js",
+    "~plugins/tracking.js",
+
+  ],
   /*
    ** Auto import components
    ** See https://nuxtjs.org/api/configuration-components
