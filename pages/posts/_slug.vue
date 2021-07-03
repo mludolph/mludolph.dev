@@ -12,8 +12,8 @@
       <div class="flex flex-col w-full mt-2">
         <div class="flex flex-col mb-8">
           <div class="text-xs text-gray-600 dark:text-gray-400 ml-8">
-            <time :datetime="post.createdAt">{{
-              post.createdAt | formatDate
+            <time :datetime="post.postedAt">{{
+              post.postedAt | formatDate
             }}</time>
             &middot; {{ post.readingTime }} min read
           </div>

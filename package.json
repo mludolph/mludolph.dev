@@ -29,6 +29,8 @@
     "rehype-mathjax": "^3.0.0",
     "remark-math": "^4.0.0",
     "tailwindcss": "^2.0.2",
+    "vue-cookie-law": "^1.13.3",
+    "vue-gtag": "^1.16.1",
     "word-count": "^0.2.2"
   },
   "devDependencies": {
