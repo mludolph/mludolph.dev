@@ -48,7 +48,7 @@
     "eslint-plugin-nuxt": "^1.0.0",
     "eslint-plugin-prettier": "^3.1.4",
     "jshint": "^2.12.0",
-    "postcss": "^8.2.8",
+    "postcss": "^8.2.10",
     "postcss-hexrgba": "^2.0.1",
     "postcss-preset-env": "^6.7.0",
     "postcss-responsive-type": "^1.0.0",
