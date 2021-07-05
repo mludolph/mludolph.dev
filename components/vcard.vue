@@ -11,7 +11,13 @@
         Hi! I'm
       </div>
       <h1
-        class="text-3xl text-gray-800 dark:text-gray-300 font-secondary whitespace-no-wrap leading-none"
+        class="
+          text-3xl text-gray-800
+          dark:text-gray-300
+          font-secondary
+          whitespace-no-wrap
+          leading-none
+        "
       >
         Moritz Ludolph
       </h1>
