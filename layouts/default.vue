@@ -1,5 +1,5 @@
 <template>
-  <div id="app" class="flex flex-col px-4 xl:mx-0 min-h-screen z-minus-5">
+  <div id="app" class="flex flex-col min-h-screen px-4 xl:mx-0 z-minus-5">
     <header class="container max-w-content mx-auto pt-4 mb-24 sm:mb-24">
       <div class="flex justify-between">
         <div class="flex flex-col h-content">
@@ -107,19 +107,35 @@
 
     <Nuxt />
 
-    <footer class="flex flex-row justify-center mb-1 mt-2">
-      <cookie-law theme="custom" v-on:accept="enableTracking()"></cookie-law>
-      <span
+    <footer class="mt-auto">
+      <cookie-law
+        theme="custom"
+        class="container max-w-content m-auto"
+        v-on:accept="enableTracking()"
+      ></cookie-law>
+
+      <div
         class="
-          text-center text-xs
-          sm:text-sm
-          text-gray-700
-          dark:text-gray-400
-          font-blog
-          leading-none
+          footer
+          container
+          max-w-content
+          m-auto
+          justify-center
+          text-xs
+          font-secondary font-light
+          mb-1
         "
-        >Made with ❤️ in Berlin.
-      </span>
+      >
+        <span class="text-gray-800 dark:text-gray-300"
+          >Made with ❤ in Berlin
+        </span>
+        <span class="text-gray-800 dark:text-gray-300 mx-1"> | </span>
+        <nuxt-link
+          class="text-primary hover:text-indigo-500 active:text-indigo-500"
+          to="/"
+          >Privacy</nuxt-link
+        >
+      </div>
     </footer>
   </div>
 </template>
@@ -165,6 +181,7 @@ export default {
 .Cookie--custom {
   @apply py-2 px-4;
   @apply dark:bg-gray-700 bg-gray-50;
+  @apply rounded-t;
 
   .Cookie__content {
     @apply text-sm;
@@ -173,5 +190,9 @@ export default {
     @apply text-sm rounded;
     @apply bg-green-500 dark:bg-green-600 hover:bg-green-600 dark:hover:bg-green-500 text-gray-50 focus:outline-none px-2 py-1;
   }
+}
+.footer {
+  @apply flex flex-row w-full;
+  @apply overflow-hidden box-border z-40 items-baseline;
 }
 </style>

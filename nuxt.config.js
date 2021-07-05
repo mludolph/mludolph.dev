@@ -180,6 +180,7 @@ export default {
           "faArrowLeft",
           "faCodeBranch",
           "faSquareRootAlt",
+          "faHeart"
         ],
       },
       {
