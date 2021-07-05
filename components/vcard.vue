@@ -1,7 +1,7 @@
 <template>
   <div class="flex flex-col sm:flex-row sm:w-content items-center">
     <img
-      class="w-24 h-24 mb-4 mr-0 sm:mr-4 sm:mb-0 select-none rounded-full"
+      class="w-32 h-32 mb-4 mr-0 sm:mr-4 sm:mb-0 select-none rounded-full"
       src="/images/profile_square.jpg"
       alt="Profile Image"
     />
