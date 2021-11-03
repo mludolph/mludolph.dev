@@ -22,7 +22,7 @@ export default {
     htmlAttrs: {
       lang: "en-GB",
     },
-    title: "Moritz Ludolph | MSc CS student",
+    title: "Moritz Ludolph | ML & SWE",
     meta: [
       { charset: "utf-8" },
       { name: "HandheldFriendly", content: "True" },

@@ -5,9 +5,26 @@
       <div class="dots-vertical"></div>
       <div class="transition duration-300 ease-in-out">
         <div
-          class="flex flex-col items-center sm:items-start text-center sm:text-left sm:flex-row sm:justify-between"
+          class="
+            flex flex-col
+            items-center
+            mdsm:items-start
+            text-center
+            md:text-left
+            md:flex-row
+            md:justify-between
+          "
         >
           <vcard></vcard>
+          <div class="grid grid-cols-5">
+            <div class="w-16 h-16 p-3" v-for="icon in icons" :key="icon.name">
+              <img
+                class="w-full h-full"
+                :class="{ 'filter-white': $colorMode.value === 'dark' }"
+                :src="`icons/${icon.icon}`"
+              />
+            </div>
+          </div>
         </div>
       </div>
       <hr class="mt-6 mx-4 dark:bg-gray-600" />
@@ -16,13 +33,27 @@
     <section class="container max-w-content m-auto mb-4">
       <div class="">
         <h1
-          class="text-2xl text-gray-800 dark:text-gray-300 font-light w-full text-center sm:text-left mb-4"
+          class="
+            text-md text-gray-800
+            dark:text-gray-300
+            uppercase
+            w-full
+            text-center
+            sm:text-left
+            mb-4
+          "
         >
-          projects
+          Contributions & Projects
         </h1>
 
         <div
-          class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2 place-content-stretch"
+          class="
+            grid grid-cols-1
+            sm:grid-cols-2
+            md:grid-cols-3
+            gap-2
+            place-content-stretch
+          "
           v-if="reposLoading"
         >
           <repo-card
@@ -33,7 +64,13 @@
           ></repo-card>
         </div>
         <div
-          class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2 place-content-stretch"
+          class="
+            grid grid-cols-1
+            sm:grid-cols-2
+            md:grid-cols-3
+            gap-2
+            place-content-stretch
+          "
           v-if="!reposLoading"
         >
           <repo-card
@@ -46,11 +83,19 @@
         <hr class="mt-6 mx-4 dark:bg-gray-600" />
       </div>
     </section>
-    <section class="container max-w-content m-auto pb-8">
+    <section class="container max-w-content m-auto pb-8" v-if="postsCount > 0">
       <h1
-        class="text-2xl text-gray-800 dark:text-gray-300 font-light w-full text-center sm:text-left mb-4"
+        class="
+          text-md text-gray-800
+          dark:text-gray-300
+          uppercase
+          w-full
+          text-center
+          sm:text-left
+          mb-4
+        "
       >
-        blog posts
+        Blog Posts
       </h1>
       <div v-if="postsLoading">
         <post-list-entry
@@ -79,7 +124,63 @@ import { mapGetters } from "vuex";
 
 export default {
   name: "blog",
-  data: () => ({}),
+  data: () => ({
+    icons: [
+      {
+        icon: "python-icon.svg",
+        name: "Python",
+      },
+      {
+        icon: "javascript-icon.svg",
+        name: "JavaScript",
+      },
+      {
+        icon: "sql-database-generic.svg",
+        name: "SQL",
+      },
+
+      {
+        icon: "pytorch-icon.svg",
+        name: "PyTorch",
+      },
+      {
+        icon: "tensorflow-icon.svg",
+        name: "Tensorflow",
+      },
+      {
+        icon: "django-icon.svg",
+        name: "Django",
+      },
+      {
+        icon: "flask-icon.svg",
+        name: "Flask",
+      },
+      {
+        icon: "apache-kafka-icon.svg",
+        name: "Apache Kafka",
+      },
+      {
+        icon: "apache-spark-icon.svg",
+        name: "Apache Spark",
+      },
+      {
+        icon: "flink-icon.svg",
+        name: "Apache Flink",
+      },
+      {
+        icon: "docker-icon.svg",
+        name: "Docker",
+      },
+      {
+        icon: "kubernetes-icon.svg",
+        name: "Kubernetes",
+      },
+      {
+        icon: "microsoft-azure-icon.svg",
+        name: "Microsoft Azure",
+      },
+    ],
+  }),
   computed: {
     ...mapGetters({
       repos: "repos/getRepositories",
@@ -97,7 +198,7 @@ export default {
   },
   head() {
     return {
-      title: "Moritz Ludolph | MSc CS student",
+      title: "Moritz Ludolph | ML & SWE",
       meta: [],
       link: [
         {
@@ -110,3 +211,10 @@ export default {
   },
 };
 </script>
+
+<style lang="postcss">
+.filter-white {
+  filter: brightness(0) saturate(100%) invert(100%) sepia(0%) saturate(7384%)
+    hue-rotate(295deg) brightness(130%) contrast(60%);
+}
+</style>

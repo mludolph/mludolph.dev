@@ -1,6 +1,10 @@
 export const state = () => ({
   repos: [],
-  repoNames: ["mludolph/mludolph.github.io", "mludolph/pytorch_isin"],
+  repoNames: [
+    "rusty1s/pytorch_cluster",
+    "mludolph/pytorch_isin",
+    "mludolph/mludolph.github.io",
+  ],
   loading: true,
 });
 

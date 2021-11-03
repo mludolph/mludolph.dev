@@ -7,14 +7,13 @@
     />
 
     <div class="flex flex-col">
-      <div class="text-lg font-secondary text-gray-800 dark:text-gray-300">
+      <div class="text-lg text-gray-800 dark:text-gray-300">
         Hi! I'm
       </div>
       <h1
         class="
           text-3xl text-gray-800
           dark:text-gray-300
-          font-secondary
           whitespace-no-wrap
           leading-none
         "
@@ -24,7 +23,7 @@
       <h2 class="text-base text-gray-800 dark:text-gray-300 font-sans">
         M.Sc. student @ TU Berlin
       </h2>
-      <div class="text-xs text-gray-600 dark:text-gray-400 font-secondary mb-1">
+      <div class="text-xs text-gray-600 dark:text-gray-400 mb-1">
         Machine Learning - Software Engineering
       </div>
       <social-links></social-links>

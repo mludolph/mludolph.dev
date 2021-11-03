@@ -23,7 +23,6 @@
             class="
               text-xs text-gray-600
               dark:text-gray-400
-              font-secondary
               mb-1
               select-none
             "
@@ -47,7 +46,7 @@
                 dark:text-gray-300
                 hover:text-gray-700
                 dark:hover:text-gray-400
-                font-bold font-secondary
+                font-bold
               "
             >
               {{ item.title }}
@@ -59,7 +58,6 @@
                 dark:text-gray-300
                 hover:text-gray-700
                 dark:hover:text-gray-400
-                font-secondary
               "
             >
               {{ item.title }}
@@ -122,7 +120,7 @@
           m-auto
           justify-center
           text-xs
-          font-secondary font-light
+          font-light
           mb-1
         "
       >

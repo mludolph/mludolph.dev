@@ -5,10 +5,10 @@
       <div class="dots-vertical"></div>
       <div class="transition duration-300 ease-in-out">
         <div
-          class="flex flex-col items-center sm:items-start text-center sm:text-left sm:flex-row sm:justify-between"
+          class="flex flex-col items-center md:items-start text-center md:text-left md:flex-row md:justify-between"
         >
           <vcard></vcard>
-          <div class="flex flex-col max-w-sm sm:self-end mt-4 sm:mt-0">
+          <div class="flex flex-col max-w-sm md:self-end mt-4 md:mt-0">
             <p class="text-gray-800 dark:text-gray-300 text-sm font-sans">
               I'm a {{ age }}-year old
               <b class="font-semibold">Computer Science</b> student from

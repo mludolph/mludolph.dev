@@ -1,6 +1,6 @@
 const type = "website";
 const url = "https://www.mludolph.dev";
-const title = "Moritz Ludolph | MSc CS student";
+const title = "Moritz Ludolph | ML & SWE";
 const description =
   "A Berlin-based CS student's portfolio and blog. I write about all things regarding machine learning, cloud computing and the Internet of Things.";
 const mainImage = "";

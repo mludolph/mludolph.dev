@@ -13,6 +13,7 @@ module.exports = {
       },
       fontFamily: {
         sans: [
+          "Poppins",
           "-apple-system",
           "BlinkMacSystemFont",
           "Segoe UI",
@@ -26,7 +27,6 @@ module.exports = {
           "Segoe UI Symbol",
           "Noto Color Emoji",
         ],
-        secondary: "Poppins",
         blog: "Raleway",
       },
     },

@@ -1,6 +1,6 @@
 export const state = () => ({
   posts: [],
-  postsCount: 1,
+  postsCount: 0,
   loading: true,
 });
 
