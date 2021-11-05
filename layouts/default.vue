@@ -1,6 +1,6 @@
 <template>
   <div id="app" class="flex flex-col min-h-screen px-4 xl:mx-0 z-minus-5">
-    <header class="container max-w-content mx-auto pt-4 mb-24 sm:mb-24">
+    <header class="container max-w-content mx-auto pt-4">
       <div class="flex justify-between">
         <div class="flex flex-col h-content">
           <nuxt-link
@@ -20,12 +20,7 @@
             >
           </nuxt-link>
           <div
-            class="
-              text-xs text-gray-600
-              dark:text-gray-400
-              mb-1
-              select-none
-            "
+            class="text-xs text-gray-600 dark:text-gray-400 mb-1 select-none"
           >
             portfolio
           </div>
@@ -71,9 +66,10 @@
               hover:text-gray-700
               dark:hover:text-gray-400
               font-secondary
+              hero
             "
             :href="mail"
-            >contact</a
+            >get in touch</a
           >
           <span
             class="
@@ -192,5 +188,21 @@ export default {
 .footer {
   @apply flex flex-row w-full;
   @apply overflow-hidden box-border z-40 items-baseline;
+}
+.hero {
+  @apply transition-all duration-500;
+  background: rgb(34, 193, 195);
+  background: linear-gradient(
+    27deg,
+    rgba(34, 193, 195, 1) 0%,
+    rgba(253, 187, 45, 1) 100%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-size: 200% auto;
+  background-position: left center;
+}
+.hero:hover {
+  background-position: right center;
 }
 </style>

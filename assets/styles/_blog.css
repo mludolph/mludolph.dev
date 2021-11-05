@@ -9,6 +9,17 @@
   h6 {
     @apply font-sans;
   }
+
+  h1 {
+    @apply text-2xl font-semibold;
+  }
+  h2 {
+    @apply text-xl font-semibold;
+  }
+  h3 {
+    @apply font-semibold;
+  }
+
   p {
     @apply text-base;
     display: block;
@@ -20,19 +31,59 @@
 
   & .nuxt-content-highlight {
     @apply relative;
+    & pre {
+      @apply rounded-md;
+      background-color: #001e26;
+      & code {
+        background-color: transparent;
+      }
+    }
+    & pre[data-line] {
+      @apply px-4 py-6;
+    }
+    & .line-highlight {
+      @apply mt-6;
+    }
     /* Style filename span added by @nuxt/content */
     & > .filename {
+      background: hsla(220, 100%, 80%, 0.1);
       @apply absolute;
-      @apply right-0;
-      @apply top-0;
+      @apply right-1;
+      @apply top-1;
       @apply text-gray-100;
       @apply z-10;
       @apply font-mono;
       @apply text-sm;
       @apply tracking-tight;
       @apply leading-none;
-      @apply mr-4;
-      @apply mt-3;
+      @apply rounded-md;
+      @apply px-1 py-0.5;
+    }
+  }
+
+  .code-toolbar > .toolbar {
+    @apply top-auto bottom-1;
+    & .copy-toolbar-button {
+      background: hsla(220, 100%, 80%, 0.1);
+      background-image: url(/icons/copy.svg);
+      background-repeat: no-repeat;
+      background-size: 60%;
+      background-position: 40% 50%;
+      @apply w-8 h-8;
+      @apply focus:outline-none;
+      @apply absolute;
+      @apply right-1;
+      @apply bottom-1;
+      @apply p-2;
+      @apply rounded-lg;
+      @apply transition-all duration-300;
+    }
+    & .copy-toolbar-button.copied {
+      background: hsla(220, 100%, 80%, 0.1);
+      background-image: url(/icons/check.svg);
+      background-repeat: no-repeat;
+      background-size: 60%;
+      background-position: 50% 50%;
     }
   }
 }
@@ -42,9 +93,5 @@
   @apply text-sm;
 }
 svg {
-  display: inline;
-}
-
-pre {
-  border-radius: 4px;
+  @apply inline;
 }

@@ -1,6 +1,5 @@
 export const state = () => ({
   posts: [],
-  postsCount: 0,
   loading: true,
 });
 
@@ -18,7 +17,11 @@ export const mutations = {
 export const actions = {
   async LOAD({ commit }, contentContext) {
     commit("setLoading", true);
-    const posts = await contentContext("posts").without(["body"]).fetch();
+    const posts = await contentContext("posts")
+      .without(["body"])
+      .where({ published: true })
+      .sortBy("postedAt", "desc")
+      .fetch();
     commit("setPosts", posts);
     commit("setLoading", false);
   },
@@ -29,7 +32,7 @@ export const getters = {
     return state.posts;
   },
   getPostsCount: (state) => {
-    return state.postsCount;
+    return state.posts.length;
   },
   isLoading: (state) => {
     return state.loading;

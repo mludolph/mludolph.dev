@@ -5,7 +5,15 @@
       v-bind:key="i"
       :href="social.link"
       :aria-label="social.name"
-      class="text-lg mr-3 text-gray-800 dark:text-gray-300 hover:text-gray-600 dark:hover:text-gray-400"
+      class="
+        text-lg
+        mr-3
+        last:mr-0
+        text-gray-800
+        dark:text-gray-300
+        hover:text-gray-600
+        dark:hover:text-gray-400
+      "
     >
       <font-awesome-icon
         :icon="social.icon"

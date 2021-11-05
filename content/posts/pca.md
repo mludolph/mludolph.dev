@@ -4,11 +4,11 @@ subtitle: Motivation, Derivation and Implementation
 description: "Principal Component Analysis (PCA) is a dimensionality reduction method that tries to reduce the dimensions by finding the most relevant directions in the high dimensional space..."
 tags:
   - Machine Learning
-image: ""
 faIconPack: fas
 faIcon: square-root-alt
 postedAt: 2021-04-02T04:48:04.401Z
 published: False
+showToC: False
 ---
 
 **Principal Component Analysis (PCA)** is a dimensionality reduction method that tries to reduce the dimensions by finding the most relevant directions in the high dimensional space. Given $N$ $d$-dimensional data points $x_1, \dots, x_N \in \mathbb{R}^d$, we can find a projection such that the projected data a) is as close to the original data is possible (**minimum noise**) or equivalently b) has maximum variance (**maximum signal**).

@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="mt-4">
     <section class="container max-w-content m-auto mb-4">
       <div class="dots"></div>
       <div class="dots-vertical"></div>
@@ -8,21 +8,40 @@
           class="
             flex flex-col
             items-center
-            mdsm:items-start
+            md:items-start
             text-center
-            md:text-left
-            md:flex-row
-            md:justify-between
+            md:text-left md:flex-row md:justify-between
           "
         >
-          <vcard></vcard>
-          <div class="grid grid-cols-5">
-            <div class="w-16 h-16 p-3" v-for="icon in icons" :key="icon.name">
-              <img
-                class="w-full h-full"
-                :class="{ 'filter-white': $colorMode.value === 'dark' }"
-                :src="`icons/${icon.icon}`"
-              />
+          <v-card></v-card>
+          <div class="flex flex-col gap-2 mt-4 md:mt-0 px-6">
+            <span
+              class="
+                text-md text-gray-800
+                dark:text-gray-300
+                uppercase
+                w-full
+                text-center
+                md:text-left
+              "
+              >Things I Use</span
+            >
+            <div class="grid grid-cols-5 gap-4">
+              <div class="w-10 h-10" v-for="icon in icons" :key="icon.name">
+                <img
+                  class="w-full h-full hover-icon"
+                  :class="{ 'filter-white': $colorMode.value === 'dark' }"
+                  :src="`icons/${icon.icon}`"
+                  v-tooltip="{
+                    content: icon.name,
+                    placement: 'bottom',
+                    delay: {
+                      show: 100,
+                      hide: 0,
+                    },
+                  }"
+                />
+              </div>
             </div>
           </div>
         </div>
@@ -216,5 +235,22 @@ export default {
 .filter-white {
   filter: brightness(0) saturate(100%) invert(100%) sepia(0%) saturate(7384%)
     hue-rotate(295deg) brightness(130%) contrast(60%);
+}
+.hover-icon {
+  @apply transition duration-300 ease-in-out;
+}
+.hover-icon:hover {
+  @apply transform scale-110;
+}
+
+.v-popper--theme-tooltip .v-popper__inner {
+  @apply text-gray-800 dark:text-gray-300 !important;
+  @apply text-sm !important;
+  @apply rounded-md shadow-md bg-white dark:bg-gray-800 border-gray-300 dark:border-gray-600 border !important;
+  @apply px-2 py-1 !important;
+  @apply opacity-100;
+}
+.v-popper--theme-tooltip .v-popper__arrow {
+  @apply border-transparent;
 }
 </style>

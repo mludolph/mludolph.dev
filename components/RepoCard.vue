@@ -55,7 +55,19 @@
         >
           <div
             v-show="isVisible"
-            class="absolute left-0 mt-6 w-40 rounded-md shadow-md bg-white dark:bg-gray-800 border-gray-300 dark:border-gray-600 border"
+            class="
+              absolute
+              left-0
+              mt-6
+              w-40
+              rounded-md
+              shadow-md
+              bg-white
+              dark:bg-gray-800
+              border-gray-300
+              dark:border-gray-600
+              border
+            "
           >
             <!--
             <div
@@ -151,7 +163,7 @@ export default {
 };
 </script>
 
-<style>
+<style lang="postcss">
 .flyout-arrow {
   @apply transform;
   --transform-rotate: 45deg !important;

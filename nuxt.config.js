@@ -76,7 +76,7 @@ export default {
     "~plugins/directives.js",
     "~plugins/banner.js",
     "~plugins/tracking.js",
-
+    "~plugins/tooltip.js",
   ],
   /*
    ** Auto import components
@@ -158,7 +158,7 @@ export default {
       remarkPlugins: ["remark-math"],
       rehypePlugins: ["rehype-mathjax"],
       prism: {
-        theme: "prism-themes/themes/prism-material-oceanic.css",
+        theme: false, // "prism-themes/themes/prism-material-oceanic.css",
       },
     },
   },
@@ -180,7 +180,7 @@ export default {
           "faArrowLeft",
           "faCodeBranch",
           "faSquareRootAlt",
-          "faHeart"
+          "faHeart",
         ],
       },
       {
@@ -201,6 +201,18 @@ export default {
       },
       { set: "@fortawesome/free-regular-svg-icons", icons: ["faStar"] },
     ],
+  },
+  googleFonts: {
+    families: {
+      Poppins: true,
+      Raleway: true,
+      // or:
+      // Lato: [100, 300],
+      // Raleway: {
+      //   wght: [100, 400],
+      //   ital: [100]
+      // },
+    },
   },
   hooks: {
     "content:file:beforeInsert": (document) => {

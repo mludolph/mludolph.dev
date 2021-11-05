@@ -1,13 +1,21 @@
 <template>
-  <div>
+  <div class="mt-4">
     <section class="container max-w-content m-auto mb-4">
       <div class="dots"></div>
       <div class="dots-vertical"></div>
       <div class="transition duration-300 ease-in-out">
         <div
-          class="flex flex-col items-center md:items-start text-center md:text-left md:flex-row md:justify-between"
+          class="
+            flex flex-col
+            items-center
+            md:items-start
+            text-center
+            md:text-left
+            md:flex-row
+            md:justify-between
+          "
         >
-          <vcard></vcard>
+          <v-card />
           <div class="flex flex-col max-w-sm md:self-end mt-4 md:mt-0">
             <p class="text-gray-800 dark:text-gray-300 text-sm font-sans">
               I'm a {{ age }}-year old
@@ -34,7 +42,14 @@
       <div class="">
         <div class="flex items-center mb-6 w-full">
           <h1
-            class="text-2xl text-gray-800 dark:text-gray-300 font-light w-full text-center mb-0"
+            class="
+              text-2xl text-gray-800
+              dark:text-gray-300
+              font-light
+              w-full
+              text-center
+              mb-0
+            "
           >
             education & experience
           </h1>
@@ -43,7 +58,16 @@
         <div class="timeline is-centered">
           <header class="timeline-header">
             <span
-              class="text-xs uppercase font-semibold bg-primary py-1 px-2 rounded text-white"
+              class="
+                text-xs
+                uppercase
+                font-semibold
+                bg-primary
+                py-1
+                px-2
+                rounded
+                text-white
+              "
               >today</span
             >
           </header>
@@ -57,17 +81,35 @@
               <p
                 v-for="(period, j) in entry.periods"
                 :key="j"
-                class="text-gray-700 dark:text-gray-400 text-xs font-semibold uppercase"
+                class="
+                  text-gray-700
+                  dark:text-gray-400
+                  text-xs
+                  font-semibold
+                  uppercase
+                "
               >
                 {{ period | formatPeriod }}
               </p>
               <h2
-                class="text-gray-800 dark:text-gray-300 text-lg font-bold leading-1"
+                class="
+                  text-gray-800
+                  dark:text-gray-300
+                  text-lg
+                  font-bold
+                  leading-1
+                "
               >
                 {{ entry.title }}
               </h2>
               <h3
-                class="text-gray-800 dark:text-gray-300 text-base leading-none mb-2"
+                class="
+                  text-gray-800
+                  dark:text-gray-300
+                  text-base
+                  leading-none
+                  mb-2
+                "
               >
                 {{ entry.institution }}
               </h3>
