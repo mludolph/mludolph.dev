@@ -53,7 +53,7 @@ jobs:
           known_hosts: "placeholder"
 
       - name: Add known known_hosts
-        run: ssh-keyscan -p ${{secrets.SSH_PORT}} -H ${{secrets.SSH_HOST}}
+        run: ssh-keyscan -p ${{secrets.SSH_PORT}} -H ${{secrets.SSH_HOST}} >> ~/.ssh/known_hosts
 
       - name: Deploy with rsync
         run: rsync -avz --force --delete -e 'ssh -p ${{secrets.SSH_PORT}}' ./dist/ ${{secrets.SSH_USER}}@${{secrets.SSH_HOST}}:${{secrets.TARGET_DIR}}
