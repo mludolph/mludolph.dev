@@ -16,7 +16,7 @@
           <span class="text-gray-500 text-xs rounded uppercase">
             {{ repo.role.name }}
           </span>
-          <a v-if="repo.role.link" :href="repo.role.link" class="leading-none">
+          <a v-if="repo.role.link" :href="repo.role.link" target="_blank" class="leading-none">
             <font-awesome-icon
               class="text-primary text-xs"
               size="xs"
@@ -29,6 +29,7 @@
         <a
           class="flex text-primary font-semibold leading-none w-content mb-4"
           :href="repo.html_url"
+          target="_blank"
           >{{ repo.name }}</a
         >
         <p class="block text-gray-800 dark:text-gray-400 text-sm mb-2">
