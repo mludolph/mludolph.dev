@@ -1,10 +1,20 @@
 export const state = () => ({
   repos: [],
   repoNames: [
+    "pyg-team/pytorch_geometric",
     "rusty1s/pytorch_cluster",
     "mludolph/pytorch_isin",
     "mludolph/mludolph.github.io",
   ],
+  repoRoles: {
+    pytorch_geometric: {
+      name: "Acknowledged in Paper",
+      link: "https://arxiv.org/abs/1903.02428",
+    },
+    pytorch_cluster: { name: "Contributor", link: "" },
+    pytorch_isin: { name: "Creator", link: "" },
+    "mludolph.github.io": { name: "Creator", link: "" },
+  },
   loading: true,
 });
 
@@ -36,6 +46,12 @@ export const actions = {
       return repo;
     });
     repos = await Promise.all(repos);
+
+    repos.map((r) => {
+      r.role = state.repoRoles[r.name];
+      return r;
+    });
+
     commit("setRepositories", repos);
     commit("setLoading", false);
   },

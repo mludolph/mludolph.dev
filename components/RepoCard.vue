@@ -12,6 +12,20 @@
     </div>
     <div class="flex flex-col justify-between h-full" v-if="!loading">
       <div class="flex flex-col">
+        <div class="flex flex-row gap-1">
+          <span class="text-gray-500 text-xs rounded uppercase">
+            {{ repo.role.name }}
+          </span>
+          <a v-if="repo.role.link" :href="repo.role.link" class="leading-none">
+            <font-awesome-icon
+              class="text-primary text-xs"
+              size="xs"
+              transform="shrink-3"
+              :icon="['fas', 'external-link-alt']"
+            />
+          </a>
+        </div>
+
         <a
           class="flex text-primary font-semibold leading-none w-content mb-4"
           :href="repo.html_url"
@@ -28,11 +42,10 @@
           @mouseleave="dropdown(false)"
         >
           <font-awesome-icon :icon="icon(repo.language)"></font-awesome-icon>
-          {{ repo.language }}
-          <span v-if="this.languagesCount > 1">
-            (+{{ this.languagesCount - 1 }}
-            <span class="text-primary">more</span>)</span
-          >
+          <span>{{ repo.language }}</span>
+          <span class="text-primary" v-if="this.languagesCount > 1">
+            +{{ this.languagesCount - 1 }}
+          </span>
         </div>
         <div class="text-gray-600 dark:text-gray-500 text-sm">
           <font-awesome-icon :icon="['far', 'star']"></font-awesome-icon>

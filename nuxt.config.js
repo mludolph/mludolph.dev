@@ -181,6 +181,7 @@ export default {
           "faCodeBranch",
           "faSquareRootAlt",
           "faHeart",
+          "faExternalLinkAlt",
         ],
       },
       {
