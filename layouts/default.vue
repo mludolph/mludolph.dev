@@ -123,13 +123,14 @@
         <span class="text-gray-800 dark:text-gray-300"
           >Made with ❤ in Berlin
         </span>
+        <!--
         <span class="text-gray-800 dark:text-gray-300 mx-1"> | </span>
         <nuxt-link
           class="text-primary hover:text-indigo-500 active:text-indigo-500"
           to="/"
           >Privacy</nuxt-link
-        >
       </div>
+      -->
     </footer>
   </div>
 </template>
