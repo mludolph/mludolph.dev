@@ -57,3 +57,12 @@ jobs:
 
       - name: Deploy with rsync
         run: rsync -avz --force --delete -e 'ssh -p ${{secrets.SSH_PORT}}' ./dist/ ${{secrets.SSH_USER}}@${{secrets.SSH_HOST}}:${{secrets.TARGET_DIR}}
+
+      - uses: alex-ac/github-action-ssh-docker-compose@master
+        name: Docker-Compose Remote Deployment
+        with:
+          ssh_host: mludolph.dev
+          ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }}
+          ssh_user: ${{ secrets.SSH_USER }}
+          docker_compose_prefix: api
+          docker_compose_filename: ./api/docker-compose.yml
