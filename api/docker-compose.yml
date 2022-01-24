@@ -1,0 +1,28 @@
+version: '3.8'
+
+services:
+  api:
+    container_name: api
+    build: .
+    command: uvicorn app.main:app --host 0.0.0.0 --port 8080
+    environment:
+      - REDIS_CACHE=redis://redis:6379
+    volumes:
+      - .:/app
+    networks:
+      - external
+      - backend
+
+  redis:
+    image: redis
+    container_name: redis
+    networks:
+      - backend
+
+networks:
+  external:
+    external:
+      name: external
+  backend:
+    external:
+      name: backend

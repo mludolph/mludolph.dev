@@ -1,4 +1,7 @@
+wheel
 
 uvicorn
-fastapi
 websockets
+fastapi
+fastapi-cache2[redis]
+
