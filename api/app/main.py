@@ -1,30 +1,27 @@
+import logging
+import logging.config
+
 import aioredis
 from fastapi import FastAPI
-from starlette.requests import Request
-from starlette.responses import Response
-from fastapi import FastAPI
-
 from fastapi_cache import FastAPICache
 from fastapi_cache.backends.redis import RedisBackend
-from fastapi_cache.decorator import cache
 
 from app.config import REDIS_HOST
+from app.log_config import LOG_CONFIG, update_loggers
+from app.routes import router
+
+logging.config.dictConfig(LOG_CONFIG)
+logger = logging.getLogger("api")
 
 app = FastAPI(title="mludolph.dev API")
-
-
-@cache()
-async def get_cache():
-    return 1
-
-
-@app.get("/")
-@cache(expire=60)
-async def index(request: Request, response: Response):
-    return dict(hello="world")
+app.include_router(router, prefix="/api/v1")
 
 
 @app.on_event("startup")
 async def startup():
+    update_loggers()
+
     redis = aioredis.from_url(REDIS_HOST, encoding="utf8", decode_responses=True)
     FastAPICache.init(RedisBackend(redis), prefix="fastapi-cache")
+
+    logger.info("initialization successful")

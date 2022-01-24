@@ -1,7 +1,8 @@
 wheel
+requests
 
 uvicorn
 websockets
 fastapi
 fastapi-cache2[redis]
-
+fastapi-cloudauth
