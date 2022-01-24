@@ -9,7 +9,7 @@ from fastapi_cache.backends.redis import RedisBackend
 
 from app.config import REDIS_HOST
 from app.log_config import LOG_CONFIG, update_loggers
-from app.routes import router
+from app.routes import checksRouter, reposRouter
 
 logging.config.dictConfig(LOG_CONFIG)
 logger = logging.getLogger("api")
@@ -24,7 +24,8 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
-app.include_router(router, prefix="/api/v1")
+app.include_router(checksRouter, prefix="/api/v1")
+app.include_router(reposRouter, prefix="/api/v1")
 
 
 @app.on_event("startup")

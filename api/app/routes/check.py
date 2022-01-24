@@ -1,11 +1,8 @@
 import logging
 
-from fastapi import APIRouter, Depends, HTTPException, status
-from fastapi_cache.decorator import cache
-from fastapi_cloudauth.firebase import FirebaseClaims, FirebaseCurrentUser
-
 from app.config import AUTHORIZED_USER_IDS, FIREBASE_PROJECT_ID
-from app.services.github import get_github_repository
+from fastapi import APIRouter, Depends, HTTPException, status
+from fastapi_cloudauth.firebase import FirebaseClaims, FirebaseCurrentUser
 
 logger = logging.getLogger("api")
 
@@ -25,13 +22,14 @@ def get_current_authorized_user(
     return user
 
 
-@router.get("/repos/{repository_name:path}")
-@cache(expire=24 * 60 * 60)
-async def get_repos(repository_name: str):
-    return get_github_repository(repository_name=repository_name)
+@router.get("/healthcheck")
+def healthcheck():
+    return {"status": "OK"}
 
 
-@router.get("/user/")
-async def secure_user(current_user: FirebaseClaims = Depends(get_current_user)):
+@router.get("/authcheck")
+async def secure_user(
+    current_user: FirebaseClaims = Depends(get_current_authorized_user),
+):
     # ID token is valid and getting user info from ID token
-    return f"Hello, {current_user.user_id}"
+    return {"detail": "success", "user_id": current_user.user_id}
