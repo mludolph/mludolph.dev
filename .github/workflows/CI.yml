@@ -33,18 +33,6 @@ jobs:
       - name: run yarn generate
         run: yarn generate
 
-      # - name: Push dist folder to other directory
-      #  uses: cpina/github-action-push-to-another-repository@v1.2
-      #  env:
-      #    API_TOKEN_GITHUB: ${{ secrets.API_TOKEN }}
-      #  with:
-      #    source-directory: dist
-      #   destination-github-username: mludolph
-      #    destination-repository-name: mludolph.github.io
-      #    user-email: mail@moritzludolph.de
-      #    destination-repository-username: mludolph
-      #    target-branch: gh-pages
-
       - name: Install SSH key
         uses: shimataro/ssh-key-action@v2
         with:
@@ -55,14 +43,21 @@ jobs:
       - name: Add known known_hosts
         run: ssh-keyscan -p ${{secrets.SSH_PORT}} -H ${{secrets.SSH_HOST}} >> ~/.ssh/known_hosts
 
-      - name: Deploy with rsync
+      - name: Deploy with rsync (frontend)
         run: rsync -avz --force --delete -e 'ssh -p ${{secrets.SSH_PORT}}' ./dist/ ${{secrets.SSH_USER}}@${{secrets.SSH_HOST}}:${{secrets.TARGET_DIR}}
 
-      - uses: alex-ac/github-action-ssh-docker-compose@master
-        name: Docker-Compose Remote Deployment
+      - name: Deploy with rsync (backend)
+        run: rsync -avz --force --delete -e 'ssh -p ${{secrets.SSH_PORT}}' ./api/ ${{secrets.SSH_USER}}@${{secrets.SSH_HOST}}:/home/${{secrets.SSH_USER}}/api
+
+      - name: Deploy with docker-compose (backend)
+        uses: appleboy/ssh-action@master
         with:
-          ssh_host: mludolph.dev
-          ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }}
-          ssh_user: ${{ secrets.SSH_USER }}
-          docker_compose_prefix: api
-          docker_compose_filename: ./api/docker-compose.yml
+          host: ${{secrets.SSH_HOST}}
+          port: ${{secrets.SSH_PORT}}
+          username: ${{secrets.SSH_USER}}
+          key: ${{secrets.SSH_PRIVATE_KEY}}
+          script: |
+            # Stop all running Docker Containers
+            cd /home/${{secrets.SSH_USER}}/api
+
+            docker-compose up -d --force-recreate --build
