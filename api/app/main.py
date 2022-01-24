@@ -8,6 +8,8 @@ from fastapi_cache import FastAPICache
 from fastapi_cache.backends.redis import RedisBackend
 from fastapi_cache.decorator import cache
 
+from app.config import REDIS_HOST
+
 app = FastAPI(title="mludolph.dev API")
 
 
@@ -24,7 +26,5 @@ async def index(request: Request, response: Response):
 
 @app.on_event("startup")
 async def startup():
-    redis = aioredis.from_url(
-        "redis://localhost", encoding="utf8", decode_responses=True
-    )
+    redis = aioredis.from_url(REDIS_HOST, encoding="utf8", decode_responses=True)
     FastAPICache.init(RedisBackend(redis), prefix="fastapi-cache")

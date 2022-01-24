@@ -1,3 +1,3 @@
 import os
 
-REDIS_CACHE = os.environ.get("REDIS_HOST", "redis://redis:6379")
+REDIS_HOST = os.environ.get("REDIS_HOST", "redis://redis:6379")
