@@ -29,13 +29,13 @@ export const mutations = {
   },
 };
 
-const GITHUB_API = "https://api.github.com/";
+const GITHUB_API = "https://api.mludolph.dev/api/v1/repos/";
 
 export const actions = {
   async LOAD({ commit, state }) {
     commit("setLoading", true);
     const promises = state.repoNames.map((name) =>
-      this.$axios.get(GITHUB_API + "repos/" + name)
+      this.$axios.get(GITHUB_API + name)
     );
     const responses = await Promise.all(promises);
     let repos = responses.map((r) => r.data);

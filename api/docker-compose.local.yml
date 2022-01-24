@@ -1,0 +1,17 @@
+version: '3.8'
+
+services:
+  api:
+    extends:
+      file: docker-compose.yml
+      service: api
+    ports:
+      - 8080:8080
+
+networks:
+  external:
+    external:
+      name: external
+  backend:
+    external:
+      name: backend
