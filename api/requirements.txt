@@ -5,4 +5,6 @@ uvicorn
 websockets
 fastapi
 fastapi-cache2[redis]
-fastapi-cloudauth
+fastapi-socketio
+
+python-keycloak

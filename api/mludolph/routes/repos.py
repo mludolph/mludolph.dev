@@ -1,7 +1,7 @@
 from fastapi import APIRouter
 from fastapi_cache.decorator import cache
 
-from app.services.github import get_github_repository
+from mludolph.services.github import get_github_repository
 
 router = APIRouter()
 
