@@ -39,9 +39,20 @@ async def connect(sid, environ, auth):
             )
             await sm.disconnect(sid)
             return False
+    await sm.save_session(sid, {"authenticated": True})
     return True
 
 
 @sm.on("disconnect")
 async def disconnect(sid):
     logger.info(f"socket disconnected (sid={sid})")
+
+
+@sm.on("notification")
+async def notification_handler(sid, data):
+    session = await sm.get_session(sid)
+    if not session.get("authenticated"):
+        return False
+
+    await sm.emit("notification", data)
+    return True
