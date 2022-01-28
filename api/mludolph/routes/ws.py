@@ -14,7 +14,7 @@ async def connect(sid, environ, auth):
     if not auth:
         logger.warning(f"socket missing auth, disconnect (sid={sid})")
         await sm.disconnect(sid)
-        return
+        return False
 
     scheme, token = auth.split(" ")
 
@@ -28,7 +28,7 @@ async def connect(sid, environ, auth):
                 f"bearer token verification failed (sid={sid}, reason={str(e)})"
             )
             await sm.disconnect(sid)
-            return
+            return False
     elif scheme.lower() == "api-key":
         if token in config.AUTH_API_KEYS:
             logger.info(f"socket authenticated (sid={sid}, sub=service_account)")
@@ -38,9 +38,21 @@ async def connect(sid, environ, auth):
                   reason=unknown_api_key('{token}'))"
             )
             await sm.disconnect(sid)
-            return
+            return False
+    await sm.save_session(sid, {"authenticated": True})
+    return True
 
 
 @sm.on("disconnect")
 async def disconnect(sid):
     logger.info(f"socket disconnected (sid={sid})")
+
+
+@sm.on("notification")
+async def notification_handler(sid, data):
+    session = await sm.get_session(sid)
+    if not session.get("authenticated"):
+        return False
+
+    await sm.emit("notification", data)
+    return True
