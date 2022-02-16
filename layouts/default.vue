@@ -129,8 +129,8 @@
           class="text-primary hover:text-indigo-500 active:text-indigo-500"
           to="/"
           >Privacy</nuxt-link
-      </div>
-      -->
+          
+      --></div>
     </footer>
   </div>
 </template>

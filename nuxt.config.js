@@ -182,6 +182,9 @@ export default {
           "faSquareRootAlt",
           "faHeart",
           "faExternalLinkAlt",
+          "faPencilAlt",
+          "faTrash",
+          "faPlus",
         ],
       },
       {
