@@ -5,12 +5,6 @@ module.exports = {
   darkMode: "class",
   theme: {
     extend: {
-      textColor: {
-        primary: "#8490ff",
-      },
-      backgroundColor: {
-        primary: "#8490ff",
-      },
       fontFamily: {
         sans: [
           "Poppins",
@@ -29,6 +23,11 @@ module.exports = {
         ],
         blog: "Raleway",
       },
+    },
+  },
+  variants: {
+    extend: {
+      display: ["group-hover"],
     },
   },
 };

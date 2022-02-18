@@ -72,6 +72,7 @@ export default {
    ** https://nuxtjs.org/guide/plugins
    */
   plugins: [
+    "~/plugins/components",
     "~plugins/filters.js",
     "~plugins/directives.js",
     "~plugins/banner.js",
@@ -87,10 +88,11 @@ export default {
    ** Nuxt.js dev-modules
    */
   buildModules: [
-    "@nuxt/typescript-build",
+    // "@nuxt/typescript-build",
     "@nuxtjs/color-mode",
     "@nuxtjs/moment",
     "@nuxtjs/tailwindcss",
+    "@nuxtjs/fontawesome",
   ],
   /*
    ** Nuxt.js modules
@@ -98,8 +100,6 @@ export default {
   modules: [
     // Doc: https://buefy.github.io/#/documentation
     //"nuxt-buefy",
-    "nuxt-fontawesome",
-
     // Doc: https://axios.nuxtjs.org/usage
     "@nuxtjs/axios",
     "@nuxt/content",
@@ -170,41 +170,45 @@ export default {
   fontawesome: {
     component: "font-awesome-icon",
 
-    imports: [
-      {
-        set: "@fortawesome/free-solid-svg-icons",
-        icons: [
-          "faEnvelope",
-          "faMoon",
-          "faSun",
-          "faArrowLeft",
-          "faCodeBranch",
-          "faSquareRootAlt",
-          "faHeart",
-          "faExternalLinkAlt",
-          "faPencilAlt",
-          "faTrash",
-          "faPlus",
-        ],
-      },
-      {
-        set: "@fortawesome/free-brands-svg-icons",
-        icons: [
-          "faGithub",
-          "faTwitter",
-          "faLinkedin",
-          "faMedium",
-          "faPython",
-          "faJsSquare",
-          "faJava",
-          "faVuejs",
-          "faAngular",
-          "faReact",
-          "faSass",
-        ],
-      },
-      { set: "@fortawesome/free-regular-svg-icons", icons: ["faStar"] },
-    ],
+    icons: {
+      solid: [
+        "faEnvelope",
+        "faMoon",
+        "faSun",
+        "faArrowLeft",
+        "faCodeBranch",
+        "faSquareRootAlt",
+        "faHeart",
+        "faExternalLinkAlt",
+        "faPencilAlt",
+        "faTrash",
+        "faPlus",
+        "faVideo",
+        "faUpload",
+        "faTimes",
+        "faSync",
+        "faCircle",
+        "faFolder",
+        "faDownload",
+        "faAngleRight",
+        "faAngleLeft",
+      ],
+      regular: ["faStar", "faFloppyDisk"],
+      brands: [
+        "faGithub",
+        "faTwitter",
+        "faLinkedin",
+        "faMedium",
+        "faPython",
+        "faJsSquare",
+        "faJava",
+        "faVuejs",
+        "faAngular",
+        "faReact",
+        "faSass",
+        "faGoogleDrive",
+      ],
+    },
   },
   googleFonts: {
     families: {

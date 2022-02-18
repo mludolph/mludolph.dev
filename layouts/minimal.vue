@@ -1,30 +1,35 @@
 <template>
   <div id="app" class="flex flex-col min-h-screen px-4 xl:mx-0 z-minus-5">
+    <header class="flex flex-col fixed top-4">
+      <nuxt-link
+        to="/"
+        tag="span"
+        class="cursor-pointer select-none tap-transparent"
+      >
+        <span class="text-2xl text-gray-800 dark:text-gray-300 font-blog"
+          >mludolph.</span
+        ><span
+          class="
+            text-2xl text-gray-800
+            dark:text-gray-300
+            font-blog font-semibold
+          "
+          >dev</span
+        >
+      </nuxt-link>
+      <div class="text-xs text-gray-600 dark:text-gray-400 mb-1 select-none">
+        portfolio
+      </div>
+    </header>
+
     <Nuxt />
 
-    <footer class="mt-auto">
+    <footer class="mt-auto absolute bottom-0">
       <cookie-law
         theme="custom"
         class="container max-w-content m-auto"
         v-on:accept="enableTracking()"
       ></cookie-law>
-
-      <div
-        class="
-          footer
-          container
-          max-w-content
-          m-auto
-          justify-center
-          text-xs
-          font-light
-          mb-1
-        "
-      >
-        <span class="text-gray-800 dark:text-gray-300"
-          >Made with ❤ in Berlin | <NuxtLink to="/">mludolph.dev</NuxtLink>
-        </span>
-      </div>
     </footer>
   </div>
 </template>
