@@ -36,7 +36,7 @@
     <hr class="bg-gray-500" />
 
     <div class="flex flex-col px-6 py-3 gap-3" v-if="!webcam && !upload">
-      <div class="flex flex-row items-center gap-2">
+      <div class="flex flex-row w-full items-center gap-2">
         <span v-if="value.samples.length > 0" class="font-semibold"
           >Samples: {{ value.samples.length }}</span
         >
@@ -47,6 +47,17 @@
           :icon="['fas', 'download']"
           class="text-gray-400 hover:text-gray-500 cursor-pointer"
           @click="downloadSamples"
+        ></font-awesome-icon>
+
+        <font-awesome-icon
+          v-if="value.samples.length > 0"
+          :icon="['fas', 'trash']"
+          class="
+            text-gray-400
+            hover:text-gray-500
+            cursor-pointer
+          "
+          @click="clearSamples"
         ></font-awesome-icon>
       </div>
       <div class="flex flex-row gap-3">
@@ -239,6 +250,9 @@ export default {
     },
     onFileUpload(files) {
       files.forEach((file) => this.value.samples.push(file));
+    },
+    clearSamples() {
+      this.value.samples = [];
     },
     downloadSamples() {
       var zip = new JSZip();

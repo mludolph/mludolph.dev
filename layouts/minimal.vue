@@ -91,4 +91,25 @@ export default {
 .hero:hover {
   background-position: right center;
 }
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+  border: 1px transparent;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  @apply bg-gray-500;
+  border-radius: 6px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-gray-400;
+}
 </style>

@@ -3,13 +3,14 @@
     <button
       v-if="!menuVisible"
       class="
-        absolute
+        fixed
         top-24
         left-0
         p-2
         bg-gray-900
         hover:bg-gray-500
         rounded-r-lg
+        text-sm
       "
       @click="menuVisible = true"
     >
@@ -20,7 +21,7 @@
     </button>
     <div
       class="
-        absolute
+        fixed
         flex flex-col
         left-0
         top-24
@@ -30,11 +31,12 @@
         duration-200
         transform
         overflow-hidden
+        text-sm
       "
       :class="{ '-translate-x-full': !menuVisible }"
     >
       <button
-        class="px-4 py-2 text-left hover:bg-gray-500"
+        class="px-2 py-2 text-left hover:bg-gray-500"
         @click="menuVisible = false"
       >
         <font-awesome-icon
@@ -47,7 +49,7 @@
           flex flex-row
           items-center
           hover:bg-gray-500
-          px-4
+          px-2
           py-2
           gap-3
           whitespace-nowrap
@@ -64,7 +66,7 @@
           flex flex-row
           items-center
           hover:bg-gray-500
-          px-4
+          px-2
           py-2
           gap-3
           whitespace-nowrap
@@ -81,7 +83,7 @@
           flex flex-row
           items-center
           hover:bg-gray-500
-          px-4
+          px-2
           py-2
           gap-3
           whitespace-nowrap
@@ -93,12 +95,30 @@
         ></font-awesome-icon>
         <span>Save to Drive</span>
       </button>
+
       <button
         class="
           flex flex-row
           items-center
           hover:bg-gray-500
-          px-4
+          px-2
+          py-2
+          gap-3
+          whitespace-nowrap
+        "
+      >
+        <font-awesome-icon
+          :icon="['fas', 'folder']"
+          class="w-4"
+        ></font-awesome-icon>
+        <span>Open from File</span>
+      </button>
+      <button
+        class="
+          flex flex-row
+          items-center
+          hover:bg-gray-500
+          px-2
           py-2
           gap-3
           whitespace-nowrap
@@ -108,11 +128,11 @@
           :icon="['fas', 'download']"
           class="w-4"
         ></font-awesome-icon>
-        <span>Save to local</span>
+        <span>Save to File</span>
       </button>
     </div>
 
-    <div class="flex flex-col flex-grow gap-6 mt-8">
+    <div class="flex flex-col flex-grow gap-6 mt-8 mb-8">
       <class-card
         v-for="(cls, index) in classes"
         :key="index"
