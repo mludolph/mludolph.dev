@@ -10,5 +10,4 @@ export default ({ app }) => {
     },
     app.router
   );
-  console.log(app.router);
 };

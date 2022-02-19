@@ -73,8 +73,8 @@ export default {
     async getCanvas(url) {
       if (!this.ctx) {
         let canvas = document.createElement("canvas");
-        canvas.height = 500;
-        canvas.width = 500;
+        canvas.height = 224;
+        canvas.width = 224;
         this.canvas = canvas;
 
         this.ctx = canvas.getContext("2d");

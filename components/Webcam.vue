@@ -175,6 +175,8 @@ export default {
         // old broswers
         this.source = window.HTMLMediaElement.srcObject(stream);
       }
+      this.$refs.video.play();
+      
       // Emit video start/live event
       this.$refs.video.onloadedmetadata = () => {
         this.ready = true;
@@ -197,6 +199,7 @@ export default {
         track.stop();
         this.$emit("stopped", stream);
 
+        this.$refs.video.pause();
         this.$refs.video.srcObject = null;
         this.source = null;
       });
@@ -286,8 +289,8 @@ export default {
       let video = this.$refs.video;
       if (!this.ctx) {
         let canvas = document.createElement("canvas");
-        canvas.height = 500;
-        canvas.width = 500;
+        canvas.height = 224;
+        canvas.width = 224;
         this.canvas = canvas;
 
         this.ctx = canvas.getContext("2d");

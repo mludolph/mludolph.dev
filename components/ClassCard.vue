@@ -1,14 +1,5 @@
 <template>
-  <div
-    class="
-      flex flex-col
-      bg-gray-700
-      rounded-lg
-      shadow-md
-      overflow-hidden
-      w-card
-    "
-  >
+  <div class="flex flex-col bg-gray-700 rounded-lg shadow-md overflow-hidden">
     <div class="flex flex-row w-full justify-between items-center px-6 py-3">
       <div class="flex flex-row items-center gap-3">
         <h2 v-if="!edit" class="text-lg font-semibold">{{ value.title }}</h2>
@@ -52,11 +43,7 @@
         <font-awesome-icon
           v-if="value.samples.length > 0"
           :icon="['fas', 'trash']"
-          class="
-            text-gray-400
-            hover:text-gray-500
-            cursor-pointer
-          "
+          class="text-gray-400 hover:text-gray-500 cursor-pointer"
           @click="clearSamples"
         ></font-awesome-icon>
       </div>
@@ -240,7 +227,6 @@ export default {
     startCapture() {
       this.timer = setInterval(() => {
         const img = this.$refs.webcam.capture();
-        console.log(img);
         this.value.samples.push(img);
       }, 1000.0 / 24);
     },
@@ -272,32 +258,6 @@ export default {
 </script>
 
 <style lang="postcss">
-.w-card {
-  width: 640px;
-
-  /* width */
-  ::-webkit-scrollbar {
-    width: 6px;
-    height: 6px;
-    border: 1px transparent;
-  }
-
-  /* Track */
-  ::-webkit-scrollbar-track {
-    background: transparent;
-  }
-
-  /* Handle */
-  ::-webkit-scrollbar-thumb {
-    @apply bg-gray-500;
-    border-radius: 6px;
-  }
-
-  /* Handle on hover */
-  ::-webkit-scrollbar-thumb:hover {
-    @apply bg-gray-400;
-  }
-}
 .h-card {
   height: 400px;
   max-height: 400px;

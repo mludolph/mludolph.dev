@@ -28,6 +28,9 @@ module.exports = {
   variants: {
     extend: {
       display: ["group-hover"],
+      backgroundColor: ["disabled"],
+      textColor: ["disabled"],
+      cursor: ["disabled"],
     },
   },
 };

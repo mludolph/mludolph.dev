@@ -65,7 +65,7 @@ const settings = {
     props: {
       fixedClasses:
         "transition duration-100 ease-in-out shadow-sm focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500 focus:outline-none focus:ring-opacity-50 focus:ring-offset-0  disabled:opacity-50 disabled:cursor-not-allowed",
-      classes: "text-indigo-400-500 border-gray-300",
+      classes: "text-indigo-500 border-gray-300",
       variants: {
         error: "text-red-500 border-red-300",
         success: "text-green-500 border-green-300",
@@ -77,7 +77,7 @@ const settings = {
     props: {
       fixedClasses:
         "transition duration-100 ease-in-out rounded shadow-sm focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500 focus:outline-none focus:ring-opacity-50 focus:ring-offset-0 disabled:opacity-50 disabled:cursor-not-allowed",
-      classes: "text-indigo-400-500 border-gray-300 ",
+      classes: "text-indigo-500 border-gray-300 ",
       variants: {
         error: "text-red-500 border-red-300",
         success: "text-green-500 border-green-300",
@@ -90,7 +90,7 @@ const settings = {
       fixedClasses:
         "transition duration-100 ease-in-out focus:outline-none focus:ring-opacity-50 disabled:opacity-50 disabled:cursor-not-allowed text-sm",
       classes:
-        "block px-3 py-1 h-fit-content text-white bg-indigo-400-500 border border-transparent shadow-sm rounded hover:bg-indigo-400-600 disabled:bg-indigo-400-500 focus:ring-2 focus:border-indigo-500 focus:ring-indigo-500",
+        "block px-3 py-1 h-fit-content text-white bg-indigo-500 border border-transparent shadow-sm rounded hover:bg-indigo-400-600 disabled:bg-indigo-500 focus:ring-2 focus:border-indigo-500 focus:ring-indigo-500",
       variants: {
         menu: "block w-full px-4 py-1 my-1 text-sm leading-5 text-gray-700 transition duration-150 ease-in-out hover:bg-gray-100 focus:outline-none focus:bg-gray-100",
         secondary:
@@ -281,13 +281,13 @@ const settings = {
           "text-sm rounded-full w-8 h-8 mx-auto hover:bg-indigo-400-100 text-gray-400 disabled:opacity-50 disabled:cursor-not-allowed",
         emptyDay: "",
         inRangeFirstDay:
-          "text-sm bg-indigo-400-500 text-white w-full h-8 rounded-l-full",
+          "text-sm bg-indigo-500 text-white w-full h-8 rounded-l-full",
         inRangeLastDay:
-          "text-sm bg-indigo-400-500 text-white w-full h-8 rounded-r-full",
+          "text-sm bg-indigo-500 text-white w-full h-8 rounded-r-full",
         inRangeDay:
           "text-sm bg-indigo-400-200 w-full h-8 disabled:opacity-50 disabled:cursor-not-allowed",
         selectedDay:
-          "text-sm rounded-full w-8 h-8 mx-auto bg-indigo-400-500 text-white disabled:opacity-50 disabled:cursor-not-allowed",
+          "text-sm rounded-full w-8 h-8 mx-auto bg-indigo-500 text-white disabled:opacity-50 disabled:cursor-not-allowed",
         activeDay:
           "text-sm rounded-full bg-indigo-400-100 w-8 h-8 mx-auto disabled:opacity-50 disabled:cursor-not-allowed",
         highlightedDay:
@@ -297,13 +297,13 @@ const settings = {
           "text-sm rounded-full w-8 h-8 mx-auto hover:bg-indigo-400-100 disabled:opacity-50 disabled:cursor-not-allowed border border-indigo-500",
         monthWrapper: "px-3 pt-2",
         selectedMonth:
-          "text-sm rounded w-full h-12 mx-auto bg-indigo-400-500 text-white",
+          "text-sm rounded w-full h-12 mx-auto bg-indigo-500 text-white",
         activeMonth: "text-sm rounded w-full h-12 mx-auto bg-indigo-400-100",
         month: "text-sm rounded w-full h-12 mx-auto hover:bg-indigo-400-100",
         yearWrapper: "px-3 pt-2",
         year: "text-sm rounded w-full h-12 mx-auto hover:bg-indigo-400-100",
         selectedYear:
-          "text-sm rounded w-full h-12 mx-auto bg-indigo-400-500 text-white",
+          "text-sm rounded w-full h-12 mx-auto bg-indigo-500 text-white",
         activeYear: "text-sm rounded w-full h-12 mx-auto bg-indigo-400-100",
         timepickerWrapper: "flex items-center px-4 py-2 space-x-2",
         timepickerTimeWrapper: "flex items-center space-x-2",
@@ -376,7 +376,7 @@ const settings = {
         wrapper:
           "relative inline-flex flex-shrink-0 cursor-pointer transition-colors ease-in-out duration-200",
         wrapperChecked:
-          "relative inline-flex flex-shrink-0 cursor-pointer transition-colors ease-in-out duration-200  border-2 border-transparent focus:ring-2 focus:ring-indigo-500 focus:outline-none focus:ring-opacity-50",
+          "relative inline-flex flex-shrink-0 cursor-pointer transition-colors ease-in-out duration-200 border-2 border-transparent focus:ring-2 focus:ring-indigo-500 focus:outline-none focus:ring-opacity-50",
         wrapperDisabled:
           "relative inline-flex flex-shrink-0 cursor-pointer transition-colors ease-in-out duration-200 opacity-50 cursor-not-allowed",
         wrapperCheckedDisabled:
@@ -390,43 +390,19 @@ const settings = {
       },
       classes: {
         wrapper:
-          "bg-gray-100 rounded-full border-2 border-transparent focus:ring-2 focus:ring-indigo-500 focus:outline-none focus:ring-opacity-50",
-        wrapperChecked: "bg-indigo-400-500 rounded-full",
+          "bg-gray-500 rounded-full border-2 border-transparent focus:ring-2 focus:ring-indigo-500 focus:outline-none focus:ring-opacity-50 h-4 items-center",
+        wrapperChecked: "bg-indigo-500 rounded-full h-4 items-center",
         wrapperDisabled:
-          "bg-gray-100 rounded-full border-2 border-transparent focus:ring-2 focus:ring-indigo-500 focus:outline-none focus:ring-opacity-50",
-        wrapperCheckedDisabled: "bg-indigo-400-500",
+          "bg-gray-500 rounded-full border-2 border-transparent focus:ring-2 focus:ring-indigo-500 focus:outline-none focus:ring-opacity-50 h-4 items-center",
+        wrapperCheckedDisabled: "bg-indigo-500 h-4 items-center",
         button:
           "h-5 w-5 rounded-full bg-white shadow flex items-center justify-center text-gray-400 text-xs",
         buttonChecked:
-          "h-5 w-5 rounded-full bg-white shadow flex items-center justify-center text-indigo-400-500 text-xs",
+          "h-5 w-5 rounded-full bg-white shadow flex items-center justify-center text-indigo-500 text-xs",
         checkedPlaceholder:
           "rounded-full w-5 h-5 flex items-center justify-center text-gray-400 text-xs",
         uncheckedPlaceholder:
           "rounded-full w-5 h-5 flex items-center justify-center text-gray-400 text-xs",
-      },
-      variants: {
-        danger: {
-          wrapperChecked: "bg-red-500 rounded-full",
-          wrapperCheckedDisabled: "bg-red-500 rounded-full",
-        },
-        success: {
-          wrapperChecked: "bg-green-500 rounded-full",
-          wrapperCheckedDisabled: "bg-green-500 rounded-full",
-        },
-        box: {
-          wrapper:
-            "bg-gray-100 rounded-sm border-2 border-transparent focus:ring-2 focus:ring-indigo-500 focus:outline-none focus:ring-opacity-50",
-          wrapperChecked: "bg-indigo-400-500 rounded-sm",
-          wrapperCheckedDisabled: "bg-indigo-400-500 rounded-sm",
-          button:
-            "h-6 w-6 rounded-sm bg-white shadow flex items-center justify-center text-gray-400 text-xs",
-          buttonChecked:
-            "h-6 w-6 rounded-sm  bg-white shadow flex items-center justify-center text-indigo-400-500 text-xs",
-          checkedPlaceholder:
-            "rounded-sm w-6 h-6 flex items-center justify-center text-gray-400 text-xs",
-          uncheckedPlaceholder:
-            "rounded-sm w-6 h-6 flex items-center justify-center text-gray-400 text-xs",
-        },
       },
     },
   },
@@ -443,7 +419,7 @@ const settings = {
       classes: {
         wrapper: "bg-indigo-400-50 border-indigo-500",
         body: "text-indigo-400-700",
-        close: "text-indigo-400-500 hover:bg-indigo-400-200",
+        close: "text-indigo-500 hover:bg-indigo-400-200",
       },
       variants: {
         danger: {
@@ -532,7 +508,7 @@ const settings = {
         text: "",
         cancelButton:
           "block px-4 py-2 transition duration-100 ease-in-out bg-white border border-gray-300 rounded shadow-sm hover:bg-gray-100 focus:border-gray-100 focus:ring-2 focus:ring-indigo-500 focus:outline-none focus:ring-opacity-50 disabled:opacity-50 disabled:cursor-not-allowed w-full max-w-xs",
-        okButton: "bg-indigo-400-500 hover:bg-indigo-400-600",
+        okButton: "bg-indigo-500 hover:bg-indigo-400-600",
         inputWrapper: "mt-3 flex items-center space-x-3",
         input:
           "block w-full px-3 py-2 text-black placeholder-gray-400 transition duration-100 ease-in-out bg-white border border-gray-300 rounded shadow-sm focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500 focus:outline-none focus:ring-opacity-50 disabled:opacity-50 disabled:cursor-not-allowed w-full",
@@ -540,11 +516,11 @@ const settings = {
           "block w-full px-3 py-2 text-black placeholder-gray-400 transition duration-100 ease-in-out bg-white border border-gray-300 rounded shadow-sm focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500 focus:outline-none focus:ring-opacity-50  disabled:opacity-50 disabled:cursor-not-allowed w-full",
         radioWrapper: "flex items-center space-x-2",
         radio:
-          "text-indigo-400-500 transition duration-100 ease-in-out border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500 focus:outline-none focus:ring-opacity-50 focus:ring-offset-0  disabled:opacity-50 disabled:cursor-not-allowed",
+          "text-indigo-500 transition duration-100 ease-in-out border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500 focus:outline-none focus:ring-opacity-50 focus:ring-offset-0  disabled:opacity-50 disabled:cursor-not-allowed",
         radioText: "",
         checkboxWrapper: "flex items-center space-x-2",
         checkbox:
-          "text-indigo-400-500 transition duration-100 ease-in-out border-gray-300 rounded shadow-sm focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500 focus:outline-none focus:ring-opacity-50 focus:ring-offset-0  disabled:opacity-50 disabled:cursor-not-allowed",
+          "text-indigo-500 transition duration-100 ease-in-out border-gray-300 rounded shadow-sm focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500 focus:outline-none focus:ring-opacity-50 focus:ring-offset-0  disabled:opacity-50 disabled:cursor-not-allowed",
         checkboxText: "",
         errorMessage: "text-red-500 block text-sm",
         busyWrapper:

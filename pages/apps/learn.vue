@@ -132,7 +132,7 @@
       </button>
     </div>
 
-    <div class="flex flex-col flex-grow gap-6 mt-8 mb-8">
+    <div class="flex flex-col flex-grow gap-6 mt-8 mb-8 w-card">
       <class-card
         v-for="(cls, index) in classes"
         :key="index"
@@ -147,7 +147,6 @@
           border-b border-r border-l border-dashed border-gray-500
           rounded-lg
           shadow-md
-          w-full
           cursor-pointer
           hover:text-gray-400
           py-3
@@ -159,22 +158,75 @@
       </div>
     </div>
     <div class="flex flex-col flex-grow-0 w-48">
-      <div class="flex flex-col bg-gray-700 rounded-lg shadow-md sticky top-8">
+      <div
+        class="flex flex-col bg-gray-700 rounded-lg shadow-md sticky top-0 mt-8"
+      >
         <div class="flex flex-row px-6 py-3">
           <h2 class="text-lg font-semibold">Training</h2>
         </div>
         <hr class="bg-gray-500" />
-        <div class="flex flex-col px-6 py-3">
+        <div class="flex flex-col gap-3 px-6 py-3">
           <button
-            class="bg-gray-500 hover:bg-gray-600 rounded py-2 whitespace-nowrap"
+            class="
+              bg-gray-500
+              disabled:bg-gray-400
+              disabled:text-gray-500
+              disabled:cursor-default
+              hover:bg-gray-600
+              rounded
+              px-4
+              py-2
+              whitespace-nowrap
+            "
+            :disabled="!canTrain || (training.started && !training.finished)"
+            @click="trainModel"
           >
-            Train Model
+            {{ training.finished ? "Re-train Model" : "Train Model" }}
           </button>
+          <div
+            class="flex flex-col gap-2"
+            :class="{ hidden: !training.started }"
+          >
+            <span class="text-sm font-semibold">{{ training.status }}</span>
+            <progress-bar
+              :current="training.currentEpoch"
+              :max="training.maxEpoch"
+            ></progress-bar>
+            <span class="text-xs"
+              >Loss:
+              {{
+                training.trainLosses.length > 0
+                  ? `${training.trainLosses[
+                      training.trainLosses.length - 1
+                    ].toFixed(3)} (${training.valLosses[
+                      training.valLosses.length - 1
+                    ].toFixed(3)})`
+                  : "n/a"
+              }}
+            </span>
+            <activity-indicator
+              class="h-6"
+              :height="20"
+              :chart-data="chartDataCollection"
+              :options="chartOptions"
+            />
+          </div>
         </div>
       </div>
     </div>
     <div class="flex flex-col flex-grow-0 w-80">
-      <div class="flex bg-gray-700 rounded-lg shadow-md sticky top-8">
+      <div
+        class="
+          flex flex-col
+          bg-gray-700
+          rounded-lg
+          shadow-md
+          sticky
+          top-0
+          mt-8
+          overflow-hidden
+        "
+      >
         <div
           class="
             flex flex-row
@@ -190,27 +242,122 @@
           <button
             class="
               bg-gray-500
+              disabled:bg-gray-400
+              disabled:text-gray-500
+              disabled:cursor-default
               hover:bg-gray-600
               rounded
               px-4
               py-2
               whitespace-nowrap
             "
+            :disabled="!training.finished"
           >
-            Export Model
+            <font-awesome-icon :icon="['fas', 'download']"></font-awesome-icon>
+            <span>Export Model</span>
           </button>
         </div>
+        <hr class="bg-gray-500" />
+        <div class="flex flex-col">
+          <div class="grid grid-cols-2">
+            <button
+              class="
+                flex flex-row
+                justify-center
+                items-center
+                gap-2
+                text-sm
+                hover:bg-gray-500
+                w-full
+                py-3
+              "
+              :class="{ 'bg-gray-600': webcam }"
+              @click="openWebcam()"
+            >
+              <font-awesome-icon :icon="['fas', 'video']"></font-awesome-icon>
+              <span class="text-xs">Webcam</span>
+            </button>
+            <button
+              class="
+                flex flex-row
+                justify-center
+                items-center
+                gap-2
+                text-sm
+                hover:bg-gray-500
+                w-full
+                py-3
+              "
+              :class="{ 'bg-gray-600': upload }"
+              @click="openUpload()"
+            >
+              <font-awesome-icon :icon="['fas', 'upload']"></font-awesome-icon>
+              <span class="text-xs">File</span>
+            </button>
+          </div>
+
+          <div
+            class="flex flex-col gap-2 bg-gray-600 px-6 py-3"
+            :class="{ hidden: !webcam }"
+          >
+            <div class="flex flex-row gap-2 items-center">
+              <span class="text-sm">Live </span>
+              <t-toggle
+                v-model="webcamLive"
+                @change="onWebcamLiveToggle"
+              ></t-toggle>
+            </div>
+            <t-select
+              placeholder="Select a webcam"
+              :options="cameras"
+              value-attribute="deviceId"
+              text-attribute="label"
+              @input="onCameraSelect"
+            ></t-select>
+            <webcam
+              ref="webcam"
+              :deviceId="selectedCameraId"
+              @cameras="onCameraLoad"
+              @video-live="webcamReady = true"
+              @stopped="webcamReady = false"
+            ></webcam>
+          </div>
+        </div>
+        <hr class="bg-gray-500" />
+        <div class="flex flex-col px-6 py-3"></div>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import MobileNet from "~/plugins/mobilenet";
+
 export default {
   layout: "minimal",
   data() {
     return {
       menuVisible: false,
+
+      cameras: [],
+      selectedCameraId: null,
+      webcamReady: false,
+      webcam: true,
+      webcamLive: true,
+      upload: false,
+      sample: null,
+
+      training: {
+        status: "",
+        started: false,
+        finished: false,
+        currentEpoch: 0,
+        maxEpoch: 50,
+        epochs: [],
+        valLosses: [],
+        trainLosses: [],
+      },
+      model: null,
       classes: [
         {
           id: 1,
@@ -218,9 +365,83 @@ export default {
           samples: [],
         },
       ],
+      chartDataCollection: null,
+      chartOptions: {
+        layout: { padding: 1 },
+        responsive: true,
+        maintainAspectRatio: false,
+        tooltips: {
+          enabled: false,
+        },
+        legend: {
+          display: false,
+        },
+        scales: {
+          xAxes: [
+            {
+              display: false,
+              ticks: {
+                display: false,
+              },
+              gridLines: {
+                border: true,
+                lineWidth: 0,
+              },
+            },
+          ],
+          yAxes: [
+            {
+              display: false,
+              ticks: {
+                beginAtZero: true,
+              },
+            },
+          ],
+        },
+      },
     };
   },
+  mounted() {
+    this.updateTrainingData();
+  },
+  computed: {
+    canTrain() {
+      const numValidClasses = this.classes.reduce((cum, curr) => {
+        return cum + (curr.samples.length > 0 ? 1 : 0);
+      }, 0);
+      return numValidClasses >= 2;
+    },
+    prediction(){
+      if (this.training.finished){
+        return this.model.infer
+      }
+      return null;
+    }
+  },
   methods: {
+    updateTrainingData() {
+      this.chartDataCollection = {
+        labels: this.training.epochs,
+        datasets: [
+          {
+            tension: 0.2,
+            fill: false,
+            pointRadius: 0,
+            borderColor: "rgb(75, 192, 192)",
+            borderWidth: 2,
+            data: this.training.trainLosses,
+          },
+          {
+            tension: 0.2,
+            fill: false,
+            pointRadius: 0,
+            borderColor: "rgb(175, 192, 192)",
+            borderWidth: 2,
+            data: this.training.valLosses,
+          },
+        ],
+      };
+    },
     createClass() {
       const id = this.classes.length + 1;
       this.classes.push({
@@ -235,6 +456,72 @@ export default {
         this.$delete(this.classes, idx);
       }
     },
+    async trainModel() {
+      this.model = new MobileNet(this.classes.length);
+      this.training.currentEpoch = 0;
+      this.training.trainLosses = [];
+      this.training.valLosses = [];
+
+      this.training.started = true;
+      this.training.status = "Loading model...";
+      this.results = await this.model.create().then(() => {
+        this.training.status = "Loading data...";
+        return this.model.finetune(
+          this.classes,
+          (args) => {
+            console.log(args);
+            this.training.status = "Training model...";
+          },
+          (batch, logs) => {},
+          (epoch, logs) => {
+            console.log(logs);
+            this.training.currentEpoch = epoch + 1;
+            this.training.epochs.push(epoch);
+            this.training.trainLosses.push(logs.loss);
+            this.training.valLosses.push(logs.val_loss);
+            this.updateTrainingData();
+          }
+        );
+      });
+      this.training.status = "Training finished!";
+      this.training.finished = true;
+    },
+    openWebcam() {
+      this.$refs.webcam.start();
+      this.webcam = true;
+
+      this.upload = false;
+    },
+    openUpload() {
+      this.upload = true;
+
+      this.webcam = false;
+      this.$refs.webcam.stop();
+    },
+    onCameraLoad(cameras) {
+      this.cameras = cameras;
+      this.$nextTick().then(() => {
+        if (this.cameras.length > 0) {
+          this.selectedCameraId = this.cameras[0].deviceId;
+          this.$refs.webcam.changeCamera(this.selectedCameraId);
+        }
+      });
+    },
+    onCameraSelect(deviceId) {
+      this.selectedCameraId = deviceId;
+    },
+    onWebcamLiveToggle(live) {
+      if (live) {
+        this.$refs.webcam.resume();
+      } else {
+        this.$refs.webcam.pause();
+      }
+    },
   },
 };
 </script>
+
+<style lang="postcss">
+.w-card {
+}
+</style>
