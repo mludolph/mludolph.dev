@@ -5,8 +5,9 @@
       items-center
       justify-center
       border border-dashed border-gray-400
-      bg-gray-600
-      hover:bg-gray-500
+      bg-gray-200
+      hover:bg-gray-100
+      dark:bg-gray-600 dark:hover:bg-gray-500
       rounded-lg
       relative
     "

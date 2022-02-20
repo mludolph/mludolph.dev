@@ -50,11 +50,11 @@ export default {
     },
     wrapperClass: {
       type: String,
-      default: "bg-gray-500",
+      default: "bg-gray-300 dark:bg-gray-500",
     },
     progressClass: {
       type: String,
-      default: "bg-gray-800",
+      default: "bg-gray-400 dark:bg-gray-800",
     },
   },
   computed: {

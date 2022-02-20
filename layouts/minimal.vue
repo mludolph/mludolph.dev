@@ -20,6 +20,30 @@
       <div class="text-xs text-gray-600 dark:text-gray-400 mb-1 select-none">
         portfolio
       </div>
+      <span
+        class="
+          flex
+          mt-1
+          cursor-pointer
+          text-gray-800
+          dark:text-gray-300
+          hover:text-gray-700
+          dark:hover:text-gray-400
+        "
+      >
+        <font-awesome-icon
+          class="w-4"
+          @click="setColorMode('light')"
+          v-if="darkMode"
+          :icon="['fas', 'sun']"
+        ></font-awesome-icon>
+        <font-awesome-icon
+          class="w-4"
+          @click="setColorMode('dark')"
+          v-if="!darkMode"
+          :icon="['fas', 'moon']"
+        ></font-awesome-icon>
+      </span>
     </header>
 
     <Nuxt />

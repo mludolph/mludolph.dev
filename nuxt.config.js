@@ -120,12 +120,13 @@ export default {
       // Add plugin names as key and arguments as value
       // Install them before as dependencies with npm or yarn
       plugins: {
-        // Disable a plugin by passing false as value
-        "postcss-url": {},
+        "postcss-import": true,
+        "tailwindcss/nesting": {},
         "postcss-nested": {},
+        "postcss-url": {},
+        //"postcss-nested": {},
         "postcss-responsive-type": {},
         "postcss-hexrgba": {},
-        precss: {},
       },
 
       preset: {
@@ -135,7 +136,7 @@ export default {
         },
         stage: 3,
         features: {
-          "nesting-rules": true,
+          "nesting-rules": false,
         },
       },
     },

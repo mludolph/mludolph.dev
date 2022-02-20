@@ -1,12 +1,21 @@
 <template>
-  <div class="flex flex-col bg-gray-700 rounded-lg shadow-md overflow-hidden">
+  <div
+    class="
+      flex flex-col
+      bg-gray-100
+      dark:bg-gray-700
+      rounded-lg
+      shadow-md
+      overflow-hidden
+    "
+  >
     <div class="flex flex-row w-full justify-between items-center px-6 py-3">
       <div class="flex flex-row items-center gap-3">
         <h2 v-if="!edit" class="text-lg font-semibold">{{ value.title }}</h2>
         <input
           ref="titleEditor"
           v-if="edit"
-          class="text-lg font-semibold bg-gray-600"
+          class="text-lg font-semibold bg-gray-200 dark:bg-gray-600"
           :value="value.title"
           @input="updateTitle"
           @blur="onBlur"
@@ -54,8 +63,9 @@
             justify-center
             items-center
             gap-2
-            bg-gray-500
-            hover:bg-gray-600
+            bg-gray-200
+            hover:bg-gray-300
+            dark:bg-gray-500 dark:hover:bg-gray-600
             rounded
             w-20
             h-16
@@ -72,8 +82,9 @@
             justify-center
             items-center
             gap-2
-            bg-gray-500
-            hover:bg-gray-600
+            bg-gray-200
+            hover:bg-gray-300
+            dark:bg-gray-500 dark:hover:bg-gray-600
             rounded
             w-20
             h-16
@@ -88,7 +99,9 @@
       </div>
     </div>
     <div v-if="webcam || upload" class="grid grid-cols-2 h-card">
-      <div class="flex flex-col col-span-1 gap-2 bg-gray-600 p-2">
+      <div
+        class="flex flex-col col-span-1 gap-2 bg-gray-200 dark:bg-gray-600 p-2"
+      >
         <div class="flex flex-row justify-between">
           <span class="text-sm font-semibold">{{
             webcam ? "Webcam" : "Upload"

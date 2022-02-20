@@ -4,11 +4,13 @@
       v-if="!menuVisible"
       class="
         fixed
-        top-24
+        top-28
         left-0
         p-2
-        bg-gray-900
-        hover:bg-gray-500
+        bg-gray-100
+        hover:bg-gray-300
+        dark:bg-gray-900 dark:hover:bg-gray-500
+        shadow
         rounded-r-lg
         text-sm
       "
@@ -24,8 +26,10 @@
         fixed
         flex flex-col
         left-0
-        top-24
-        bg-gray-900
+        top-28
+        shadow-md
+        bg-gray-100
+        dark:bg-gray-900
         rounded-r-xl
         transition-transform
         duration-200
@@ -36,7 +40,7 @@
       :class="{ '-translate-x-full': !menuVisible }"
     >
       <button
-        class="px-2 py-2 text-left hover:bg-gray-500"
+        class="px-2 py-2 text-left hover:bg-gray-300 dark:hover:bg-gray-600"
         @click="menuVisible = false"
       >
         <font-awesome-icon
@@ -48,7 +52,8 @@
         class="
           flex flex-row
           items-center
-          hover:bg-gray-500
+          hover:bg-gray-300
+          dark:hover:bg-gray-600
           px-2
           py-2
           gap-3
@@ -101,7 +106,8 @@
         class="
           flex flex-row
           items-center
-          hover:bg-gray-500
+          hover:bg-gray-300
+          dark:hover:bg-gray-600
           px-2
           py-2
           gap-3
@@ -125,7 +131,8 @@
         class="
           flex flex-row
           items-center
-          hover:bg-gray-500
+          hover:bg-gray-300
+          dark:hover:bg-gray-600
           px-2
           py-2
           gap-3
@@ -168,7 +175,16 @@
     </div>
     <div class="flex flex-col flex-grow-0 w-48">
       <div
-        class="flex flex-col bg-gray-700 rounded-lg shadow-md sticky top-0 mt-8"
+        class="
+          flex flex-col
+          bg-gray-100
+          dark:bg-gray-700
+          rounded-lg
+          shadow-md
+          sticky
+          top-0
+          mt-8
+        "
       >
         <div class="flex flex-row px-6 py-3">
           <h2 class="text-lg font-semibold">Training</h2>
@@ -177,11 +193,15 @@
         <div class="flex flex-col gap-3 px-6 py-3">
           <button
             class="
-              bg-gray-500
+              bg-gray-200
+              dark:bg-gray-500
               disabled:bg-gray-400
               disabled:text-gray-500
+              disabled:dark:bg-gray-400
+              disabled:dark:text-gray-500
+              hover:bg-gray-300
+              dark:hover:bg-gray-600
               disabled:cursor-default
-              hover:bg-gray-600
               rounded
               px-4
               py-2
@@ -227,7 +247,8 @@
       <div
         class="
           flex flex-col
-          bg-gray-700
+          bg-gray-100
+          dark:bg-gray-700
           rounded-lg
           shadow-md
           sticky
@@ -279,11 +300,12 @@
                   items-center
                   gap-2
                   text-sm
-                  hover:bg-gray-500
+                  hover:bg-gray-300
+                  dark:hover:bg-gray-500
                   w-full
                   py-3
                 "
-                :class="{ 'bg-gray-600': webcam }"
+                :class="{ 'bg-gray-200 dark:bg-gray-600': webcam }"
                 @click="openWebcam()"
               >
                 <font-awesome-icon :icon="['fas', 'video']"></font-awesome-icon>
@@ -296,11 +318,12 @@
                   items-center
                   gap-2
                   text-sm
-                  hover:bg-gray-500
+                  hover:bg-gray-300
+                  dark:hover:bg-gray-500
                   w-full
                   py-3
                 "
-                :class="{ 'bg-gray-600': upload }"
+                :class="{ 'bg-gray-200 dark:bg-gray-600': upload }"
                 @click="openUpload()"
               >
                 <font-awesome-icon
@@ -311,7 +334,15 @@
             </div>
 
             <div
-              class="flex flex-col gap-2 items-center bg-gray-600 px-6 py-3"
+              class="
+                flex flex-col
+                gap-2
+                items-center
+                bg-gray-200
+                dark:bg-gray-600
+                px-6
+                py-3
+              "
               :class="{ hidden: !webcam }"
             >
               <div class="flex flex-row gap-3">
@@ -339,7 +370,15 @@
               ></webcam>
             </div>
             <div
-              class="flex flex-col gap-2 items-center bg-gray-600 px-6 py-3"
+              class="
+                flex flex-col
+                gap-2
+                items-center
+                bg-gray-200
+                dark:bg-gray-600
+                px-6
+                py-3
+              "
               :class="{ hidden: !upload }"
             >
               <drag-upload-image

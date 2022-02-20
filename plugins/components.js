@@ -56,7 +56,7 @@ const settings = {
     component: TSelect,
     props: {
       fixedClasses:
-        "block w-full pl-3 pr-3 py-1 transition duration-100 ease-in-out border rounded shadow-sm focus:ring-2 focus:ring-indigo-500 focus:outline-none focus:ring-opacity-50 disabled:opacity-50 disabled:cursor-not-allowed text-sm placeholder-gray-600 bg-gray-500 border-gray-400 focus:border-indigo-500",
+        "block w-full pl-3 pr-3 py-1 transition duration-100 ease-in-out border rounded shadow-sm focus:ring-2 focus:ring-indigo-500 focus:outline-none focus:ring-opacity-50 disabled:opacity-50 disabled:cursor-not-allowed text-sm placeholder-gray-600 bg-gray-300 dark:bg-gray-500 border-gray-400 focus:border-indigo-500",
       classes: "",
     },
   },
@@ -452,7 +452,7 @@ const settings = {
       classes: {
         overlay: "bg-black",
         wrapper: "",
-        modal: "bg-gray-600 shadow",
+        modal: "bg-gray-200 dark:bg-gray-600 shadow",
         body: "p-3",
         header: "border-gray-100",
         footer: "bg-gray-100",

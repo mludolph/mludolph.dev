@@ -51,7 +51,57 @@
 
     <section class="container max-w-content m-auto mb-4">
       <div class="">
-        <h1
+        <h2
+          class="
+            text-md text-gray-800
+            dark:text-gray-300
+            uppercase
+            w-full
+            text-center
+            sm:text-left
+            mb-4
+          "
+        >
+          Demos
+        </h2>
+
+        <div
+          class="
+            grid grid-cols-1
+            sm:grid-cols-2
+            md:grid-cols-3
+            gap-2
+            place-content-stretch
+          "
+        >
+          <demo-card :demo="demos[0]">
+            <div
+              class="
+                flex flex-col
+                gap-2
+                bg-gray-100
+                dark:bg-gray-700
+                p-3
+                rounded-t
+              "
+            >
+              <div class="flex flex-row">
+                <span class="text-sm w-24">Cat</span>
+                <progress-bar :current="0.8" :percentage="true" />
+              </div>
+              <div class="flex flex-row">
+                <span class="text-sm w-24">No Cat :(</span>
+                <progress-bar :current="0.2" :percentage="true" />
+              </div>
+            </div>
+          </demo-card>
+        </div>
+        <hr class="mt-6 mx-4 dark:bg-gray-600" />
+      </div>
+    </section>
+    <section class="container max-w-content m-auto mb-4">
+      <div class="">
+        <h2
           class="
             text-md text-gray-800
             dark:text-gray-300
@@ -63,7 +113,7 @@
           "
         >
           Contributions & Projects
-        </h1>
+        </h2>
 
         <div
           class="
@@ -103,7 +153,7 @@
       </div>
     </section>
     <section class="container max-w-content m-auto pb-8" v-if="postsCount > 0">
-      <h1
+      <h2
         class="
           text-md text-gray-800
           dark:text-gray-300
@@ -115,7 +165,7 @@
         "
       >
         Blog Posts
-      </h1>
+      </h2>
       <div v-if="postsLoading">
         <post-list-entry
           class="mb-2"
@@ -197,6 +247,14 @@ export default {
       {
         icon: "microsoft-azure-icon.svg",
         name: "Microsoft Azure",
+      },
+    ],
+    demos: [
+      {
+        title: "Classify",
+        description:
+          "Build your own custom image classifier using MobileNet straight in your browser!",
+        tech: ["Vue", "tensorflow.js"],
       },
     ],
   }),
