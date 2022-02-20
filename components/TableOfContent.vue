@@ -8,7 +8,7 @@
           :key="link.id"
           :class="{ 'ml-2': link.depth === 2, 'ml-4': link.depth === 3 }"
         >
-          <NuxtLink :to="`#${link.id}`" class="text-primary hover:opacity-50">{{
+          <NuxtLink :to="`#${link.id}`" class="text-indigo-400 hover:opacity-50">{{
             link.text
           }}</NuxtLink>
         </li>

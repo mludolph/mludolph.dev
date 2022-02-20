@@ -42,7 +42,7 @@
       >
         <div class="flex items-center mb-2">
           <font-awesome-icon
-            class="text-primary text-base w-6 mr-2"
+            class="text-base w-6 mr-2"
             :icon="[post.faIconPack, post.faIcon]"
           ></font-awesome-icon>
           <span

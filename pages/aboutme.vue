@@ -27,7 +27,7 @@
             <p class="text-gray-800 dark:text-gray-300 text-sm mt-2">
               In my free time I love hiking, playing the piano and producing
               music. Feel free to shoot me an
-              <a class="text-primary" href="mailto:contact@moritzludolph.de"
+              <a class="text-indigo-400" href="mailto:contact@moritzludolph.de"
                 >email</a
               >
               if you like!
@@ -62,7 +62,7 @@
                 text-xs
                 uppercase
                 font-semibold
-                bg-primary
+                bg-indigo-400
                 py-1
                 px-2
                 rounded

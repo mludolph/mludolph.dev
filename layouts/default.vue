@@ -126,11 +126,11 @@
         <!--
         <span class="text-gray-800 dark:text-gray-300 mx-1"> | </span>
         <nuxt-link
-          class="text-primary hover:text-indigo-500 active:text-indigo-500"
+          class="text-indigo-400 hover:text-indigo-500 active:text-indigo-500"
           to="/"
           >Privacy</nuxt-link
-      </div>
-      -->
+          
+      --></div>
     </footer>
   </div>
 </template>
@@ -205,5 +205,27 @@ export default {
 }
 .hero:hover {
   background-position: right center;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+  border: 1px transparent;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  @apply bg-gray-500;
+  border-radius: 6px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-gray-400;
 }
 </style>

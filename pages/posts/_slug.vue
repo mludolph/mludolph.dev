@@ -38,7 +38,7 @@
           <div class="flex flex-col">
             <div class="flex items-center">
               <font-awesome-icon
-                class="text-primary text-base w-6 mr-2"
+                class="text-indigo-400 text-base w-6 mr-2"
                 :icon="[post.faIconPack, post.faIcon]"
               ></font-awesome-icon>
               <span

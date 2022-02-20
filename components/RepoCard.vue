@@ -21,14 +21,14 @@
             :href="repo.role.link"
             target="_blank"
             class="
-              text-primary
+              text-indigo-400
               hover:text-indigo-500
               active:text-indigo-500
               leading-none
             "
           >
             <font-awesome-icon
-              class="text-primary text-xs"
+              class="text-indigo-400 text-xs"
               size="xs"
               transform="shrink-3"
               :icon="['fas', 'external-link-alt']"
@@ -39,7 +39,7 @@
         <a
           class="
             flex
-            text-primary
+            text-indigo-400
             hover:text-indigo-500
             active:text-indigo-500
             font-semibold
@@ -63,7 +63,7 @@
         >
           <font-awesome-icon :icon="icon(repo.language)"></font-awesome-icon>
           <span>{{ repo.language }}</span>
-          <span class="text-primary" v-if="this.languagesCount > 1">
+          <span class="text-indigo-400" v-if="this.languagesCount > 1">
             +{{ this.languagesCount - 1 }}
           </span>
         </div>
