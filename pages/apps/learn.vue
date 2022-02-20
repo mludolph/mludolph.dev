@@ -61,6 +61,7 @@
         ></font-awesome-icon>
         <span>New Project</span>
       </button>
+      <!--
       <button
         class="
           flex flex-row
@@ -95,7 +96,7 @@
         ></font-awesome-icon>
         <span>Save to Drive</span>
       </button>
-
+      -->
       <button
         class="
           flex flex-row
@@ -105,8 +106,15 @@
           py-2
           gap-3
           whitespace-nowrap
+          relative
         "
       >
+        <input
+          class="absolute top-0 bottom-0 left-0 right-0 opacity-0"
+          type="file"
+          @change="onLoadFromFile"
+          accept=".zip"
+        />
         <font-awesome-icon
           :icon="['fas', 'folder']"
           class="w-4"
@@ -123,6 +131,7 @@
           gap-3
           whitespace-nowrap
         "
+        @click="onSaveToFile"
       >
         <font-awesome-icon
           :icon="['fas', 'download']"
@@ -239,6 +248,7 @@
           "
         >
           <h2 class="text-lg font-semibold">Preview</h2>
+          <!--
           <button
             class="
               bg-gray-500
@@ -256,75 +266,109 @@
             <font-awesome-icon :icon="['fas', 'download']"></font-awesome-icon>
             <span>Export Model</span>
           </button>
+          -->
         </div>
-        <hr class="bg-gray-500" />
-        <div class="flex flex-col">
-          <div class="grid grid-cols-2">
-            <button
-              class="
-                flex flex-row
-                justify-center
-                items-center
-                gap-2
-                text-sm
-                hover:bg-gray-500
-                w-full
-                py-3
-              "
-              :class="{ 'bg-gray-600': webcam }"
-              @click="openWebcam()"
-            >
-              <font-awesome-icon :icon="['fas', 'video']"></font-awesome-icon>
-              <span class="text-xs">Webcam</span>
-            </button>
-            <button
-              class="
-                flex flex-row
-                justify-center
-                items-center
-                gap-2
-                text-sm
-                hover:bg-gray-500
-                w-full
-                py-3
-              "
-              :class="{ 'bg-gray-600': upload }"
-              @click="openUpload()"
-            >
-              <font-awesome-icon :icon="['fas', 'upload']"></font-awesome-icon>
-              <span class="text-xs">File</span>
-            </button>
-          </div>
-
-          <div
-            class="flex flex-col gap-2 bg-gray-600 px-6 py-3"
-            :class="{ hidden: !webcam }"
-          >
-            <div class="flex flex-row gap-2 items-center">
-              <span class="text-sm">Live </span>
-              <t-toggle
-                v-model="webcamLive"
-                @change="onWebcamLiveToggle"
-              ></t-toggle>
+        <template v-if="training.finished">
+          <hr class="bg-gray-500" />
+          <div class="flex flex-col">
+            <div class="grid grid-cols-2">
+              <button
+                class="
+                  flex flex-row
+                  justify-center
+                  items-center
+                  gap-2
+                  text-sm
+                  hover:bg-gray-500
+                  w-full
+                  py-3
+                "
+                :class="{ 'bg-gray-600': webcam }"
+                @click="openWebcam()"
+              >
+                <font-awesome-icon :icon="['fas', 'video']"></font-awesome-icon>
+                <span class="text-xs">Webcam</span>
+              </button>
+              <button
+                class="
+                  flex flex-row
+                  justify-center
+                  items-center
+                  gap-2
+                  text-sm
+                  hover:bg-gray-500
+                  w-full
+                  py-3
+                "
+                :class="{ 'bg-gray-600': upload }"
+                @click="openUpload()"
+              >
+                <font-awesome-icon
+                  :icon="['fas', 'upload']"
+                ></font-awesome-icon>
+                <span class="text-xs">File</span>
+              </button>
             </div>
-            <t-select
-              placeholder="Select a webcam"
-              :options="cameras"
-              value-attribute="deviceId"
-              text-attribute="label"
-              @input="onCameraSelect"
-            ></t-select>
-            <webcam
-              ref="webcam"
-              :deviceId="selectedCameraId"
-              @cameras="onCameraLoad"
-              @video-live="webcamReady = true"
-              @stopped="webcamReady = false"
-            ></webcam>
+
+            <div
+              class="flex flex-col gap-2 items-center bg-gray-600 px-6 py-3"
+              :class="{ hidden: !webcam }"
+            >
+              <div class="flex flex-row gap-3">
+                <div class="flex flex-row gap-2 items-center">
+                  <span class="text-sm">Live </span>
+                  <t-toggle
+                    v-model="webcamLive"
+                    @change="onWebcamLiveToggle"
+                  ></t-toggle>
+                </div>
+                <t-select
+                  placeholder="Select a webcam"
+                  :options="cameras"
+                  value-attribute="deviceId"
+                  text-attribute="label"
+                  @input="onCameraSelect"
+                ></t-select>
+              </div>
+              <webcam
+                ref="webcam"
+                :deviceId="selectedCameraId"
+                @cameras="onCameraLoad"
+                @video-live="webcamReady = true"
+                @stopped="webcamReady = false"
+              ></webcam>
+            </div>
+            <div
+              class="flex flex-col gap-2 items-center bg-gray-600 px-6 py-3"
+              :class="{ hidden: !upload }"
+            >
+              <drag-upload-image
+                @files="onFileUpload"
+                class="w-full h-32"
+              ></drag-upload-image>
+
+              <img
+                class="rounded w-64 h-64"
+                :src="sample"
+                :class="{ hidden: sample === null }"
+              />
+            </div>
           </div>
-        </div>
-        <hr class="bg-gray-500" />
-        <div class="flex flex-col px-6 py-3"></div>
+          <hr class="bg-gray-500" />
+          <div class="flex flex-col gap-2 px-6 py-3">
+            <div
+              v-for="(cls, index) in classes"
+              :key="index"
+              class="flex flex-row gap-2 items-center"
+            >
+              <span class="text-sm w-20">{{ cls.title }}</span>
+              <progress-bar
+                :current="predictions !== null ? predictions[index] : 0"
+                :percentage="true"
+              />
+            </div>
+          </div>
+        </template>
       </div>
     </div>
   </div>
@@ -332,6 +376,9 @@
 
 <script>
 import MobileNet from "~/plugins/mobilenet";
+import * as FileSaver from "file-saver";
+import JSZip from "jszip";
+import slugify from "slugify";
 
 export default {
   layout: "minimal",
@@ -342,10 +389,11 @@ export default {
       cameras: [],
       selectedCameraId: null,
       webcamReady: false,
-      webcam: true,
-      webcamLive: true,
+      webcam: false,
+      webcamLive: false,
       upload: false,
       sample: null,
+      predictions: null,
 
       training: {
         status: "",
@@ -362,6 +410,11 @@ export default {
         {
           id: 1,
           title: "Class 1",
+          samples: [],
+        },
+        {
+          id: 2,
+          title: "Class 2",
           samples: [],
         },
       ],
@@ -411,12 +464,19 @@ export default {
       }, 0);
       return numValidClasses >= 2;
     },
-    prediction(){
-      if (this.training.finished){
-        return this.model.infer
+    predictions() {
+      if (this.training.finished) {
+        return this.model.predict(this.sample);
       }
       return null;
-    }
+    },
+  },
+  watch: {
+    webcamLive: function (newVal, oldVal) {
+      if (this.webcamLive) {
+        window.requestAnimationFrame(this.predictWebcam);
+      }
+    },
   },
   methods: {
     updateTrainingData() {
@@ -485,18 +545,24 @@ export default {
       });
       this.training.status = "Training finished!";
       this.training.finished = true;
+
+      this.$nextTick().then(() => this.openWebcam());
     },
     openWebcam() {
+      this.sample = null;
+      this.upload = false;
+
       this.$refs.webcam.start();
       this.webcam = true;
-
-      this.upload = false;
+      this.webcamLive = true;
     },
     openUpload() {
-      this.upload = true;
-
+      this.sample = null;
       this.webcam = false;
+      this.webcamLive = false;
       this.$refs.webcam.stop();
+
+      this.upload = true;
     },
     onCameraLoad(cameras) {
       this.cameras = cameras;
@@ -517,11 +583,134 @@ export default {
         this.$refs.webcam.pause();
       }
     },
+    async onFileUpload(files) {
+      this.sample = files[0];
+      await this.predict();
+    },
+
+    predictWebcam() {
+      this.predict().then(() => {
+        if (this.webcamReady) {
+          this.sample = this.$refs.webcam.capture();
+        }
+
+        if (this.webcamLive) {
+          window.requestAnimationFrame(this.predictWebcam);
+        } else {
+          this.sample = null;
+          this.predictions = null;
+        }
+      });
+    },
+    async predict() {
+      if (this.model !== null && this.sample !== null) {
+        this.predictions = await this.model.predict(this.sample);
+      } else {
+        this.predictions = null;
+      }
+    },
+
+    async onSaveToFile() {
+      var zip = new JSZip();
+      let meta = { classes: [], model: false };
+      this.classes.forEach((cls) => {
+        meta.classes.push({ id: cls.id, title: cls.title });
+        const folder = zip.folder(cls.title);
+        cls.samples.forEach((sample, idx) => {
+          folder.file(`${idx}.jpg`, sample.split("base64,")[1], {
+            base64: true,
+          });
+        });
+      });
+
+      if (this.training.finished) {
+        meta.model = true;
+        await this.model
+          .save()
+          .then((json) => JSON.stringify(json))
+          .then((json) => zip.file("model.json", json));
+      }
+      zip.file("meta.json", JSON.stringify(meta));
+
+      zip.generateAsync({ type: "blob" }).then((content) => {
+        FileSaver.saveAs(content, `project.zip`);
+      });
+    },
+    readFile(file) {
+      const reader = new FileReader();
+
+      return new Promise((resolve) => {
+        reader.onload = (ev) => {
+          resolve(ev.target.result);
+        };
+        reader.readAsArrayBuffer(file);
+      });
+    },
+    resetTraining() {
+      this.training = {
+        status: "",
+        started: false,
+        finished: false,
+        currentEpoch: 0,
+        maxEpoch: 50,
+        epochs: [],
+        valLosses: [],
+        trainLosses: [],
+      };
+    },
+    onLoadFromFile(evt) {
+      this.resetTraining();
+      const file = [...evt.target.files][0];
+
+      this.readFile(file)
+        .then((blob) => JSZip.loadAsync(blob))
+        .then(async (zip) => {
+          const meta = await zip
+            .file("meta.json")
+            .async("string")
+            .then((str) => JSON.parse(str));
+
+          this.classes = [];
+          await meta.classes.forEach(async ({ id, title }) => {
+            const cls = { id, title, samples: [] };
+            const promises = [];
+            zip.folder(title).forEach((relativePath, file) => {
+              promises.push(
+                file.async("base64").then((base64) => {
+                  cls.samples.push("data:image/jpeg;base64," + base64);
+                })
+              );
+            });
+            await Promise.all(promises);
+            this.classes.push(cls);
+          });
+
+          if (meta.model) {
+            await zip
+              .file("model.json")
+              .async("string")
+              .then(async (str) => {
+                const json = JSON.parse(str);
+                this.model = new MobileNet(this.classes.length);
+                await this.model.load(json);
+                this.training.status = "Training finished!";
+                this.training.finished = true;
+
+                this.$nextTick().then(() => this.openWebcam());
+              });
+          }
+        });
+    },
+    onSaveToDrive() {},
+    onLoadFromDrive() {},
   },
 };
 </script>
 
 <style lang="postcss">
 .w-card {
+  width: 600px;
+  max-width: 600px;
+  min-width: 600px;
 }
 </style>

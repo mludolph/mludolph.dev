@@ -87,66 +87,67 @@
         <sample-list v-model="value.samples" :horizontal="true"></sample-list>
       </div>
     </div>
-    <div v-if="webcam || upload">
-      <div class="grid grid-cols-2 h-card">
-        <div class="flex flex-col col-span-1 gap-2 bg-gray-600 p-2">
-          <div class="flex flex-row justify-between">
-            <span class="text-sm font-semibold">{{
-              webcam ? "Webcam" : "Upload"
-            }}</span>
+    <div v-if="webcam || upload" class="grid grid-cols-2 h-card">
+      <div class="flex flex-col col-span-1 gap-2 bg-gray-600 p-2">
+        <div class="flex flex-row justify-between">
+          <span class="text-sm font-semibold">{{
+            webcam ? "Webcam" : "Upload"
+          }}</span>
 
-            <font-awesome-icon
-              :icon="['fas', 'times']"
-              class="text-gray-400 hover:text-gray-500 cursor-pointer"
-              @click="closeWebcamOrUpload"
-            ></font-awesome-icon>
-          </div>
-          <div v-if="webcam" class="flex flex-col items-center gap-3">
-            <t-select
-              placeholder="Select a webcam"
-              :options="cameras"
-              value-attribute="deviceId"
-              text-attribute="label"
-              @input="onCameraSelect"
-            ></t-select>
-            <webcam
-              ref="webcam"
-              :deviceId="selectedCameraId"
-              @cameras="onCameraLoad"
-              @video-live="webcamReady = true"
-              @stopped="webcamReady = false"
-            ></webcam>
-            <button
-              v-if="webcamReady"
-              class="
-                flex flex-row
-                gap-2
-                w-full
-                bg-gray-700
-                hover:bg-gray-800
-                rounded
-                items-center
-                justify-center
-                whitespace-nowrap
-                py-2
-              "
-              @mousedown="startCapture"
-              @mouseup="stopCapture"
-            >
-              <font-awesome-icon :icon="['fas', 'circle']"></font-awesome-icon>
-              <span class="whitespace-nowrap">Hold to Capture</span>
-            </button>
-          </div>
-          <div v-if="upload" class="flex flex-col flex-grow h-full">
-            <drag-upload-image @files="onFileUpload"></drag-upload-image>
-          </div>
+          <font-awesome-icon
+            :icon="['fas', 'times']"
+            class="text-gray-400 hover:text-gray-500 cursor-pointer"
+            @click="closeWebcamOrUpload"
+          ></font-awesome-icon>
         </div>
-        <div class="flex flex-col col-span-1 p-2 gap-2 overflow-hidden">
-          <span class="text-sm font-semibold"
-            >Samples: {{ value.samples.length }}</span
+        <div v-if="webcam" class="flex flex-col items-center gap-3">
+          <t-select
+            placeholder="Select a webcam"
+            :options="cameras"
+            value-attribute="deviceId"
+            text-attribute="label"
+            @input="onCameraSelect"
+          ></t-select>
+          <webcam
+            ref="webcam"
+            :deviceId="selectedCameraId"
+            @cameras="onCameraLoad"
+            @video-live="webcamReady = true"
+            @stopped="webcamReady = false"
+          ></webcam>
+          <button
+            v-if="webcamReady"
+            class="
+              flex flex-row
+              gap-2
+              w-full
+              bg-gray-700
+              hover:bg-gray-800
+              rounded
+              items-center
+              justify-center
+              whitespace-nowrap
+              py-2
+            "
+            @mousedown="startCapture"
+            @mouseup="stopCapture"
           >
-          <sample-list v-model="value.samples"></sample-list>
+            <font-awesome-icon :icon="['fas', 'circle']"></font-awesome-icon>
+            <span class="whitespace-nowrap">Hold to Capture</span>
+          </button>
         </div>
+        <div v-if="upload" class="flex flex-col h-full">
+          <drag-upload-image
+            @files="onFileUpload"
+            class="w-full h-full"
+          ></drag-upload-image>
+        </div>
+      </div>
+      <div class="flex flex-col col-span-1 p-2 gap-2 overflow-hidden">
+        <span class="text-sm font-semibold"
+          >Samples: {{ value.samples.length }}</span
+        >
+        <sample-list v-model="value.samples"></sample-list>
       </div>
     </div>
   </div>

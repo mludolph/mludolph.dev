@@ -8,10 +8,10 @@
       h-5
       rounded
       overflow-hidden
-      bg-gray-500
       relative
       select-none
     "
+    :class="wrapperClass"
   >
     <div
       class="
@@ -21,12 +21,12 @@
         h-5
         transition-transform
         duration-100
-        bg-gray-800
         rounded
       "
+      :class="progressClass"
       :style="translateX"
     ></div>
-    <span class="z-10 text-xs">{{ current }} / {{ max }}</span>
+    <span class="z-10 text-xs">{{ label }}</span>
   </div>
 </template>
 <script>
@@ -48,11 +48,26 @@ export default {
       type: Boolean,
       default: true,
     },
+    wrapperClass: {
+      type: String,
+      default: "bg-gray-500",
+    },
+    progressClass: {
+      type: String,
+      default: "bg-gray-800",
+    },
   },
   computed: {
     translateX() {
       const percentage = 100 - (this.current / this.max) * 100;
       return `transform: translateX(-${percentage}%)`;
+    },
+    label() {
+      if (this.percentage) {
+        return `${((this.current / this.max) * 100).toFixed(1)}%`;
+      } else {
+        return `${this.current.toFixed(0)} / ${this.max.toFixed(0)}`;
+      }
     },
   },
 };

@@ -14,6 +14,11 @@ body {
   @apply duration-300;
   @apply ease-in-out;
 }
+input[type=file], /* FF, IE7+, chrome (except button) */
+input[type=file]::-webkit-file-upload-button {
+  /* chromes and blink button */
+  cursor: pointer;
+}
 
 @media (min-width: 1280px) {
   .dots {

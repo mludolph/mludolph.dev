@@ -1,41 +1,29 @@
 <template>
   <div
     class="
-      flex flex-col flex-grow
+      flex flex-col
       items-center
       justify-center
-      w-full
-      h-full
       border border-dashed border-gray-400
       bg-gray-600
       hover:bg-gray-500
       rounded-lg
-      cursor-pointer
       relative
     "
   >
-    <div
-      class="
-        flex flex-col
-        items-center
-        justify-center
-        gap-2
-        absolute
-        px-6
-        cursor-pointer
-      "
-    >
+    <div class="flex flex-col items-center justify-center gap-2 px-6">
       <font-awesome-icon :icon="['fas', 'folder']"></font-awesome-icon>
       <span class="text-sm text-center"
-        >Chooses images from your files, or drag & drop images here</span
+        >Choose {{ multiple ? "images" : "an image" }} from your files,<br />
+        or drag & drop {{ multiple ? "images" : "an image" }} here</span
       >
     </div>
     <input
       type="file"
-      multiple
+      :multiple="multiple"
       @change="onFileUpload"
       accept="image/*"
-      class="opacity-0 w-full h-full cursor-pointer"
+      class="absolute top-0 bottom-0 left-0 right-0 opacity-0 cursor-pointer"
     />
   </div>
 </template>
@@ -43,6 +31,10 @@
 <script>
 export default {
   props: {
+    multiple: {
+      type: Boolean,
+      default: true,
+    },
     imageFormat: {
       type: String,
       default: "image/jpeg",

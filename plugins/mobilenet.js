@@ -39,6 +39,24 @@ class MobileNet {
       img.src = url;
     });
   }
+
+  async load(json) {
+    this.classes = json.classes;
+    const weightData = new Uint8Array(Buffer.from(json.weightData, "base64"))
+      .buffer;
+    this.model = await tf.loadLayersModel(
+      tf.io.fromMemory(json.modelTopology, json.weightSpecs, weightData)
+    );
+  }
+  async save() {
+    let result = await this.model.save(
+      tf.io.withSaveHandler(async (modelArtifacts) => modelArtifacts)
+    );
+    result.weightData = Buffer.from(result.weightData).toString("base64");
+    result.classes = this.classes;
+    return result;
+  }
+
   async create() {
     const trainableLayers = [
       "denseModified",
@@ -110,8 +128,15 @@ class MobileNet {
   }
 
   async predict(url) {
-    const tensor = await this.getImage(url).then((img) => tf.fromPixels(img));
-    return this.model.predict(tensor, { batchSize: 1 }).toArray();
+    let tensor = await this.getImage(url).then((img) =>
+      tf.browser.fromPixels(img)
+    );
+    tensor = tensor.expandDims(0);
+
+    const prediction = await this.model
+      .predict(tensor, { batchSize: 1 })
+      .data();
+    return prediction;
   }
 }
 

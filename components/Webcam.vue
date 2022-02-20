@@ -7,6 +7,7 @@
       rounded-lg
       overflow-hidden
       relative
+      w-content
     "
   >
     <font-awesome-icon
@@ -176,7 +177,7 @@ export default {
         this.source = window.HTMLMediaElement.srcObject(stream);
       }
       this.$refs.video.play();
-      
+
       // Emit video start/live event
       this.$refs.video.onloadedmetadata = () => {
         this.ready = true;
