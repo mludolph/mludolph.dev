@@ -229,6 +229,10 @@ export default {
         name: "Flask",
       },
       {
+        icon: "spring-icon.svg",
+        name: "Spring Boot",
+      },
+      {
         icon: "apache-kafka-icon.svg",
         name: "Apache Kafka",
       },
