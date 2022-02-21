@@ -3,7 +3,7 @@
     <img
       class="w-32 h-32 mb-4 mr-0 md:mr-4 md:mb-0 select-none rounded-full"
       src="/images/profile_square.jpg"
-      alt="Profile Image"
+      alt="Moritz Ludolph Profile Image"
     />
 
     <div class="flex flex-col">
