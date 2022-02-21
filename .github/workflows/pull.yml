@@ -32,6 +32,7 @@ jobs:
         with:
           webhook_id: '945323813007163432'  # Has to be provided as a string
           webhook_token: ${{ secrets.DISCORD_WEBHOOK }}
+          status: ${{job.status}}
 
           pr_author_login: ${{ github.event.pull_request.user.login }}
           pr_number: ${{ github.event.pull_request.number }}
