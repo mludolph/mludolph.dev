@@ -17,12 +17,11 @@ async def connect(sid, environ, auth):
         return False
 
     scheme, token = auth.split(" ")
-
+    sub = ""
     if scheme.lower() == "bearer":
         try:
             verified_token = await verify_token(token)
             sub = verified_token["sub"]
-            logger.info(f"socket authenticated (sid={sid}, sub={sub})")
         except Exception as e:
             logger.warning(
                 f"bearer token verification failed (sid={sid}, reason={str(e)})"
@@ -30,16 +29,17 @@ async def connect(sid, environ, auth):
             await sm.disconnect(sid)
             return False
     elif scheme.lower() == "api-key":
-        if token in config.AUTH_API_KEYS:
-            logger.info(f"socket authenticated (sid={sid}, sub=service_account)")
-        else:
+        if token not in config.AUTH_API_KEYS:
             logger.warning(
                 f"api-key verification failed (sid={sid}, \
                   reason=unknown_api_key('{token}'))"
             )
             await sm.disconnect(sid)
             return False
-    await sm.save_session(sid, {"authenticated": True})
+        sub = "service_account"
+
+    logger.info(f"socket authenticated (sid={sid}, sub={sub})")
+    await sm.save_session(sid, {"sub": sub})
     return True
 
 
@@ -51,7 +51,7 @@ async def disconnect(sid):
 @sm.on("notification")
 async def notification_handler(sid, data):
     session = await sm.get_session(sid)
-    if not session.get("authenticated"):
+    if not session.get("sub"):
         return False
 
     await sm.emit("notification", data)
