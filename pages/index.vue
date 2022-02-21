@@ -24,7 +24,7 @@
                 text-center
                 md:text-left
               "
-              >Things I Use</span
+              >Tech Skills</span
             >
             <div class="grid grid-cols-5 gap-4">
               <div class="w-10 h-10" v-for="icon in icons" :key="icon.name">
@@ -198,6 +198,10 @@ export default {
       {
         icon: "python-icon.svg",
         name: "Python",
+      },
+      {
+        icon: "java-icon.svg",
+        name: "Java",
       },
       {
         icon: "javascript-icon.svg",
