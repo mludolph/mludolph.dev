@@ -1,20 +1,20 @@
-$timeline-marker-size: 12px !default;
-$timeline-marker-color: #b9c0fc !default;
-$timeline-marker-icon-size: 24px !default;
-$timeline-marker-border-size: 1px !default;
+$timeline-marker-size: 12px;
+$timeline-marker-color: #b9c0fc;
+$timeline-marker-icon-size: 24px;
+$timeline-marker-border-size: 1px;
 $timeline-marker-border: $timeline-marker-border-size solid
-  $timeline-marker-color !default;
-$timeline-line-color: #daddfa !default;
-$timeline-line-width: 1px !default;
-$timeline-line-style: solid !default;
-$timeline-line: $timeline-line-width $timeline-line-style $timeline-line-color !default;
-$timeline-content-padding: 1em 0 0 2em !default;
-$timeline-rtl-content-padding: 1em 2em 0 0 !default;
-$timeline-icon-size: 0.75rem !default;
-$timeline-header-width: 4em !default;
-$timeline-item-padding-left: $timeline-header-width / 2 !default;
-$timeline-item-padding-bottom: 2em !default;
-$dimensions: 16 24 32 48 64 96 128 !default;
+$timeline-marker-color;
+$timeline-line-color: #daddfa;
+$timeline-line-width: 1px;
+$timeline-line-style: solid;
+$timeline-line: $timeline-line-width $timeline-line-style $timeline-line-color;
+$timeline-content-padding: 1em 0 0 2em;
+$timeline-rtl-content-padding: 1em 2em 0 0;
+$timeline-icon-size: 0.75rem;
+$timeline-header-width: 4em;
+$timeline-item-padding-left: $timeline-header-width / 2;
+$timeline-item-padding-bottom: 2em;
+$dimensions: 16 24 32 48 64 96 128;
 
 .timeline {
   display: flex;

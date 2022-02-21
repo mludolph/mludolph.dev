@@ -255,6 +255,7 @@ export default {
         description:
           "Build your own custom image classifier using MobileNet straight in your browser!",
         tech: ["Vue", "tensorflow.js"],
+        to: "/apps/classify",
       },
     ],
   }),

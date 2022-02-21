@@ -13,7 +13,7 @@ export const state = () => ({
     },
     pytorch_cluster: { name: "Contributor", link: "" },
     pytorch_isin: { name: "Author", link: "" },
-    "mludolph.github.io": { name: "Author", link: "" },
+    "mludolph.dev": { name: "Author", link: "" },
   },
   loading: true,
 });

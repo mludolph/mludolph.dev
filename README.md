@@ -13,7 +13,4 @@ $ yarn dev
 
 # generate static project
 $ yarn generate
-
-# deploy to github pages (done automatically by pushing master branch) or using
-$ yarn deploy
 ```

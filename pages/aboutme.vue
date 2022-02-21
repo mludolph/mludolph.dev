@@ -10,9 +10,7 @@
             items-center
             md:items-start
             text-center
-            md:text-left
-            md:flex-row
-            md:justify-between
+            md:text-left md:flex-row md:justify-between
           "
         >
           <v-card />
@@ -51,7 +49,7 @@
               mb-0
             "
           >
-            education & experience
+            Education & Experience
           </h1>
         </div>
 
@@ -79,8 +77,8 @@
             <div class="timeline-marker"></div>
             <div class="timeline-content">
               <p
-                v-for="(period, j) in entry.periods"
-                :key="j"
+                v-for="period in entry.periods"
+                :key="period[0]"
                 class="
                   text-gray-700
                   dark:text-gray-400

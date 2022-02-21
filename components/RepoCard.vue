@@ -31,7 +31,7 @@
               class="text-indigo-400 text-xs"
               size="xs"
               transform="shrink-3"
-              :icon="['fas', 'external-link-alt']"
+              :icon="['fas', 'up-right-from-square']"
             />
           </a>
         </div>
