@@ -30,6 +30,7 @@
               <div class="w-10 h-10" v-for="icon in icons" :key="icon.name">
                 <img
                   class="w-full h-full hover-icon"
+                  :alt="icon.name"
                   :class="{ 'filter-white': $colorMode.value === 'dark' }"
                   :src="`icons/${icon.icon}`"
                   v-tooltip="{
