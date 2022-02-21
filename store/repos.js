@@ -4,7 +4,7 @@ export const state = () => ({
     "pyg-team/pytorch_geometric",
     "rusty1s/pytorch_cluster",
     "mludolph/pytorch_isin",
-    "mludolph/mludolph.github.io",
+    "mludolph/mludolph.dev",
   ],
   repoRoles: {
     pytorch_geometric: {
