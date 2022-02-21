@@ -22,7 +22,7 @@
           @keyup.enter="onBlur"
         />
         <font-awesome-icon
-          :icon="['fas', 'pencil-alt']"
+          :icon="['fas', 'pencil']"
           class="text-gray-400 hover:text-gray-500 cursor-pointer"
           @click="makeEditable"
         ></font-awesome-icon>
@@ -108,7 +108,7 @@
           }}</span>
 
           <font-awesome-icon
-            :icon="['fas', 'times']"
+            :icon="['fas', 'xmark']"
             class="text-gray-400 hover:text-gray-500 cursor-pointer"
             @click="closeWebcamOrUpload"
           ></font-awesome-icon>
@@ -140,6 +140,7 @@
               items-center
               justify-center
               whitespace-nowrap
+              select-none
               py-2
             "
             @mousedown="startCapture"

@@ -1,5 +1,17 @@
 <template>
-  <div class="flex flex-row gap-12 pl-48 pr-24">
+  <div
+    class="
+      absolute
+      top-0
+      flex flex-row
+      items-center
+      min-h-screen
+      w-full
+      gap-12
+      pl-48
+      pr-24
+    "
+  >
     <button
       v-if="!menuVisible"
       class="
@@ -173,7 +185,7 @@
         <span>Add a class</span>
       </div>
     </div>
-    <div class="flex flex-col flex-grow-0 w-48">
+    <div class="flex flex-col h-screen max-h-screen relative">
       <div
         class="
           flex flex-col
@@ -181,9 +193,11 @@
           dark:bg-gray-700
           rounded-lg
           shadow-md
+          w-48
           sticky
-          top-0
-          mt-8
+          top-1/2
+          transform
+          -translate-y-1/2
         "
       >
         <div class="flex flex-row px-6 py-3">
@@ -243,7 +257,7 @@
         </div>
       </div>
     </div>
-    <div class="flex flex-col flex-grow-0 w-80">
+    <div class="flex flex-col h-screen max-h-screen relative">
       <div
         class="
           flex flex-col
@@ -251,10 +265,12 @@
           dark:bg-gray-700
           rounded-lg
           shadow-md
-          sticky
-          top-0
-          mt-8
           overflow-hidden
+          sticky
+          w-80
+          top-1/2
+          transform
+          -translate-y-1/2
         "
       >
         <div

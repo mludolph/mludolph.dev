@@ -12,8 +12,8 @@
   >
     <font-awesome-icon
       v-if="ready"
-      :icon="['fas', 'sync']"
-      class="absolute top-4 right-4 hover:text-gray-500 cursor-pointer z-40"
+      :icon="['fas', 'camera-rotate']"
+      class="absolute top-4 right-4 text-white hover:text-gray-300 cursor-pointer z-40"
       @click="flip = !flip"
     ></font-awesome-icon>
     <video
