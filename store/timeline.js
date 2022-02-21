@@ -1,17 +1,24 @@
 export const state = () => ({
   timelineEntries: [
     {
+      periods: [["2021-06", "today"]],
+      title: "Machine Learning",
+      institution: "movingimage EVP GmbH, Berlin",
+      descriptionLines: ["Working student for Machine Learning"],
+    },
+    {
       periods: [["2019-10", "today"]],
       title: "M.Sc. Computer Science",
       institution: "Technical Unversity of Berlin",
       descriptionLines: [
         "Data Science and Engineering Track",
         "Coursework: Machine Learning, Database Technology, Cloud Computing",
+        "GPA: 1.2",
       ],
     },
     {
       periods: [["2018-02", "2018-04"]],
-      title: "Intern IoT Data Analytics",
+      title: "IoT Data Analytics Intern",
       institution: "T-Systems International GmbH, Bonn",
       descriptionLines: [
         "Integrated public datasets for the use in a data analytics platform and different PoCs, built data processing and cleaning pipelines using Apache Spark on Microsoft Azure",

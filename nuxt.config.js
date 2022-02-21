@@ -72,7 +72,7 @@ export default {
    ** https://nuxtjs.org/guide/plugins
    */
   plugins: [
-    "~/plugins/components",
+    "~plugins/components.js",
     "~plugins/filters.js",
     "~plugins/directives.js",
     "~plugins/banner.js",
@@ -122,11 +122,11 @@ export default {
       plugins: {
         "postcss-import": true,
         "tailwindcss/nesting": {},
-        "postcss-nested": {},
+        tailwindcss: {},
         "postcss-url": {},
-        //"postcss-nested": {},
         "postcss-responsive-type": {},
         "postcss-hexrgba": {},
+        "postcss-simple-vars": {},
       },
 
       preset: {
@@ -180,7 +180,6 @@ export default {
         "faCodeBranch",
         "faSquareRootAlt",
         "faHeart",
-        "faExternalLinkAlt",
         "faPencilAlt",
         "faTrash",
         "faPlus",
@@ -193,6 +192,7 @@ export default {
         "faDownload",
         "faAngleRight",
         "faAngleLeft",
+        "faUpRightFromSquare",
       ],
       regular: ["faStar", "faFloppyDisk"],
       brands: [

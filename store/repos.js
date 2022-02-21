@@ -4,7 +4,7 @@ export const state = () => ({
     "pyg-team/pytorch_geometric",
     "rusty1s/pytorch_cluster",
     "mludolph/pytorch_isin",
-    "mludolph/mludolph.github.io",
+    "mludolph/mludolph.dev",
   ],
   repoRoles: {
     pytorch_geometric: {
@@ -13,7 +13,7 @@ export const state = () => ({
     },
     pytorch_cluster: { name: "Contributor", link: "" },
     pytorch_isin: { name: "Author", link: "" },
-    "mludolph.github.io": { name: "Author", link: "" },
+    "mludolph.dev": { name: "Author", link: "" },
   },
   loading: true,
 });

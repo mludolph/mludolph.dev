@@ -86,15 +86,15 @@ export default {
   @apply py-2 px-4;
   @apply dark:bg-gray-700 bg-gray-50;
   @apply rounded-t;
-
-  .Cookie__content {
-    @apply text-sm;
-  }
-  .Cookie__button {
-    @apply text-sm rounded;
-    @apply bg-green-500 dark:bg-green-600 hover:bg-green-600 dark:hover:bg-green-500 text-gray-50 focus:outline-none px-2 py-1;
-  }
 }
+.Cookie__content {
+  @apply text-sm;
+}
+.Cookie__button {
+  @apply text-sm rounded;
+  @apply bg-green-500 dark:bg-green-600 hover:bg-green-600 dark:hover:bg-green-500 text-gray-50 focus:outline-none px-2 py-1;
+}
+
 .footer {
   @apply flex flex-row w-full;
   @apply overflow-hidden box-border z-40 items-baseline;

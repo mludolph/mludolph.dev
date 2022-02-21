@@ -25,12 +25,29 @@
           mt-2
           mb-4
         "
-        to="/apps/classify"
+        :to="demo.to"
         >{{ demo.title }}</NuxtLink
       >
-      <p class="block text-gray-800 dark:text-gray-400 text-sm">
+      <p class="block text-gray-800 dark:text-gray-400 text-sm pb-2">
         {{ demo.description }}
       </p>
+      <nuxt-link
+        class="
+          rounded
+          px-3
+          py-2
+          text-center
+          whitespace-nowrap
+          font-semibold
+          text-sm text-gray-100
+          bg-indigo-400
+          hover:bg-indigo-300
+          dark:hover:bg-indigo-500
+        "
+        :to="demo.to"
+      >
+        Get started
+      </nuxt-link>
     </div>
   </div>
 </template>
