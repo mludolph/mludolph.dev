@@ -14,10 +14,11 @@
   >
     <div class="flex flex-col items-center justify-center gap-2 px-6">
       <font-awesome-icon :icon="['fas', 'folder']"></font-awesome-icon>
-      <span class="text-sm text-center"
+      <span v-if="label === null" class="text-sm text-center"
         >Choose {{ multiple ? "images" : "an image" }} from your files,<br />
         or drag & drop {{ multiple ? "images" : "an image" }} here</span
       >
+      <span v-else class="text-sm text-center"> {{ label }}</span>
     </div>
     <input
       type="file"
@@ -39,6 +40,20 @@ export default {
     imageFormat: {
       type: String,
       default: "image/jpeg",
+    },
+    label: {
+      type: String,
+      default: null,
+    },
+    crop: {
+      type: Boolean,
+      default: true,
+    },
+    cropResolution: {
+      type: Object,
+      default: () => {
+        return { w: 224, h: 224 };
+      },
     },
   },
   data() {
@@ -66,8 +81,8 @@ export default {
     async getCanvas(url) {
       if (!this.ctx) {
         let canvas = document.createElement("canvas");
-        canvas.height = 224;
-        canvas.width = 224;
+        canvas.height = this.cropResolution.h;
+        canvas.width = this.cropResolution.w;
         this.canvas = canvas;
 
         this.ctx = canvas.getContext("2d");
@@ -92,16 +107,25 @@ export default {
     },
     async onFileUpload(evt) {
       const files = [...evt.target.files];
+      console.log(files);
       let promises = [];
       files.forEach((file) =>
         promises.push(
-          this.getBase64(file)
-            .then((url) => this.getCanvas(url))
-            .then((canvas) => canvas.toDataURL(this.imageFormat))
+          this.getBase64(file).then((url) => {
+            if (this.crop) {
+              return this.getCanvas(url).then((canvas) =>
+                canvas.toDataURL(this.imageFormat)
+              );
+            } else {
+              return url;
+            }
+          })
         )
       );
+      const names = files.map((file) => file.name);
+
       let sources = await Promise.all(promises);
-      this.$emit("files", sources);
+      this.$emit("files", sources, names);
     },
   },
 };

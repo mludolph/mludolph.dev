@@ -25,6 +25,7 @@
     "jszip": "^3.7.1",
     "nuxt": "^2.15.8",
     "prism-themes": "^1.9.0",
+    "random-material-color": "^1.0.5",
     "rehype-mathjax": "3.1.0",
     "remark-math": "4.0.0",
     "slugify": "^1.6.5",
