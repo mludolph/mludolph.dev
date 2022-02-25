@@ -8287,6 +8287,11 @@ multimap@^1.1.0:
   resolved "https://registry.yarnpkg.com/multimap/-/multimap-1.1.0.tgz#5263febc085a1791c33b59bb3afc6a76a2a10ca8"
   integrity sha512-0ZIR9PasPxGXmRsEF8jsDzndzHDj7tIav+JUmvIFB/WHswliFnquxECT/De7GR4yg99ky/NlRKJT82G1y271bw==
 
+murmurhash-js@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/murmurhash-js/-/murmurhash-js-1.0.0.tgz#b06278e21fc6c37fa5313732b0412bcb6ae15f51"
+  integrity sha1-sGJ44h/Gw3+lMTcysEEry2rhX1E=
+
 mustache@^2.3.0:
   version "2.3.2"
   resolved "https://registry.yarnpkg.com/mustache/-/mustache-2.3.2.tgz#a6d4d9c3f91d13359ab889a812954f9230a3d0c5"
@@ -8651,6 +8656,11 @@ open@^7.0.4:
   dependencies:
     is-docker "^2.0.0"
     is-wsl "^2.1.1"
+
+opencv.js@^1.2.1:
+  version "1.2.1"
+  resolved "https://registry.yarnpkg.com/opencv.js/-/opencv.js-1.2.1.tgz#9e89fd669a749f80574ba5d4615a5ff3e3c09a16"
+  integrity sha512-+ji5Pk3eyz+RRSeZr2kLZNJpjsKoGyPJOjFWng7+Cuq9ylHakBqJMxDGlBW1+qdju3k8DadWOiHJ6JaF28UpKA==
 
 opener@1.5.2, opener@^1.5.2:
   version "1.5.2"
@@ -10129,6 +10139,13 @@ quick-lru@^5.1.1:
   version "5.1.1"
   resolved "https://registry.yarnpkg.com/quick-lru/-/quick-lru-5.1.1.tgz#366493e6b3e42a3a6885e2e99d18f80fb7a8c932"
   integrity sha512-WuyALRjWPDGtt/wzJiadO5AXY+8hZ80hVpe6MyivgraREW751X3SbhRvG3eLKOYN+8VEvqLcf3wdnt44Z4S4SA==
+
+random-material-color@^1.0.5:
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/random-material-color/-/random-material-color-1.0.5.tgz#cbbef08abd110393b4e923992b519b8968876b67"
+  integrity sha512-S4bF/sARdh0jd+ODZtyM5Di2F7MfC1plLXOPz3P1qCOHNpbX8AmnqeLB8+K00MhYryNr8UZqQcKEQBZ7E4L4WA==
+  dependencies:
+    murmurhash-js "^1.0.0"
 
 randombytes@^2.0.0, randombytes@^2.0.1, randombytes@^2.0.5, randombytes@^2.1.0:
   version "2.1.0"
@@ -12115,6 +12132,11 @@ vue-cookie-law@^1.13.3:
   integrity sha512-n5ef5/dAB4cyUz6OaolYZEeyfV/fcsVU/RCTT/aHXcyjNbXf7EU2TgaOlMwu+cTOjdn5tBJKyKP6lr6IOUf9bg==
   dependencies:
     tiny-cookie "^2.1.1"
+
+vue-draggable-resizable@^2.3.0:
+  version "2.3.0"
+  resolved "https://registry.yarnpkg.com/vue-draggable-resizable/-/vue-draggable-resizable-2.3.0.tgz#94c433ca748bc1a4d0959ba1c5c0e1c3536cee5b"
+  integrity sha512-77CLRj1TPwB30pwsjOf3pkd1UzYanCdKXbqhILJ0Oo5QQl50lvBfyQCXxMFzwWwTc3sbBbQH3FfWSV+BkoSElA==
 
 vue-eslint-parser@^7.10.0:
   version "7.11.0"
