@@ -125,6 +125,9 @@ export default {
 ::-webkit-scrollbar-track {
   background: transparent;
 }
+::-webkit-scrollbar-corner {
+  background: transparent;
+}
 
 /* Handle */
 ::-webkit-scrollbar-thumb {

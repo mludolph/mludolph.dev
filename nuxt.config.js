@@ -78,6 +78,7 @@ export default {
     "~plugins/banner.js",
     "~plugins/tracking.js",
     "~plugins/tooltip.js",
+    "~plugins/draggable.js",
   ],
   /*
    ** Auto import components
@@ -116,6 +117,13 @@ export default {
    ** See https://nuxtjs.org/api/configuration-build/
    */
   build: {
+    extend(config) {
+      config.node = {
+        fs: "empty",
+        path: "empty",
+        crypto: "empty",
+      };
+    },
     postcss: {
       // Add plugin names as key and arguments as value
       // Install them before as dependencies with npm or yarn

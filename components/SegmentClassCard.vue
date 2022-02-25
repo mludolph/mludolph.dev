@@ -1,8 +1,11 @@
 <template>
-  <div class="flex flex-col bg-gray-700 rounded gap-3 py-2">
+  <div
+    class="flex flex-col bg-gray-700 rounded gap-3 py-2 cursor-pointer"
+    @click="$emit('select')"
+  >
     <div class="flex flex-row items-center justify-between gap-3 px-3">
       <div class="flex flex-row items-center gap-2">
-        <span v-if="!edit" class="text-sm">{{ value.name }}</span>
+        <span v-if="!edit" class="text-sm select-none">{{ value.name }}</span>
         <input
           ref="nameEditor"
           v-if="edit"
@@ -15,16 +18,21 @@
         <font-awesome-icon
           :icon="['fas', 'pencil']"
           class="text-sm text-gray-400 hover:text-gray-500 cursor-pointer"
-          @click="makeEditable"
+          @click.stop="makeEditable"
         ></font-awesome-icon>
       </div>
 
       <div class="flex flex-row gap-2 relative">
-        <input type="color" :value="value.color" @input="updateColor" />
+        <input
+          type="color"
+          :value="value.color"
+          @input="updateColor"
+          @click.stop=""
+        />
         <font-awesome-icon
           :icon="['fas', 'trash']"
           class="cursor-pointer hover:text-gray-500"
-          @click="removeClass"
+          @click.stop="removeClass"
         ></font-awesome-icon>
       </div>
     </div>
@@ -50,21 +58,21 @@ export default {
     },
     updateColor(evt) {
       this.$emit("input", {
-        name: this.value.name,
+        ...this.value,
         color: evt.target.value,
       });
     },
     updateName(evt) {
       this.$emit("input", {
+        ...this.value,
         name: evt.target.value,
-        color: this.value.color,
       });
     },
     onBlur() {
       if (this.value.name === "") {
         this.$emit("input", {
+          ...this.value,
           name: this.previousName,
-          color: this.value.color,
         });
       }
       this.edit = false;

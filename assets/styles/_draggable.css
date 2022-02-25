@@ -1,0 +1,79 @@
+$draggable-border: 1px dashed black;
+
+$handle-size: 10px;
+$handle-offset: 5px;
+$handle-position: 5px;
+
+$handle-color: white;
+$handle-border: 1px solid #333;
+$handle-border-radius: 10px;
+
+.vdr {
+  touch-action: none;
+  position: absolute;
+  box-sizing: border-box;
+  border: $draggable-border;
+}
+.handle {
+  box-sizing: border-box;
+  position: absolute;
+  width: $handle-size;
+  height: $handle-size;
+  background: $handle-color;
+  border-radius: $handle-border-radius;
+  border: $handle-border;
+}
+.handle-tl {
+  top: -$handle-position;
+  left: -$handle-position;
+  cursor: nw-resize;
+}
+.handle-tm {
+  top: -$handle-position;
+  left: 50%;
+  margin-left: -$handle-offset;
+  cursor: n-resize;
+}
+.handle-tr {
+  top: -$handle-position;
+  right: -$handle-position;
+  cursor: ne-resize;
+}
+.handle-ml {
+  top: 50%;
+  margin-top: -$handle-offset;
+  left: -$handle-position;
+  cursor: w-resize;
+}
+.handle-mr {
+  top: 50%;
+  margin-top: -$handle-offset;
+  right: -$handle-position;
+  cursor: e-resize;
+}
+.handle-bl {
+  bottom: -$handle-position;
+  left: -$handle-position;
+  cursor: sw-resize;
+}
+.handle-bm {
+  bottom: -$handle-position;
+  left: 50%;
+  margin-left: -$handle-offset;
+  cursor: s-resize;
+}
+.handle-br {
+  bottom: -$handle-position;
+  right: -$handle-position;
+  cursor: se-resize;
+}
+@media only screen and (max-width: 768px) {
+  [class*="handle-"]:before {
+    content: "";
+    left: -$handle-size;
+    right: -$handle-size;
+    bottom: -$handle-size;
+    top: -$handle-size;
+    position: absolute;
+  }
+}
