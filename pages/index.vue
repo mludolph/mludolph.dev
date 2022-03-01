@@ -87,7 +87,7 @@
               "
             >
               <div class="flex flex-row">
-                <span class="text-sm w-24">Cat</span>
+                <span class="text-sm w-24">Cat :)</span>
                 <progress-bar :current="0.8" :percentage="true" />
               </div>
               <div class="flex flex-row">
