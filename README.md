@@ -1,4 +1,4 @@
-# mludolph.gitub.io - portfolio for Moritz Ludolph
+# mludolph.dev
 
 ![CI](https://github.com/mludolph/mludolph.github.io/workflows/CI/badge.svg)
 

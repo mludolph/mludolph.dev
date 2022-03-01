@@ -211,7 +211,9 @@ export default {
       const annotation = {
         clsId: this.clsId,
         area: this.annotationArea,
+        mask: this.processArea(this.annotationArea),
       };
+
       if (this.selectedAnnotationId === -1) {
         update.push(annotation);
       } else {
@@ -298,6 +300,53 @@ export default {
       this.$refs.highlight.height = height;
       this.$refs.annotations.width = width;
       this.$refs.annotations.height = height;
+    },
+    processArea(area) {
+      const img = this.$refs.preview;
+      const { x, y, width, height } = area;
+
+      let src = cv.imread(img);
+      cv.cvtColor(src, src, cv.COLOR_RGBA2RGB, 0);
+
+      let mask = new cv.Mat();
+      let bgdModel = new cv.Mat();
+      let fgdModel = new cv.Mat();
+      let rect = new cv.Rect(x, y, x + width, y + height);
+      cv.grabCut(src, mask, rect, bgdModel, fgdModel, 1, cv.GC_INIT_WITH_RECT);
+
+      // draw foreground
+      for (let i = 0; i < src.rows; i++) {
+        for (let j = 0; j < src.cols; j++) {
+          if (mask.ucharPtr(i, j)[0] == 0 || mask.ucharPtr(i, j)[0] == 2) {
+            src.ucharPtr(i, j)[3] = 255;
+          } else {
+            src.ucharPtr(i, j)[0] = 255;
+            src.ucharPtr(i, j)[1] = 255;
+            src.ucharPtr(i, j)[2] = 255;
+          }
+        }
+      }
+      // draw grab rect
+      /*let color = new cv.Scalar(0, 0, 255);
+      let point1 = new cv.Point(rect.x, rect.y);
+      let point2 = new cv.Point(rect.x + rect.width, rect.y + rect.height);
+      cv.rectangle(src, point1, point2, color);
+      */
+
+      let imgdata = new ImageData(
+        new Uint8ClampedArray(src.data, src.cols, src.rows)
+      );
+      src.delete();
+      mask.delete();
+      bgdModel.delete();
+      fgdModel.delete();
+
+      return imgdata;
+    },
+    drawAnnotations() {
+      if (this.sample.annotations.length > 0) {
+        cv.imshow("canvasOutput", gray);
+      }
     },
   },
 };

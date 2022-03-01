@@ -153,6 +153,7 @@
           </button>
         </div>
       </div>
+      <canvas ref="canvasOutput" id="canvasOutput" />
       <annotation-view
         v-if="annotationView"
         ref="annotationView"
@@ -238,6 +239,7 @@ export default {
       selectedClassId: "",
       classes: {},
       samples: [],
+      canvas: null,
     };
   },
   computed: {},
