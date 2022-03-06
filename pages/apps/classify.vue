@@ -433,7 +433,6 @@
 import MobileNet from "~/plugins/mobilenet";
 import * as FileSaver from "file-saver";
 import JSZip from "jszip";
-import slugify from "slugify";
 
 export default {
   layout: "minimal",

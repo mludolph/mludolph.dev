@@ -79,6 +79,7 @@ export default {
     "~plugins/tracking.js",
     "~plugins/tooltip.js",
     "~plugins/draggable.js",
+    "~plugins/worker-plugin.js",
   ],
   /*
    ** Auto import components
@@ -117,12 +118,22 @@ export default {
    ** See https://nuxtjs.org/api/configuration-build/
    */
   build: {
-    extend(config) {
+    extend(config, { isClient }) {
+      config.output.globalObject = "this";
+
       config.node = {
         fs: "empty",
         path: "empty",
         crypto: "empty",
       };
+
+      if (isClient) {
+        config.module.rules.push({
+          test: /\.worker\.js$/,
+          loader: "worker-loader",
+          exclude: /(node_modules)/,
+        });
+      }
     },
     postcss: {
       // Add plugin names as key and arguments as value
@@ -160,8 +171,22 @@ export default {
     routes() {
       return getRoutes();
     },
+    exclude: [
+      "/posts/pca",
+      "/posts/test",
+      "/apps/segment",
+      "/apps/classify",
+      "/apps/bayes",
+    ],
   },
-
+  components: {
+    dirs: [
+      "~/components",
+      "~/components/Classify",
+      "~/components/Home",
+      "~/components/Segment",
+    ],
+  },
   content: {
     markdown: {
       remarkPlugins: ["remark-math"],
@@ -175,6 +200,7 @@ export default {
     routes() {
       return getRoutes();
     },
+    fallback: true,
   },
   fontawesome: {
     component: "font-awesome-icon",
