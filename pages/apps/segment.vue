@@ -110,7 +110,7 @@
             >
           </template>
         </div>
-        <div class="flex flex-row">
+        <div class="flex flex-row gap-2">
           <button
             class="
               flex flex-col
@@ -119,8 +119,38 @@
               text-gray-300
               bg-gray-600
               hover:bg-gray-700
-              w-6
-              h-6
+              p-1
+              rounded
+            "
+            @click="onLoadFile"
+          >
+            <font-awesome-icon :icon="['fas', 'folder']" />
+          </button>
+          <button
+            class="
+              flex flex-col
+              items-center
+              justify-center
+              text-gray-300
+              bg-gray-600
+              hover:bg-gray-700
+              p-1
+              rounded
+            "
+            @click="onSaveFile"
+          >
+            <font-awesome-icon :icon="['fas', 'download']" />
+          </button>
+          <span>|</span>
+          <button
+            class="
+              flex flex-col
+              items-center
+              justify-center
+              text-gray-300
+              bg-gray-600
+              hover:bg-gray-700
+              p-1
               rounded
             "
             v-if="annotationView"
@@ -137,8 +167,7 @@
               bg-gray-600
               hover:bg-gray-700
               disabled:bg-gray-600 disabled:text-gray-500
-              w-6
-              h-6
+              p-1
               rounded
             "
             :disabled="
@@ -160,10 +189,8 @@
         :clsId="selectedClassId"
         :classes="classes"
         @annotate="annotate(selectedSampleId, $event)"
-        @next="
-          selectedSampleId = Math.min(selectedSampleId + 1, samples.length - 1)
-        "
-        @previous="selectedSampleId = Math.max(selectedSampleId - 1, 0)"
+        @next="onNext"
+        @previous="onPrevious"
         @select="selectedAnnotationId = $event"
       />
       <div v-else class="flex flex-row flex-wrap w-full h-full gap-3">
@@ -220,6 +247,8 @@
 
 <script>
 import * as randomColor from "random-material-color";
+import * as FileSaver from "file-saver";
+import JSZip from "jszip";
 
 export default {
   layout: "minimal",
@@ -254,9 +283,10 @@ export default {
       this.annotationView = true;
     },
     onFileUpload(files, names) {
-      files.forEach((file, idx) =>
-        this.samples.push({ name: names[idx], src: file, annotations: [] })
-      );
+      files.forEach((file, idx) => {
+        const id = Math.random().toString(16).slice(2);
+        this.samples.push({ id, name: names[idx], src: file, annotations: [] });
+      });
     },
     generateColor() {
       let color = randomColor.getColor();
@@ -320,6 +350,44 @@ export default {
       this.selectedAnnotationId = id;
       this.$refs.annotationView.selectAnnotation(id);
     },
+    onNext() {
+      this.selectedSampleId = Math.min(
+        this.selectedSampleId + 1,
+        this.samples.length - 1
+      );
+      this.selectedAnnotationId = -1;
+    },
+    onPrevious() {
+      this.selectedSampleId = Math.max(this.selectedSampleId - 1, 0);
+      this.selectedAnnotationId = -1;
+    },
+    onSaveFile() {
+      const zip = new JSZip();
+      const sampleFolder = zip.folder("samples");
+      const samples = {};
+      const classes = {};
+
+      this.samples.forEach((sample) => {
+        samples[sample.id] = {
+          name: sample.name,
+          annotations: sample.annotations,
+        };
+
+        sampleFolder.file(`${sample.id}.jpg`, sample.src.split("base64,")[1], {
+          base64: true,
+        });
+      });
+
+      Object.values(this.classes).forEach((cls) => {
+        classes[cls.id] = { name: cls.name, color: cls.color };
+      });
+
+      zip.file("meta.json", JSON.stringify({ classes, samples }));
+      zip.generateAsync({ type: "blob" }).then((content) => {
+        FileSaver.saveAs(content, `project.zip`);
+      });
+    },
+    onLoadFile() {},
   },
 };
 </script>

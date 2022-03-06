@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "dev": "nuxt --hostname 0.0.0.0",
+    "dev": "nuxt --hostname 0.0.0.0 --watchIgnore '**/.git/**'",
     "build": "nuxt build",
     "start": "nuxt start --hostname 0.0.0.0",
     "generate": "nuxt generate",
@@ -24,7 +24,6 @@
     "file-saver": "^2.0.5",
     "jszip": "^3.7.1",
     "nuxt": "^2.15.8",
-    "opencv.js": "^1.2.1",
     "prism-themes": "^1.9.0",
     "random-material-color": "^1.0.5",
     "rehype-mathjax": "3.1.0",
@@ -69,6 +68,7 @@
     "postcss-responsive-type": "^1.0.0",
     "postcss-simple-vars": "^6.0.3",
     "postcss-url": "^10.1.3",
-    "prettier": "^2.4.1"
+    "prettier": "^2.4.1",
+    "worker-loader": "^1.1.1"
   }
 }

@@ -71,12 +71,16 @@
           gap-3
           whitespace-nowrap
         "
+        @click="
+          loadDummyData();
+          menuVisible = false;
+        "
       >
         <font-awesome-icon
           :icon="['fas', 'plus']"
           class="w-4"
         ></font-awesome-icon>
-        <span>New Project</span>
+        <span>Load Demo</span>
       </button>
       <!--
       <button
@@ -130,7 +134,10 @@
         <input
           class="absolute top-0 bottom-0 left-0 right-0 opacity-0"
           type="file"
-          @change="onLoadFromFile"
+          @change="
+            onLoadFromFile($event);
+            menuVisible = false;
+          "
           accept=".zip"
         />
         <font-awesome-icon
@@ -150,7 +157,10 @@
           gap-3
           whitespace-nowrap
         "
-        @click="onSaveToFile"
+        @click="
+          onSaveToFile();
+          menuVisible = false;
+        "
       >
         <font-awesome-icon
           :icon="['fas', 'download']"
@@ -162,10 +172,14 @@
 
     <div class="flex flex-col flex-grow gap-6 mt-8 mb-8 w-card">
       <class-card
-        v-for="(cls, index) in classes"
-        :key="index"
-        v-model="classes[index]"
-        @delete="deleteClass"
+        v-for="(cls, idx) in classes"
+        :key="'cls' + idx"
+        :value="cls"
+        @addSample="addSample({ sample: $event, clsId: cls.id })"
+        @deleteSample="deleteSample({ sampleIdx: $event, clsId: cls.id })"
+        @clearSamples="clearSamples({ clsId: cls.id })"
+        @input="updateClass({ update: $event, clsId: cls.id })"
+        @delete="deleteClass({ clsId: cls.id })"
       ></class-card>
       <div
         class="
@@ -179,7 +193,7 @@
           hover:text-gray-400
           py-3
         "
-        @click="createClass"
+        @click="createClass()"
       >
         <font-awesome-icon :icon="['fas', 'plus']"></font-awesome-icon>
         <span>Add a class</span>
@@ -222,7 +236,7 @@
               whitespace-nowrap
             "
             :disabled="!canTrain || (training.started && !training.finished)"
-            @click="trainModel"
+            @click="trainModel()"
           >
             {{ training.finished ? "Re-train Model" : "Train Model" }}
           </button>
@@ -247,12 +261,14 @@
                   : "n/a"
               }}
             </span>
+            <!--
             <activity-indicator
               class="h-6"
               :height="20"
               :chart-data="chartDataCollection"
               :options="chartOptions"
             />
+            -->
           </div>
         </div>
       </div>
@@ -366,7 +382,7 @@
                   <span class="text-sm">Live </span>
                   <t-toggle
                     v-model="webcamLive"
-                    @change="onWebcamLiveToggle"
+                    @change="onWebcamLiveToggle($event)"
                   ></t-toggle>
                 </div>
                 <t-select
@@ -374,15 +390,14 @@
                   :options="cameras"
                   value-attribute="deviceId"
                   text-attribute="label"
-                  @input="onCameraSelect"
+                  @input="onCameraSelect($event)"
                 ></t-select>
               </div>
               <webcam
                 ref="webcam"
                 :deviceId="selectedCameraId"
-                @cameras="onCameraLoad"
-                @video-live="webcamReady = true"
-                @stopped="webcamReady = false"
+                @video-live="predictWebcam()"
+                @cameras="onCameraLoad($event)"
               ></webcam>
             </div>
             <div
@@ -403,9 +418,9 @@
               ></drag-upload-image>
 
               <img
-                class="rounded w-64 h-64"
-                :src="sample"
-                :class="{ hidden: sample === null }"
+                :src="samplePreview"
+                class="rounded w-32 h-32"
+                :class="{ hidden: samplePreview === null }"
               />
             </div>
           </div>
@@ -433,7 +448,13 @@
 import MobileNet from "~/plugins/mobilenet";
 import * as FileSaver from "file-saver";
 import JSZip from "jszip";
-import slugify from "slugify";
+
+import { createNamespacedHelpers } from "vuex";
+const {
+  mapState: mapStateClassify,
+  mapMutations: mapMutationsClassify,
+  mapActions: mapActionsClassify,
+} = createNamespacedHelpers("classify");
 
 export default {
   layout: "minimal",
@@ -443,37 +464,14 @@ export default {
 
       cameras: [],
       selectedCameraId: null,
-      webcamReady: false,
+      model: null,
+      samplePreview: null,
+
       webcam: false,
       webcamLive: false,
       upload: false,
-      sample: null,
       predictions: null,
 
-      training: {
-        status: "",
-        started: false,
-        finished: false,
-        currentEpoch: 0,
-        maxEpoch: 50,
-        epochs: [],
-        valLosses: [],
-        trainLosses: [],
-      },
-      model: null,
-      classes: [
-        {
-          id: 1,
-          title: "Class 1",
-          samples: [],
-        },
-        {
-          id: 2,
-          title: "Class 2",
-          samples: [],
-        },
-      ],
-      chartDataCollection: null,
       chartOptions: {
         layout: { padding: 1 },
         responsive: true,
@@ -509,110 +507,123 @@ export default {
       },
     };
   },
-  mounted() {
-    this.updateTrainingData();
-  },
   computed: {
-    canTrain() {
-      const numValidClasses = this.classes.reduce((cum, curr) => {
-        return cum + (curr.samples.length > 0 ? 1 : 0);
-      }, 0);
-      return numValidClasses >= 2;
-    },
-    predictions() {
-      if (this.training.finished) {
-        return this.model.predict(this.sample);
-      }
-      return null;
-    },
+    ...mapStateClassify({
+      classes: "classes",
+      training: "training",
+      canTrain(state) {
+        const numValidClasses = state.classes.reduce((cum, curr) => {
+          return cum + (curr.samples.length > 0 ? 1 : 0);
+        }, 0);
+        return numValidClasses >= 2;
+      },
+      chartDataCollection(state) {
+        return {
+          labels: state.training.epochs,
+          datasets: [
+            {
+              tension: 0.2,
+              fill: false,
+              pointRadius: 0,
+              borderColor: "rgb(75, 192, 192)",
+              borderWidth: 2,
+              data: state.training.trainLosses,
+            },
+            {
+              tension: 0.2,
+              fill: false,
+              pointRadius: 0,
+              borderColor: "rgb(175, 192, 192)",
+              borderWidth: 2,
+              data: state.training.valLosses,
+            },
+          ],
+        };
+      },
+    }),
   },
   watch: {
-    webcamLive: function (newVal, oldVal) {
-      if (this.webcamLive) {
-        window.requestAnimationFrame(this.predictWebcam);
+    predictions: function (newVal) {
+      if (newVal !== null && this.webcamLive) {
+        this.$nextTick().then(() => {
+          window.requestAnimationFrame(() => {
+            this.predictWebcam();
+          });
+        });
       }
     },
   },
   methods: {
-    updateTrainingData() {
-      this.chartDataCollection = {
-        labels: this.training.epochs,
-        datasets: [
-          {
-            tension: 0.2,
-            fill: false,
-            pointRadius: 0,
-            borderColor: "rgb(75, 192, 192)",
-            borderWidth: 2,
-            data: this.training.trainLosses,
-          },
-          {
-            tension: 0.2,
-            fill: false,
-            pointRadius: 0,
-            borderColor: "rgb(175, 192, 192)",
-            borderWidth: 2,
-            data: this.training.valLosses,
-          },
-        ],
-      };
-    },
-    createClass() {
-      const id = this.classes.length + 1;
-      this.classes.push({
-        id: id,
-        title: "Class " + id,
-        samples: [],
-      });
-    },
-    deleteClass(deletedId) {
-      const idx = this.classes.findIndex(({ id }) => id == deletedId);
-      if (idx != -1) {
-        this.$delete(this.classes, idx);
-      }
-    },
+    ...mapMutationsClassify({
+      createClass: "createClass",
+      updateClass: "updateClass",
+      deleteClass: "deleteClass",
+      addSample: "addSample",
+      deleteSample: "deleteSample",
+      clearSamples: "clearSamples",
+      updateTrainingState: "updateTrainingState",
+      resetTrainingState: "resetTrainingState",
+    }),
+    ...mapActionsClassify({
+      loadDummyData: "loadDummyData",
+    }),
     async trainModel() {
       this.model = new MobileNet(this.classes.length);
-      this.training.currentEpoch = 0;
-      this.training.trainLosses = [];
-      this.training.valLosses = [];
 
-      this.training.started = true;
-      this.training.status = "Loading model...";
-      this.results = await this.model.create().then(() => {
-        this.training.status = "Loading data...";
-        return this.model.finetune(
-          this.classes,
-          (args) => {
-            console.log(args);
-            this.training.status = "Training model...";
-          },
-          (batch, logs) => {},
-          (epoch, logs) => {
-            console.log(logs);
-            this.training.currentEpoch = epoch + 1;
-            this.training.epochs.push(epoch);
-            this.training.trainLosses.push(logs.loss);
-            this.training.valLosses.push(logs.val_loss);
-            this.updateTrainingData();
-          }
-        );
+      this.updateTrainingState({
+        update: {
+          currentEpoch: 0,
+          trainLosses: [],
+          valLosses: [],
+          started: true,
+          status: "Loading model...",
+        },
       });
-      this.training.status = "Training finished!";
-      this.training.finished = true;
+      await this.model.create();
+
+      this.updateTrainingState({
+        update: {
+          status: "Loading data...",
+        },
+      });
+
+      await this.model.finetune(
+        this.classes,
+        (args) => {},
+        (batch, logs) => {},
+        (epoch, logs) => {
+          this.updateTrainingState({
+            update: {
+              state: "Training model...",
+              currentEpoch: epoch + 1,
+              epochs: [...this.training.epochs, epoch],
+              trainLosses: [...this.training.trainLosses, logs.loss],
+              valLosses: [this.training.valLosses, logs.val_loss],
+            },
+          });
+        }
+      );
+
+      this.updateTrainingState({
+        update: {
+          status: "Training finished!",
+          finished: true,
+        },
+      });
 
       this.$nextTick().then(() => this.openWebcam());
     },
     openWebcam() {
-      this.sample = null;
       this.upload = false;
+      this.predictions = null;
 
       this.$refs.webcam.start();
       this.webcam = true;
       this.webcamLive = true;
     },
     openUpload() {
-      this.sample = null;
+      this.predictions = null;
+
       this.webcam = false;
       this.webcamLive = false;
       this.$refs.webcam.stop();
@@ -634,37 +645,30 @@ export default {
     onWebcamLiveToggle(live) {
       if (live) {
         this.$refs.webcam.resume();
+        this.predictWebcam();
       } else {
         this.$refs.webcam.pause();
       }
     },
     async onFileUpload(files) {
-      this.sample = files[0];
-      await this.predict();
+      this.samplePreview = files[0];
+      this.predictions = await this.predict(files[0]);
     },
-
-    predictWebcam() {
-      this.predict().then(() => {
-        if (this.webcamReady) {
-          this.sample = this.$refs.webcam.capture();
-        }
-
-        if (this.webcamLive) {
-          window.requestAnimationFrame(this.predictWebcam);
-        } else {
-          this.sample = null;
-          this.predictions = null;
-        }
-      });
+    async predictWebcam() {
+      this.$refs.webcam
+        .capture()
+        .then((img) => this.predict(img))
+        .then((predictions) => {
+          this.predictions = predictions;
+        });
     },
-    async predict() {
-      if (this.model !== null && this.sample !== null) {
-        this.predictions = await this.model.predict(this.sample);
+    async predict(sample) {
+      if (this.model !== null && sample !== null) {
+        return await this.model.predict(sample);
       } else {
-        this.predictions = null;
+        return null;
       }
     },
-
     async onSaveToFile() {
       var zip = new JSZip();
       let meta = { classes: [], model: false };
@@ -691,33 +695,12 @@ export default {
         FileSaver.saveAs(content, `project.zip`);
       });
     },
-    readFile(file) {
-      const reader = new FileReader();
-
-      return new Promise((resolve) => {
-        reader.onload = (ev) => {
-          resolve(ev.target.result);
-        };
-        reader.readAsArrayBuffer(file);
-      });
-    },
-    resetTraining() {
-      this.training = {
-        status: "",
-        started: false,
-        finished: false,
-        currentEpoch: 0,
-        maxEpoch: 50,
-        epochs: [],
-        valLosses: [],
-        trainLosses: [],
-      };
-    },
     onLoadFromFile(evt) {
-      this.resetTraining();
+      this.resetTrainingState();
       const file = [...evt.target.files][0];
 
-      this.readFile(file)
+      this.$imutils
+        .readFile(file, { base64: false })
         .then((blob) => JSZip.loadAsync(blob))
         .then(async (zip) => {
           const meta = await zip
@@ -748,8 +731,13 @@ export default {
                 const json = JSON.parse(str);
                 this.model = new MobileNet(this.classes.length);
                 await this.model.load(json);
-                this.training.status = "Training finished!";
-                this.training.finished = true;
+
+                this.updateTrainingState({
+                  update: {
+                    status: "Training model...",
+                    finished: true,
+                  },
+                });
 
                 this.$nextTick().then(() => this.openWebcam());
               });

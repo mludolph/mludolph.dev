@@ -8,10 +8,10 @@ export const state = () => ({
   ],
   repoRoles: {
     pytorch_geometric: {
-      name: "Acknowledged",
+      name: "Contribution",
       link: "https://arxiv.org/abs/1903.02428",
     },
-    pytorch_cluster: { name: "Contributor", link: "" },
+    pytorch_cluster: { name: "Contribution", link: "" },
     pytorch_isin: { name: "Author", link: "" },
     "mludolph.dev": { name: "Author", link: "" },
   },

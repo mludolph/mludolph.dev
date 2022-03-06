@@ -52,7 +52,7 @@ export default {
     cropResolution: {
       type: Object,
       default: () => {
-        return { w: 224, h: 224 };
+        return { width: 224, height: 224 };
       },
     },
   },
@@ -60,62 +60,18 @@ export default {
     return { canvas: null };
   },
   methods: {
-    getBase64(file) {
-      const reader = new FileReader();
-      return new Promise((resolve) => {
-        reader.onload = (ev) => {
-          resolve(ev.target.result);
-        };
-        reader.readAsDataURL(file);
-      });
-    },
-    getMeta(url) {
-      var img = new Image();
-      return new Promise((resolve) => {
-        img.onload = function () {
-          resolve({ img, width: img.width, height: img.height });
-        };
-        img.src = url;
-      });
-    },
-    async getCanvas(url) {
-      if (!this.ctx) {
-        let canvas = document.createElement("canvas");
-        canvas.height = this.cropResolution.h;
-        canvas.width = this.cropResolution.w;
-        this.canvas = canvas;
-
-        this.ctx = canvas.getContext("2d");
-      }
-      const { img, width, height } = await this.getMeta(url);
-      const crop = (width - height) / 2;
-      const { ctx, canvas } = this;
-      let fac = 1;
-      ctx.drawImage(
-        img,
-        crop,
-        0,
-        width - 2 * crop,
-        height,
-        0,
-        0,
-        fac * canvas.width,
-        canvas.height
-      );
-
-      return canvas;
-    },
     async onFileUpload(evt) {
       const files = [...evt.target.files];
-      console.log(files);
       let promises = [];
       files.forEach((file) =>
         promises.push(
-          this.getBase64(file).then((url) => {
+          this.$imutils.readFile(file).then((url) => {
             if (this.crop) {
-              return this.getCanvas(url).then((canvas) =>
-                canvas.toDataURL(this.imageFormat)
-              );
+              return this.$imutils.cropImage(url, {
+                cropWidth: this.cropResolution.width,
+                cropHeight: this.cropResolution.height,
+                imageFormat: this.imageFormat,
+              });
             } else {
               return url;
             }
