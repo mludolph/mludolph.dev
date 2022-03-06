@@ -30,7 +30,7 @@
       <font-awesome-icon
         :icon="['fas', 'trash']"
         class="text-gray-400 hover:text-gray-500 cursor-pointer"
-        @click="onDelete"
+        @click="$emit('delete')"
       ></font-awesome-icon>
     </div>
     <hr class="bg-gray-500" />
@@ -53,7 +53,7 @@
           v-if="value.samples.length > 0"
           :icon="['fas', 'trash']"
           class="text-gray-400 hover:text-gray-500 cursor-pointer"
-          @click="clearSamples"
+          @click="$emit('clearSamples')"
         ></font-awesome-icon>
       </div>
       <div class="flex flex-row gap-3">
@@ -71,7 +71,7 @@
             h-16
             p-2
           "
-          @click="openWebcam"
+          @click="webcam = true"
         >
           <font-awesome-icon :icon="['fas', 'video']"></font-awesome-icon>
           <span class="text-xs">Webcam</span>
@@ -90,12 +90,16 @@
             h-16
             p-2
           "
-          @click="openUpload"
+          @click="upload = true"
         >
           <font-awesome-icon :icon="['fas', 'upload']"></font-awesome-icon>
           <span class="text-xs">Upload</span>
         </button>
-        <sample-list v-model="value.samples" :horizontal="true"></sample-list>
+        <sample-list
+          :value="value.samples"
+          :horizontal="true"
+          @delete="$emit('deleteSample', $event)"
+        ></sample-list>
       </div>
     </div>
     <div v-if="webcam || upload" class="grid grid-cols-2 h-card">
@@ -119,12 +123,12 @@
             :options="cameras"
             value-attribute="deviceId"
             text-attribute="label"
-            @input="onCameraSelect"
+            @input="onCameraSelect($event)"
           ></t-select>
           <webcam
             ref="webcam"
             :deviceId="selectedCameraId"
-            @cameras="onCameraLoad"
+            @cameras="onCameraLoad($event)"
             @video-live="webcamReady = true"
             @stopped="webcamReady = false"
           ></webcam>
@@ -143,8 +147,9 @@
               select-none
               py-2
             "
-            @mousedown="startCapture"
-            @mouseup="stopCapture"
+            @mousedown="startCapture()"
+            @mouseup="stopCapture()"
+            @click="singleCapture()"
           >
             <font-awesome-icon :icon="['fas', 'circle']"></font-awesome-icon>
             <span class="whitespace-nowrap">Hold to Capture</span>
@@ -161,7 +166,10 @@
         <span class="text-sm font-semibold"
           >Samples: {{ value.samples.length }}</span
         >
-        <sample-list v-model="value.samples"></sample-list>
+        <sample-list
+          :value="value.samples"
+          @delete="$emit('deleteSample', $event)"
+        ></sample-list>
       </div>
     </div>
   </div>
@@ -185,19 +193,19 @@ export default {
     };
   },
   methods: {
-    updateTitle(evt) {
+    emitUpdate(update) {
       this.$emit("input", {
-        id: this.value.id,
-        title: evt.target.value,
-        samples: this.value.samples,
+        ...this.value,
+        ...update,
       });
+    },
+    updateTitle(evt) {
+      this.emitUpdate({ title: evt.target.value });
     },
     onBlur() {
       if (this.value.title === "") {
-        this.$emit("input", {
-          id: this.value.id,
+        this.emitUpdate({
           title: "Class " + this.value.id,
-          samples: this.value.samples,
         });
       }
       this.edit = false;
@@ -209,12 +217,6 @@ export default {
         titleEditorRef.focus();
       });
     },
-    openWebcam() {
-      this.webcam = true;
-    },
-    openUpload() {
-      this.upload = true;
-    },
     closeWebcamOrUpload() {
       if (this.webcam) {
         this.$refs.webcam.stop();
@@ -223,9 +225,6 @@ export default {
       } else if (this.upload) {
         this.upload = false;
       }
-    },
-    onDelete() {
-      this.$emit("delete", this.value.id);
     },
     onCameraLoad(cameras) {
       this.cameras = cameras;
@@ -240,20 +239,21 @@ export default {
       this.selectedCameraId = deviceId;
     },
     startCapture() {
-      this.timer = setInterval(() => {
-        const img = this.$refs.webcam.capture();
-        this.value.samples.push(img);
+      this.timer = setInterval(async () => {
+        const img = await this.$refs.webcam.capture();
+        this.$emit("addSample", img);
       }, 1000.0 / 24);
     },
     stopCapture() {
       clearInterval(this.timer);
       this.timer = null;
     },
-    onFileUpload(files) {
-      files.forEach((file) => this.value.samples.push(file));
+    async singleCapture() {
+      const img = await this.$refs.webcam.capture();
+      this.$emit("addSample", img);
     },
-    clearSamples() {
-      this.value.samples = [];
+    onFileUpload(files) {
+      files.forEach((img) => this.$emit("addSample", img));
     },
     downloadSamples() {
       var zip = new JSZip();

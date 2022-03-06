@@ -14,8 +14,8 @@
       <img :src="preview" class="rounded w-64 h-64" />
     </t-modal>
     <div
-      v-for="(sample, index) in value"
-      :key="index"
+      v-for="(sample, idx) in value"
+      :key="'sample' + idx"
       class="relative group"
       style="width: 64px; height: 64px; min-height: 64px; min-width: 64px"
     >
@@ -31,7 +31,7 @@
           cursor-pointer
           z-40
         "
-        @click="deleteSample(index)"
+        @click="$emit('delete', idx)"
       ></font-awesome-icon>
       <img
         :src="sample"
@@ -61,12 +61,6 @@ export default {
     return {
       preview: null,
     };
-  },
-  methods: {
-    deleteSample(idx) {
-      this.$delete(this.value, idx);
-      this.$emit("input", this.value);
-    },
   },
 };
 </script>

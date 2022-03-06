@@ -80,6 +80,7 @@ export default {
     "~plugins/tooltip.js",
     "~plugins/draggable.js",
     "~plugins/worker-plugin.js",
+    "~plugins/imutils.js",
   ],
   /*
    ** Auto import components

@@ -13,7 +13,15 @@
     <font-awesome-icon
       v-if="ready"
       :icon="['fas', 'camera-rotate']"
-      class="absolute top-4 right-4 text-white hover:text-gray-300 cursor-pointer z-40"
+      class="
+        absolute
+        top-4
+        right-4
+        text-white
+        hover:text-gray-300
+        cursor-pointer
+        z-40
+      "
       @click="flip = !flip"
     ></font-awesome-icon>
     <video
@@ -33,10 +41,6 @@ export default {
     autoplay: {
       type: Boolean,
       default: true,
-    },
-    screenshotFormat: {
-      type: String,
-      default: "image/jpeg",
     },
     selectFirstDevice: {
       type: Boolean,
@@ -276,46 +280,11 @@ export default {
         .catch((error) => this.$emit("error", error));
     },
 
-    /**
-     * capture screenshot
-     */
-    capture() {
-      return this.getCanvas().toDataURL(this.screenshotFormat);
-    },
-
-    /**
-     * get canvas
-     */
-    getCanvas() {
-      let video = this.$refs.video;
-      if (!this.ctx) {
-        let canvas = document.createElement("canvas");
-        canvas.height = 224;
-        canvas.width = 224;
-        this.canvas = canvas;
-
-        this.ctx = canvas.getContext("2d");
+    async capture() {
+      if (!this.ready) {
+        return null;
       }
-      const crop = (video.videoWidth - video.videoHeight) / 2;
-      const { ctx, canvas } = this;
-      let fac = 1;
-      if (this.flip) {
-        ctx.scale(-1, 1);
-        fac = -1;
-      }
-      ctx.drawImage(
-        video,
-        crop,
-        0,
-        video.videoWidth - 2 * crop,
-        video.videoHeight,
-        0,
-        0,
-        fac * canvas.width,
-        canvas.height
-      );
-
-      return canvas;
+      return this.$imutils.cropImage(this.$refs.video);
     },
   },
 };

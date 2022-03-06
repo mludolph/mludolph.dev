@@ -44,12 +44,12 @@ class MobileNet {
     this.classes = json.classes;
     const weightData = new Uint8Array(Buffer.from(json.weightData, "base64"))
       .buffer;
-    this.model = await tf.loadLayersModel(
+    this._model = await tf.loadLayersModel(
       tf.io.fromMemory(json.modelTopology, json.weightSpecs, weightData)
     );
   }
   async save() {
-    let result = await this.model.save(
+    let result = await this._model.save(
       tf.io.withSaveHandler(async (modelArtifacts) => modelArtifacts)
     );
     result.weightData = Buffer.from(result.weightData).toString("base64");
@@ -84,9 +84,9 @@ class MobileNet {
       name: "modelModified",
     });
 
-    this.model = this._freeze(trainableLayers, mobilenetModified);
+    this._model = this._freeze(trainableLayers, mobilenetModified);
 
-    this.model.compile({
+    this._model.compile({
       loss: "categoricalCrossentropy",
       optimizer: tf.train.adam(this.learning_rate),
       metrics: ["accuracy", "crossentropy"],
@@ -107,36 +107,29 @@ class MobileNet {
   }
 
   async finetune(samples, beginCallback, batchCallback, epochCallback) {
-    const { images, labels } = await this.getTensors(samples);
-
-    return await this.model
-      .fit(images, labels, {
-        epochs: this.epochs,
-        batchSize: this.batchSize,
-        validationSplit: 0.2,
-        callbacks: {
-          onTrainingBegin: beginCallback,
-          onBatchEnd: batchCallback,
-          onEpochEnd: epochCallback,
-        },
-      })
-      .then((info) => {
-        images.dispose();
-        labels.dispose();
-        return info;
-      });
+    return this.getTensors(samples).then(({ images, labels }) =>
+      this._model
+        .fit(images, labels, {
+          epochs: this.epochs,
+          batchSize: this.batchSize,
+          validationSplit: 0.2,
+          callbacks: {
+            onTrainingBegin: beginCallback,
+            onBatchEnd: batchCallback,
+            onEpochEnd: epochCallback,
+          },
+        })
+        .then(() => {
+          images.dispose(), labels.dispose();
+        })
+    );
   }
 
   async predict(url) {
-    let tensor = await this.getImage(url).then((img) =>
-      tf.browser.fromPixels(img)
-    );
-    tensor = tensor.expandDims(0);
-
-    const prediction = await this.model
-      .predict(tensor, { batchSize: 1 })
-      .data();
-    return prediction;
+    return this.getImage(url)
+      .then((img) => tf.browser.fromPixels(img))
+      .then((tensor) => tensor.expandDims(0))
+      .then((tensor) => this._model.predict(tensor, { batchSize: 1 }).data());
   }
 }
 
