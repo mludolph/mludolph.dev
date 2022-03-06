@@ -1,6 +1,6 @@
 <template>
   <div id="app" class="flex flex-col min-h-screen">
-    <header class="flex flex-col fixed top-4 left-4">
+    <header class="flex flex-col fixed top-4 left-4 z-40">
       <nuxt-link
         to="/"
         tag="span"
