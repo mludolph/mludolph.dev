@@ -20,7 +20,7 @@
         text-white
         hover:text-gray-300
         cursor-pointer
-        z-40
+        z-20
       "
       @click="flip = !flip"
     ></font-awesome-icon>

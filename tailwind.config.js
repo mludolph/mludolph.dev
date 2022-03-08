@@ -4,6 +4,16 @@ module.exports = {
   darkMode: "class",
   theme: {
     extend: {
+      maxWidth: {
+        144: "36rem",
+      },
+      minWidth: {
+        144: "36rem",
+      },
+      spacing: {
+        144: "36rem",
+        192: "48rem",
+      },
       fontFamily: {
         sans: [
           "Poppins",

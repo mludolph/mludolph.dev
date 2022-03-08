@@ -1,10 +1,21 @@
 <template>
   <div id="app" class="flex flex-col min-h-screen">
-    <header class="flex flex-col fixed top-4 left-4 z-40">
+    <header
+      class="
+        flex flex-col
+        w-full
+        p-4
+        lg:fixed lg:top-0 lg:left-0
+        z-30
+        dark:bg-gray-800
+        bg-white
+        rounded-br
+      "
+    >
       <nuxt-link
         to="/"
         tag="span"
-        class="cursor-pointer select-none tap-transparent"
+        class="cursor-pointer select-none tap-transparent w-fit"
       >
         <span class="text-2xl text-gray-800 dark:text-gray-300 font-blog"
           >mludolph.</span

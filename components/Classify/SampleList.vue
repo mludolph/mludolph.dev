@@ -1,9 +1,8 @@
 <template>
   <div
-    class="overflow-auto gap-3 select-none min-w-0"
+    class="flex flex-row overflow-scroll gap-3 select-none min-w-0"
     :class="{
-      'flex flex-row flex-wrap': !horizontal,
-      'flex flex-row': horizontal,
+      'flex-wrap': !horizontal,
     }"
     :style="{
       'margin-bottom: -6px': horizontal,

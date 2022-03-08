@@ -56,45 +56,47 @@
           @click="$emit('clearSamples')"
         ></font-awesome-icon>
       </div>
-      <div class="flex flex-row gap-3">
-        <button
-          class="
-            flex flex-col flex-shrink-0
-            justify-center
-            items-center
-            gap-2
-            bg-gray-200
-            hover:bg-gray-300
-            dark:bg-gray-500 dark:hover:bg-gray-600
-            rounded
-            w-20
-            h-16
-            p-2
-          "
-          @click="webcam = true"
-        >
-          <font-awesome-icon :icon="['fas', 'video']"></font-awesome-icon>
-          <span class="text-xs">Webcam</span>
-        </button>
-        <button
-          class="
-            flex flex-col flex-shrink-0
-            justify-center
-            items-center
-            gap-2
-            bg-gray-200
-            hover:bg-gray-300
-            dark:bg-gray-500 dark:hover:bg-gray-600
-            rounded
-            w-20
-            h-16
-            p-2
-          "
-          @click="upload = true"
-        >
-          <font-awesome-icon :icon="['fas', 'upload']"></font-awesome-icon>
-          <span class="text-xs">Upload</span>
-        </button>
+      <div class="flex flex-col sm:flex-row gap-3">
+        <div class="flex flex-row gap-3">
+          <button
+            class="
+              flex flex-col flex-shrink-0
+              justify-center
+              items-center
+              gap-2
+              bg-gray-200
+              hover:bg-gray-300
+              dark:bg-gray-500 dark:hover:bg-gray-600
+              rounded
+              w-20
+              h-16
+              p-2
+            "
+            @click="webcam = true"
+          >
+            <font-awesome-icon :icon="['fas', 'video']"></font-awesome-icon>
+            <span class="text-xs">Webcam</span>
+          </button>
+          <button
+            class="
+              flex flex-col flex-shrink-0
+              justify-center
+              items-center
+              gap-2
+              bg-gray-200
+              hover:bg-gray-300
+              dark:bg-gray-500 dark:hover:bg-gray-600
+              rounded
+              w-20
+              h-16
+              p-2
+            "
+            @click="upload = true"
+          >
+            <font-awesome-icon :icon="['fas', 'upload']"></font-awesome-icon>
+            <span class="text-xs">Upload</span>
+          </button>
+        </div>
         <sample-list
           :value="value.samples"
           :horizontal="true"
@@ -102,7 +104,20 @@
         ></sample-list>
       </div>
     </div>
-    <div v-if="webcam || upload" class="grid grid-cols-2 h-card">
+    <div
+      v-if="webcam || upload"
+      class="
+        flex flex-col
+        sm:grid sm:grid-cols-2
+        lg:flex lg:flex-col
+        xl:grid xl:grid-cols-2
+        h-[600px]
+        max-h-[600px]
+        sm:max-h-[400px] sm:h-[400px]
+        lg:max-h-[600px] lg:h-[600px]
+        xl:max-h-[400px] xl:h-[400px]
+      "
+    >
       <div
         class="flex flex-col col-span-1 gap-2 bg-gray-200 dark:bg-gray-600 p-2"
       >
@@ -142,7 +157,7 @@
               hover:bg-gray-800
               rounded
               items-center
-              justify-center
+              justify-center justify-self-end
               whitespace-nowrap
               select-none
               py-2
@@ -272,9 +287,4 @@ export default {
 };
 </script>
 
-<style lang="postcss">
-.h-card {
-  height: 400px;
-  max-height: 400px;
-}
-</style>
+<style lang="postcss"></style>

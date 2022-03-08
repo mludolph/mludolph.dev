@@ -4,20 +4,8 @@ import getRoutes from "./utils/getRoutes";
 const meta = getSiteMeta();
 
 export default {
-  /*
-   ** Nuxt rendering mode
-   ** See https://nuxtjs.org/api/configuration-mode
-   */
   ssr: false,
-  /*
-   ** Nuxt target
-   ** See https://nuxtjs.org/api/configuration-target
-   */
   target: "static",
-  /*
-   ** Headers of the page
-   ** See https://nuxtjs.org/api/configuration-head
-   */
   head: {
     htmlAttrs: {
       lang: "en-GB",
@@ -63,18 +51,10 @@ export default {
       { rel: "icon", type: "image/x-icon", href: "/favicon.ico" },
     ],
   },
-  /*
-   ** Global CSS
-   */
   css: ["~assets/styles/theme.css"],
-  /*
-   ** Plugins to load before mounting the App
-   ** https://nuxtjs.org/guide/plugins
-   */
   plugins: [
     "~plugins/components.js",
     "~plugins/filters.js",
-    "~plugins/directives.js",
     "~plugins/banner.js",
     "~plugins/tracking.js",
     "~plugins/tooltip.js",
@@ -82,14 +62,6 @@ export default {
     "~plugins/worker-plugin.js",
     "~plugins/imutils.js",
   ],
-  /*
-   ** Auto import components
-   ** See https://nuxtjs.org/api/configuration-components
-   */
-  components: true,
-  /*
-   ** Nuxt.js dev-modules
-   */
   buildModules: [
     // "@nuxt/typescript-build",
     "@nuxtjs/color-mode",
@@ -97,27 +69,8 @@ export default {
     "@nuxtjs/tailwindcss",
     "@nuxtjs/fontawesome",
   ],
-  /*
-   ** Nuxt.js modules
-   */
-  modules: [
-    // Doc: https://buefy.github.io/#/documentation
-    //"nuxt-buefy",
-    // Doc: https://axios.nuxtjs.org/usage
-    "@nuxtjs/axios",
-    "@nuxt/content",
-
-    "@nuxtjs/sitemap",
-  ],
-  /*
-   ** Axios module configuration
-   ** See https://axios.nuxtjs.org/options
-   */
+  modules: ["@nuxtjs/axios", "@nuxt/content", "@nuxtjs/sitemap"],
   axios: {},
-  /*
-   ** Build configuration
-   ** See https://nuxtjs.org/api/configuration-build/
-   */
   build: {
     extend(config, { isClient }) {
       config.output.globalObject = "this";
@@ -230,6 +183,7 @@ export default {
         "faUpRightFromSquare",
         "faGrip",
         "faCropSimple",
+        "faBars",
       ],
       regular: ["faStar", "faFloppyDisk"],
       brands: [
@@ -252,12 +206,6 @@ export default {
     families: {
       Poppins: true,
       Raleway: true,
-      // or:
-      // Lato: [100, 300],
-      // Raleway: {
-      //   wght: [100, 400],
-      //   ital: [100]
-      // },
     },
   },
   hooks: {
@@ -277,5 +225,10 @@ export default {
   router: {},
   purgeCSS: {
     whitelist: ["dark"],
+  },
+  watchers: {
+    webpack: {
+      ignored: /(node_modules)|(.git)/,
+    },
   },
 };

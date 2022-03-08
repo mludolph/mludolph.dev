@@ -1,35 +1,35 @@
 <template>
   <div
     class="
-      absolute
-      top-0
-      flex flex-row
+      flex flex-col
+      mt-8
+      lg:flex-row lg:mt-0
       items-center
+      justify-center
       min-h-screen
       w-full
       gap-12
-      pl-48
-      pr-24
+      px-6
     "
   >
     <button
       v-if="!menuVisible"
       class="
         fixed
-        top-28
-        left-0
-        p-2
-        bg-gray-100
-        hover:bg-gray-300
-        dark:bg-gray-900 dark:hover:bg-gray-500
-        shadow
-        rounded-r-lg
+        top-4
+        right-4
+        w-8
+        h-8
+        rounded-sm
+        shadow-md
+        dark:shadow-none
         text-sm
+        z-40
       "
       @click="menuVisible = true"
     >
       <font-awesome-icon
-        :icon="['fas', 'angle-right']"
+        :icon="['fas', 'bars']"
         class="w-3"
       ></font-awesome-icon>
     </button>
@@ -37,26 +37,27 @@
       class="
         fixed
         flex flex-col
-        left-0
-        top-28
+        right-4
+        top-4
         shadow-md
         bg-gray-100
-        dark:bg-gray-900
-        rounded-r-xl
-        transition-transform
+        dark:bg-gray-700
+        rounded
+        transition-all
         duration-200
         transform
         overflow-hidden
         text-sm
+        z-40
       "
-      :class="{ '-translate-x-full': !menuVisible }"
+      :class="{ '-translate-y-full opacity-0': !menuVisible }"
     >
       <button
-        class="px-2 py-2 text-left hover:bg-gray-300 dark:hover:bg-gray-600"
+        class="px-2 py-2 text-center hover:bg-gray-300 dark:hover:bg-gray-600"
         @click="menuVisible = false"
       >
         <font-awesome-icon
-          :icon="['fas', 'angle-left']"
+          :icon="['fas', 'xmark']"
           class="w-4"
         ></font-awesome-icon>
       </button>
@@ -82,42 +83,6 @@
         ></font-awesome-icon>
         <span>Load Demo</span>
       </button>
-      <!--
-      <button
-        class="
-          flex flex-row
-          items-center
-          hover:bg-gray-500
-          px-2
-          py-2
-          gap-3
-          whitespace-nowrap
-        "
-      >
-        <font-awesome-icon
-          :icon="['fab', 'google-drive']"
-          class="w-4"
-        ></font-awesome-icon>
-        <span>Open from Drive</span>
-      </button>
-      <button
-        class="
-          flex flex-row
-          items-center
-          hover:bg-gray-500
-          px-2
-          py-2
-          gap-3
-          whitespace-nowrap
-        "
-      >
-        <font-awesome-icon
-          :icon="['far', 'floppy-disk']"
-          class="w-4"
-        ></font-awesome-icon>
-        <span>Save to Drive</span>
-      </button>
-      -->
       <button
         class="
           flex flex-row
@@ -170,7 +135,18 @@
       </button>
     </div>
 
-    <div class="flex flex-col flex-grow gap-6 mt-8 mb-8 w-card">
+    <div
+      class="
+        flex flex-col
+        lg:flex-grow
+        gap-6
+        mt-8
+        lg:mt-28
+        mb-8
+        w-full
+        xl:w-144 xl:min-w-144 xl:max-w-144
+      "
+    >
       <class-card
         v-for="(cls, idx) in classes"
         :key="'cls' + idx"
@@ -750,10 +726,4 @@ export default {
 };
 </script>
 
-<style lang="postcss">
-.w-card {
-  width: 600px;
-  max-width: 600px;
-  min-width: 600px;
-}
-</style>
+<style lang="postcss"></style>
