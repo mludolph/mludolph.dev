@@ -175,19 +175,22 @@
         <span>Add a class</span>
       </div>
     </div>
-    <div class="flex flex-col h-screen max-h-screen relative">
+    <div class="h-screen relative mt-[50%] lg:mt-0">
       <div
         class="
+          sticky
           flex flex-col
+          w-48
+          h-fit
+          top-1/2
+          lg:top-0 lg:mt-[50vh]
           bg-gray-100
           dark:bg-gray-700
           rounded-lg
           shadow-md
-          w-48
-          sticky
-          top-1/2
           transform
           -translate-y-1/2
+          z-40
         "
       >
         <div class="flex flex-row px-6 py-3">
@@ -225,44 +228,43 @@
               :current="training.currentEpoch"
               :max="training.maxEpoch"
             ></progress-bar>
-            <span class="text-xs"
+            <span class="text-xs" v-if="training.trainLosses.length > 0"
               >Loss:
               {{
-                training.trainLosses.length > 0
-                  ? `${training.trainLosses[
-                      training.trainLosses.length - 1
-                    ].toFixed(3)} (${training.valLosses[
-                      training.valLosses.length - 1
-                    ].toFixed(3)})`
-                  : "n/a"
+                `${training.trainLosses[
+                  training.trainLosses.length - 1
+                ].toFixed(3)} (${training.valLosses[
+                  training.valLosses.length - 1
+                ].toFixed(3)})`
               }}
             </span>
-            <!--
             <activity-indicator
+              v-if="training.trainLosses.length > 0"
               class="h-6"
               :height="20"
-              :chart-data="chartDataCollection"
+              :chart-data="chartData"
               :options="chartOptions"
             />
-            -->
           </div>
         </div>
       </div>
     </div>
-    <div class="flex flex-col h-screen max-h-screen relative">
+    <div class="h-screen relative mt-[50%] lg:mt-0">
       <div
         class="
+          sticky
           flex flex-col
+          w-80
+          h-fit
+          top-1/2
+          lg:top-0 lg:mt-[50vh]
           bg-gray-100
           dark:bg-gray-700
           rounded-lg
           shadow-md
-          overflow-hidden
-          sticky
-          w-80
-          top-1/2
           transform
           -translate-y-1/2
+          z-30
         "
       >
         <div
@@ -493,7 +495,7 @@ export default {
         }, 0);
         return numValidClasses >= 2;
       },
-      chartDataCollection(state) {
+      chartData(state) {
         return {
           labels: state.training.epochs,
           datasets: [
@@ -548,11 +550,11 @@ export default {
 
       this.updateTrainingState({
         update: {
+          status: "Loading model...",
           currentEpoch: 0,
           trainLosses: [],
           valLosses: [],
           started: true,
-          status: "Loading model...",
         },
       });
       await this.model.create();
@@ -570,7 +572,7 @@ export default {
         (epoch, logs) => {
           this.updateTrainingState({
             update: {
-              state: "Training model...",
+              status: "Training model...",
               currentEpoch: epoch + 1,
               epochs: [...this.training.epochs, epoch],
               trainLosses: [...this.training.trainLosses, logs.loss],

@@ -51,7 +51,7 @@ export default {
   },
   mounted() {
     this.options = this.options || this.defaultOptions;
-    this.renderChart(this.chartdata, this.options);
+    this.renderChart(this.chartData, this.options);
   },
 };
 </script>
