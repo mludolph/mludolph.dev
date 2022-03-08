@@ -74,7 +74,6 @@ export default {
   plugins: [
     "~plugins/components.js",
     "~plugins/filters.js",
-    "~plugins/directives.js",
     "~plugins/banner.js",
     "~plugins/tracking.js",
     "~plugins/tooltip.js",
