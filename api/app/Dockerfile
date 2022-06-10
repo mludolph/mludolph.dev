@@ -17,4 +17,8 @@ COPY requirements.txt .
 RUN pip install -r requirements.txt
 
 # copy project
-COPY . .
+COPY ./mludolph /app/mludolph
+
+CMD ["uvicorn", "mludolph.main:app", "--host", "0.0.0.0", "--port", "80", "--proxy-headers"]
+
+# uvicorn mludolph.main:app --host 0.0.0.0 --port 8080 --proxy-headers

@@ -2,7 +2,7 @@ import logging
 
 from mludolph import config
 from mludolph.main import socket_manager as sm
-from mludolph.services.auth import verify_token
+# from mludolph.services.auth import verify_token
 
 logger = logging.getLogger("api")
 
@@ -18,17 +18,17 @@ async def connect(sid, environ, auth):
 
     scheme, token = auth.split(" ")
     sub = ""
-    if scheme.lower() == "bearer":
-        try:
-            verified_token = await verify_token(token)
-            sub = verified_token["sub"]
-        except Exception as e:
-            logger.warning(
-                f"bearer token verification failed (sid={sid}, reason={str(e)})"
-            )
-            await sm.disconnect(sid)
-            return False
-    elif scheme.lower() == "api-key":
+    # if scheme.lower() == "bearer":
+    #     try:
+    #         verified_token = await verify_token(token)
+    #         sub = verified_token["sub"]
+    #     except Exception as e:
+    #         logger.warning(
+    #             f"bearer token verification failed (sid={sid}, reason={str(e)})"
+    #         )
+    #         await sm.disconnect(sid)
+    #         return False
+    if scheme.lower() == "api-key":
         if token not in config.AUTH_API_KEYS:
             logger.warning(
                 f"api-key verification failed (sid={sid}, \
@@ -37,6 +37,10 @@ async def connect(sid, environ, auth):
             await sm.disconnect(sid)
             return False
         sub = "service_account"
+    else:
+        logger.warning(f"socket invalid auth scheme {scheme}, disconnect (sid={sid})")
+        await sm.disconnect(sid)
+        return False
 
     logger.info(f"socket authenticated (sid={sid}, sub={sub})")
     await sm.save_session(sid, {"sub": sub})

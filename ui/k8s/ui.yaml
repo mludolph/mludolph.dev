@@ -1,0 +1,56 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mludolph-dev-ui
+  labels:
+    app: mludolph-dev-ui
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mludolph-dev-ui
+  template:
+    metadata:
+      labels:
+        app: mludolph-dev-ui
+    spec:
+      containers:
+        - name: mludolph-dev-ui
+          image: cr.mludolph.dev/mludolph-ui:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 80
+      imagePullSecrets:
+        - name: registry-credentials
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mludolph-dev-ui
+  labels:
+    app: mludolph-dev-ui
+spec:
+  ports:
+    - port: 80
+      targetPort: 80
+  selector:
+    app: mludolph-dev-ui
+
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: mludolph-dev-ui-https
+  namespace: default
+spec:
+  entryPoints:
+    - websecure
+  routes:
+  - match: Host(`mludolph.dev`) || Host(`www.mludolph.dev`)
+    kind: Rule
+    services:
+    - name: mludolph-dev-ui
+      port: 80
+  tls:
+    certResolver: le
