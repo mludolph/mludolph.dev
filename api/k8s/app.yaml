@@ -21,10 +21,6 @@ spec:
           ports:
             - containerPort: 80
           env: # Environment variables passed to the container
-            - name: REDIS_URI
-              value: redis://redis:6379
-            - name: CORS_ORIGINS
-              value: https://mludolph.dev,https://www.mludolph.dev
             - name: AUTH_API_KEYS
               valueFrom:
                 secretKeyRef:

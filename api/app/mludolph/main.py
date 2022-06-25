@@ -2,17 +2,17 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi_cache import FastAPICache
 from fastapi_cache.backends.redis import RedisBackend
-
-# from fastapi_socketio import SocketManager
-
 from loguru import logger
 
 from mludolph.config import settings
 from mludolph.db import redis
 from mludolph.log_config import init_logging
-from mludolph.routes import dns, healthchecks, repos
+from mludolph.routes.api import api_router
 
-app = FastAPI(title="mludolph.dev API", prefix=settings.API_V1_STR)
+# from fastapi_socketio import SocketManager
+
+
+app = FastAPI(title="mludolph.dev API")
 # socket_manager = SocketManager(app=app, socketio_path="v1", cors_allowed_origins=[])
 init_logging()
 
@@ -23,9 +23,7 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
-app.include_router(healthchecks.router, tags=["healtchecks"])
-app.include_router(repos.router, tags=["repositories"])
-app.include_router(dns.router, tags=["dns"])
+app.include_router(api_router, prefix=settings.API_V1_STR)
 
 
 @app.on_event("startup")

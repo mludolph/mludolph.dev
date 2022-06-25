@@ -1,11 +1,12 @@
-from typing import Any
-
-from pydantic import AnyHttpUrl, BaseSettings, PostgresDsn, RedisDsn, validator
+from pydantic import AnyHttpUrl, BaseSettings, RedisDsn, validator
 
 
 class Settings(BaseSettings):
     API_V1_STR: str = "/api/v1"
-    CORS_ORIGINS: list[AnyHttpUrl] = []
+    CORS_ORIGINS: list[AnyHttpUrl] = [
+        "https://mludolph.dev",
+        "https://www.mludolph.dev",
+    ]
 
     @validator("CORS_ORIGINS", pre=True)
     def assemble_cors_origins(cls, v: str | list[str]) -> str | list[str]:
@@ -25,18 +26,7 @@ class Settings(BaseSettings):
             return v
         raise ValueError(v)
 
-    REDIS_SERVER: str
-    REDIS_URI: RedisDsn | None = None
-
-    @validator("REDIS_URI", pre=True)
-    def assemble_redis_connection(cls, v: str | None, values: dict[str, Any]) -> Any:
-        if isinstance(v, str):
-            return v
-        return PostgresDsn.build(
-            scheme="redis",
-            host=values.get("REDIS_SERVER"),
-            path=f"/{values.get('REDIS_DB') or ''}",
-        )
+    REDIS_URI: RedisDsn = RedisDsn.build(scheme="redis", host="redis", port="6379")
 
     TELEGRAM_TOKEN: str
     TELEGRAM_CHAT_ID: str

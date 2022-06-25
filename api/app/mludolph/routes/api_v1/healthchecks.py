@@ -4,7 +4,7 @@ from mludolph.routes.deps import get_token
 from mludolph.schemas.healthchecks import HealthcheckCallbackMessage
 from mludolph.services import telegram
 
-router = APIRouter(prefix="/healthcheck")
+router = APIRouter(prefix="/healthchecks")
 
 
 @router.get("/self")
