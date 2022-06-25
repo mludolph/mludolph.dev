@@ -1,7 +1,7 @@
-import logging
+from loguru import logger
+
 import requests  # type: ignore
 
-logger = logging.getLogger("api")
 
 GITHUB_API_URL = "https://api.github.com/repos"
 

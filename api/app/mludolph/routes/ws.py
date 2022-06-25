@@ -1,10 +1,7 @@
-import logging
+from loguru import logger
 
 from mludolph import config
 from mludolph.main import socket_manager as sm
-# from mludolph.services.auth import verify_token
-
-logger = logging.getLogger("api")
 
 
 @sm.on("connect")

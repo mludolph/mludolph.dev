@@ -1,8 +1,7 @@
-import logging
+from loguru import logger
 
 from fastapi import APIRouter
 
-logger = logging.getLogger("api")
 
 router = APIRouter()
 

@@ -25,6 +25,11 @@ spec:
               value: redis://redis:6379
             - name: CORS_ORIGINS
               value: https://mludolph.dev,https://www.mludolph.dev
+            - name: AUTH_API_KEYS
+              valueFrom:
+                secretKeyRef:
+                  name: mludolph.dev-secrets
+                  key: api_keys
       imagePullSecrets:
         - name: registry-credentials
 
