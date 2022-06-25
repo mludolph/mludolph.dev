@@ -1,21 +1,49 @@
-import os
+from typing import Any
 
-# AUTH_HOST = os.environ.get("AUTH_HOST", "https://auth.mludolph.dev/o/")
-# AUTH_URL = os.environ.get("AUTH_URL", "https://auth.mludolph.dev/o/")
-# AUTH_REALM = os.environ.get("AUTH_REALM")
-# AUTH_CLIENT_ID = os.environ.get("AUTH_CLIENT_ID")
-# AUTH_TOKEN_URL = f"{AUTH_HOST}/realms/{AUTH_REALM}/protocol/openid-connect/token"
+from pydantic import AnyHttpUrl, BaseSettings, PostgresDsn, RedisDsn, validator
 
-AUTH_API_KEYS = []
-_api_keys = os.environ.get("AUTH_API_KEYS")
 
-if _api_keys:
-    AUTH_API_KEYS = _api_keys.split(",")
+class Settings(BaseSettings):
+    API_V1_STR: str = "/api/v1"
+    CORS_ORIGINS: list[AnyHttpUrl] = []
 
-REDIS_HOST = os.environ.get("REDIS_HOST", "redis://redis:6379")
-_origins = os.environ.get("CORS_ORIGINS")
+    @validator("CORS_ORIGINS", pre=True)
+    def assemble_cors_origins(cls, v: str | list[str]) -> str | list[str]:
+        if isinstance(v, str) and not v.startswith("["):
+            return [i.strip() for i in v.split(",")]
+        elif isinstance(v, (list, str)):
+            return v
+        raise ValueError(v)
 
-ORIGINS = []
+    AUTH_API_KEYS: list[str] = []
 
-if _origins:
-    ORIGINS = _origins.split(",")
+    @validator("AUTH_API_KEYS", pre=True)
+    def assemble_auth_api_keys(cls, v: str | list[str]) -> str | list[str]:
+        if isinstance(v, str) and not v.startswith("["):
+            return [i.strip() for i in v.split(",")]
+        elif isinstance(v, (list, str)):
+            return v
+        raise ValueError(v)
+
+    REDIS_SERVER: str
+    REDIS_URI: RedisDsn | None = None
+
+    @validator("REDIS_URI", pre=True)
+    def assemble_redis_connection(cls, v: str | None, values: dict[str, Any]) -> Any:
+        if isinstance(v, str):
+            return v
+        return PostgresDsn.build(
+            scheme="redis",
+            host=values.get("REDIS_SERVER"),
+            path=f"/{values.get('REDIS_DB') or ''}",
+        )
+
+    TELEGRAM_TOKEN: str
+    TELEGRAM_CHAT_ID: str
+
+    class Config:
+        case_sensitive = True
+        env_file = ".env"
+
+
+settings = Settings()

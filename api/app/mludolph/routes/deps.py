@@ -1,15 +1,11 @@
-from fastapi import Depends, HTTPException
-from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
-from mludolph import config
-from starlette.status import HTTP_403_FORBIDDEN
+from fastapi import Depends
+from fastapi.security import HTTPAuthorizationCredentials, HTTPBearer
+from mludolph.services import auth
 
 bearer_token_auth = HTTPBearer()
 
 
 def get_token(token: HTTPAuthorizationCredentials = Depends(bearer_token_auth)) -> str:
-    if token.credentials not in config.AUTH_API_KEYS:
-        raise HTTPException(
-            status_code=HTTP_403_FORBIDDEN, detail="Invalid credentials"
-        )
+    auth.verify_token(token.credentials)
 
     return token.credentials

@@ -3,6 +3,8 @@
 # from keycloak import KeycloakOpenID
 # from mludolph import config
 # from fastapi import Depends, Security, HTTPException, status
+from fastapi import HTTPException, status
+from mludolph.config import settings
 
 # This is just for fastapi docs
 # oauth2_scheme = OAuth2AuthorizationCodeBearer(
@@ -47,3 +49,10 @@
 
 # async def get_current_user_id(identity: Dict = Depends(get_auth)) -> str:
 #     return identity["sub"]
+
+
+def verify_token(token: str):
+    if token not in settings.AUTH_API_KEYS:
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN, detail="Invalid credentials"
+        )

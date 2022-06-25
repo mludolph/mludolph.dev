@@ -1,4 +1,3 @@
-from loguru import logger
 from fastapi import APIRouter, Depends
 from fastapi_utils.api_model import APIMessage
 from mludolph.routes.deps import get_token
