@@ -69,7 +69,12 @@ export default {
     "@nuxtjs/tailwindcss",
     "@nuxtjs/fontawesome",
   ],
-  modules: ["@nuxtjs/axios", "@nuxt/content", "@nuxtjs/sitemap"],
+  modules: [
+    "@nuxtjs/axios",
+    "@nuxt/content",
+    "@nuxtjs/sitemap",
+    "nuxt-speedkit",
+  ],
   axios: {},
   build: {
     extend(config, { isClient }) {
@@ -226,6 +231,48 @@ export default {
   purgeCSS: {
     whitelist: ["dark"],
   },
+  speedkit: {
+    detection: {
+      performance: true,
+      browserSupport: true,
+    },
+
+    performanceMetrics: {
+      device: {
+        hardwareConcurrency: { min: 2, max: 48 },
+        deviceMemory: { min: 2 },
+      },
+      timing: {
+        fcp: 800,
+        dcl: 1200,
+      },
+    },
+
+    targetFormats: ["webp", "avif", "jpg|jpeg|png|gif"],
+    componentAutoImport: false,
+    componentPrefix: undefined,
+
+    /**
+     * IntersectionObserver rootMargin for Compoennts and Assets
+     */
+    lazyOffset: {
+      component: "0%",
+      asset: "0%",
+    },
+
+    loader: {
+      dataUri: null,
+      size: "100px",
+      backgroundColor: "grey",
+    },
+  },
+
+  optimization: {
+    splitChunks: {
+      maxSize: 300000,
+    },
+  },
+
   watchers: {
     webpack: {
       ignored: /(node_modules)|(.git)/,

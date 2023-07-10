@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: mludolph-dev-ui
-          image: cr.mludolph.dev/mludolph-ui:latest
+          image: cr.mludolph.dev/mludolph-ui:0.1.3
           imagePullPolicy: Always
           ports:
             - containerPort: 80
