@@ -8,5 +8,5 @@ TAG_VERSION=$REGISTRY/$PROJECT:$VERSION
 TAG_LATEST=$REGISTRY/$PROJECT:latest
 
 echo "Building docker image '${TAG_VERSION}'..."
-docker build -t $TAG_VERSION -t $TAG_LATEST -f docker/Dockerfile .
+docker build -t $TAG_VERSION -t $TAG_LATEST -f app/Dockerfile app/
 echo "Done!"%
