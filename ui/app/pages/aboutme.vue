@@ -4,123 +4,60 @@
       <div class="dots"></div>
       <div class="dots-vertical"></div>
       <div class="transition duration-300 ease-in-out">
-        <div
-          class="
+        <div class="
             flex flex-col
             items-center
             md:items-start
             text-center
             md:text-left md:flex-row md:justify-between
-          "
-        >
-          <v-card />
-          <div class="flex flex-col max-w-sm md:self-end mt-4 md:mt-0">
-            <p class="text-gray-800 dark:text-gray-300 text-sm font-sans">
-              I'm a {{ age }}-year old
-              <b class="font-semibold">Computer Science</b> student from
-              Germany, currently living in Berlin. I enjoy building things and
-              solving problems in a fast and impactful way. Currently I'm mainly
-              interested in machine learning, cloud computing and IoT.
-            </p>
-            <p class="text-gray-800 dark:text-gray-300 text-sm mt-2">
-              In my free time I love hiking, playing the piano and producing
-              music. Feel free to shoot me an
-              <a class="text-indigo-400" href="mailto:contact@moritzludolph.de"
-                >email</a
-              >
-              if you like!
-            </p>
-          </div>
+          ">
+          <v-card class="mx-auto" />
         </div>
       </div>
       <hr class="mt-6 mx-4 dark:bg-gray-600" />
     </section>
 
     <section class="container max-w-content mx-auto">
-      <div class="">
-        <div class="flex items-center mb-6 w-full">
-          <h1
-            class="
+      <div class="flex items-center mb-6 w-full">
+        <h1 class="
               text-2xl text-gray-800
               dark:text-gray-300
               font-light
               w-full
               text-center
               mb-0
-            "
-          >
-            Education & Experience
-          </h1>
-        </div>
+            ">
+          About me
+        </h1>
+      </div>
+      <div class="flex flex-col md:self-end mt-4 md:mt-0 gap-y-2">
+        <p class="text-gray-800 dark:text-gray-300 font-sans">
+          Ever since the age of 11 I have been hooked by the idea of writing software to solve problems in one way or
+          another.
+          During a prolonged summer holiday in which I caught a bad sun allergy and had to stay inside for weeks
+          straight, I was able to discover the for me unknown depths of Microsoft Excel and its Visual Basic scripts and
+          was instantly hooked.
+        </p>
+        <p class="text-gray-800 dark:text-gray-300 font-sans">
+          Shortly after, instead of doing my maths homework, I instead wrote my first plotter to plot graphs and solve
+          the questions for me (I mean, it was definitely less effort than doing the work myself, right? RIGHT???).
+          And so my journey began as my new found interest accompanied all the way through school, uni and to today.
+          Whether it was work done to help my dad write SAP ABAP programs, reverse engineering computer games to adjust
+          them to my likings or writing
+          PoC or production code for uni or work, I always enjoyed (and still do!) the endless possiblities to create
+          something
+          useful out of literally thin air with only a laptop and some coffee.
+        </p>
+        <p class="text-gray-800 dark:text-gray-300 font-sans">
+          These days my interest mostly lies in Machine Learning and Data Engineering as I am most excited about what
+          possibilities advancement in this frontier will bring us within the next decade - and I hope to be a part of
+          that.
+          While I thouroughly enjoy writing code, I value good products and everything that goes with the development of
+          such just as much.
+          In case you want to enquire for consulting or just have a chat with me, feel free to shoot me an <a
+            class="text-indigo-400" href="mailto:contact@moritzludolph.de">email</a>!
 
-        <div class="timeline is-centered">
-          <header class="timeline-header">
-            <span
-              class="
-                text-xs
-                uppercase
-                font-semibold
-                bg-indigo-400
-                py-1
-                px-2
-                rounded
-                text-white
-              "
-              >today</span
-            >
-          </header>
-          <div
-            v-for="(entry, i) in timelineEntries"
-            v-bind:key="i"
-            class="timeline-item"
-          >
-            <div class="timeline-marker"></div>
-            <div class="timeline-content">
-              <p
-                v-for="period in entry.periods"
-                :key="period[0]"
-                class="
-                  text-gray-700
-                  dark:text-gray-400
-                  text-xs
-                  font-semibold
-                  uppercase
-                "
-              >
-                {{ period | formatPeriod }}
-              </p>
-              <h2
-                class="
-                  text-gray-800
-                  dark:text-gray-300
-                  text-lg
-                  font-bold
-                  leading-1
-                "
-              >
-                {{ entry.title }}
-              </h2>
-              <h3
-                class="
-                  text-gray-800
-                  dark:text-gray-300
-                  text-base
-                  leading-none
-                  mb-2
-                "
-              >
-                {{ entry.institution }}
-              </h3>
-              <p
-                class="text-gray-700 dark:text-gray-400 text-sm"
-                v-for="(line, i2) in entry.descriptionLines"
-                v-bind:key="i2"
-              >
-                {{ line }}
-              </p>
-            </div>
-          </div>
-        </div>
+        </p>
       </div>
     </section>
   </div>
